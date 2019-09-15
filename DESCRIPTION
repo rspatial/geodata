@@ -1,0 +1,11 @@
+Package: geodata
+Type: Package
+Title: Download geographic data
+Version: 0.1-1
+Date: 2019-09-14
+Depends: terra
+Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
+Maintainer: <r.hijmans@gmail.com>
+Description: A set of functions that enables automatic downloading of geographic data.
+License: GPL (>=3)
+
