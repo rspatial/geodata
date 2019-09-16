@@ -46,48 +46,32 @@ elevation_3s <- function(lon, lat, path) {
 	}
 }
 
-elevation_30s <- function(country, mask=TRUE, path, ...) {
-	country <- .getCountryISO(country)
+elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
+	iso3 <- .getCountryISO(country)
 	if (mask) {
-		mskname <- "_msk_"
-		mskpath <- "msk_"
+		mskname <- "_msk"
 	} else {
-		mskname<-"_"
-		mskpath <- ""
+		mskname<- ""
 	}
-	filename <- file.path(path, paste0(country, mskname, name, ".grd"))
+	f <- paste0(iso3, "_elv", mskname, subs)
+	filename <- file.path(path, paste0(f, ".tif"))
 	if (!file.exists(filename)) {
-		zipfilename <- filename
-		extension(zipfilename) <- ".zip"
+		zipfilename <- gsub("\\.tif$", ".zip", filename)
 		if (!file.exists(zipfilename)) {
-			theurl <- paste("http://biogeo.ucdavis.edu/data/diva/", mskpath, name, "/", country, mskname, name, ".zip", sep="")
+			theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
 			.download(theurl, zipfilename)
 			if (!file.exists(zipfilename))	{
 				message("\nCould not download file -- perhaps it does not exist")
 			}
 		}
+		ff <- utils::unzip(zipfilename, exdir=dirname(zipfilename))
+		file.remove(zipfilename)
 	}
-    ff <- utils::unzip(zipfilename, exdir=dirname(zipfilename))
-    file.remove(zipfilename)
 	if (file.exists(filename)) {
-		rs <- raster(filename)
+		rs <- rast(filename)
 	} else {
-    #patrn <- paste(country, ".", mskname, name, ".grd", sep="")
-    #f <- list.files(path, pattern=patrn)
-		f <- ff[substr(ff, .nchar(ff)-3, .nchar(ff)) == ".grd"]
-		if (length(f)==0) {
-			warning("something went wrong")
-			return(NULL)
-		} else if (length(f)==1) {
-			rs <- rast(f)
-		} else {
-			rs <- sapply(f, rast)
-			rs <- lapply(rs, function(i) crs(i) <- "+proj=longlat +datum=WGS84")
-			message("returning a list of SpatRaster objects")
-			return(rs)
-		}
+		stop("something went wrong")
 	}
-	crs(rs) <- "+proj=longlat +datum=WGS84"
 	return(rs)
 }
 

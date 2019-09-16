@@ -2,7 +2,7 @@
 gadm <- function(country, level, path, version=3.6) {
 
 	stopifnot(file.exists(path))
-	country <- .getCountry(country)
+	country <- .getCountryISO(country)
 
 	if (missing(level)) {
 		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
