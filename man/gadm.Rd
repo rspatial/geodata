@@ -5,13 +5,16 @@
 
 \usage{
 gadm(country, level=1, path, version=3.6, ...)
+world(resolution=5, level=0, path, version=3.6, ...)
 }
 
 \arguments{
-  \item{country}{Character. Three-letter ISO code or full country name}
-  \item{level}{Numeric. level of administrative subdivision (starting with 0 for country, then 1 for the first level of subdivision)}
-  \item{path}{Character. Path name indicating where to store the data}
-  \item{...}{Additional arguments (none implemented)}
+  \item{country}{character. Three-letter ISO code or full country name}
+  \item{level}{numeric. level of administrative subdivision (starting with 0 for country, then 1 for the first level of subdivision). For \code{world} only level 0 is currently avaialable}
+  \item{path}{character. Path name indicating where to store the data}
+  \item{version}{numeric. GADM version number (only 3.6 or higer)}
+  \item{resolution}{integer between 1 and 5 indicating the level of detail. 1 is high 5 is low}
+  \item{...}{additional arguments (none implemented)}
 }
 
 \value{
@@ -19,16 +22,17 @@ SpatVector
 }
 
 \description{
-Get administrative boundaries for any country in the world. Data are read from files that are first downloaded if necessary.
+Get administrative boundaries for any country in the world. Data are read from files that are downloaded if necessary.
 }
 
 \details{
-These data are from the \url{www.gadm.org}
+These data are from the \url{https://www.gadm.org}
 }
 
 \examples{
 \dontrun{
-gadm(country='FRA', level=1)
+fra <- gadm(country='FRA', level=1, path=tempdir())
+w <- world(path=tempdir())
 }
 }
 

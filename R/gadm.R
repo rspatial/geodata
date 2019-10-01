@@ -1,21 +1,12 @@
 
-gadm <- function(country, level, path, version=3.6) {
-
-	stopifnot(file.exists(path))
-	country <- .getCountryISO(country)
-
-	if (missing(level)) {
-		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
-	}
-	stopifnot(version %in% 3.6)
-
-	if (version > 3) {
-		filename <- file.path(path, paste0('gadm36_', country, '_', level, "_pk.rds"))
-	}
-	
+.gadm_download <- function(filename, gversion, upath="pck") {
 	if (!file.exists(filename)) {
-		baseurl <- paste0("https://biogeo.ucdavis.edu/data/gadm", version)
-		theurl <- paste(baseurl, '/pck/gadm36_', country, '_', level, "_pk.rds", sep="")			
+		baseurl <- paste0("https://biogeo.ucdavis.edu/data/gadm", gversion)
+		if (upath=="") {
+			theurl <- file.path(baseurl, basename(filename))		
+		} else {
+			theurl <- file.path(baseurl, upath, basename(filename))
+		}
 		.download(theurl, filename)
 		if (!file.exists(filename))	{ 
 			message("\nCould not download file -- perhaps it does not exist") 
@@ -26,6 +17,30 @@ gadm <- function(country, level, path, version=3.6) {
 	} else {
 		return(NULL)
 	}
+}
+
+
+wrld <- function(resolution=5, level=0, path, version=3.6) {
+	stopifnot(level[1] == 0)
+	resolution = round(resolution[1])
+	stopifnot(resolution %in% 1:5)
+	stopifnot(version[1] == 3.6)
+	filename <- file.path(path, paste0("gadm36_adm", level, "_r", resolution, "_pk.rds"))
+	.gadm_download(filename, version[1], "")
+}
+
+
+gadm <- function(country, level, path, version=3.6) {
+
+	stopifnot(file.exists(path))
+	country <- .getCountryISO(country)
+
+	if (missing(level)) {
+		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
+	}
+	stopifnot(version == 3.6)
+	filename <- file.path(path, paste0('gadm36_', country, '_', level, "_pk.rds"))
+	.gadm_download(filename, version)
 }
 
 
