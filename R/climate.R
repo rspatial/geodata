@@ -1,71 +1,106 @@
 
-wordclim30s <- function(var, lon, lat) {
-	lon <- min(180, max(-180, lon))
-	lat <- min(90, max(-60, lat))
-	rs <- raster(nrows=5, ncols=12, xmn=-180, xmx=180, ymn=-60, ymx=90 )
-	row <- rowFromY(rs, lat) - 1
-	col <- colFromX(rs, lon) - 1
-	rc <- paste(row, col, sep="")
-	zip <- paste(var, "_", rc, ".zip", sep="")
-	zipfile <- file.path(path, zip)
-	if (var  == "alt") {
-		tiffiles <- paste(var, "_", rc, ".tif", sep="")
-	} else if (var  != "bio") {
-		tiffiles <- paste(var, 1:12, "_", rc, ".tif", sep="")
-	} else {
-		tiffiles <- paste(var, 1:19, "_", rc, ".tif", sep="")
-	}
-	theurl <- paste("http://biogeo.ucdavis.edu/data/climate/worldclim/2.1/tiles/cur/", zip, sep="")
-
-	files <- c(paste(path, tiffiles, sep=""), paste(path, tiffiles, sep=""))
-	fc <- sum(file.exists(files))
-
-	if ( fc < length(files) ) {
-		if (!file.exists(zipfile)) {
-			.download(theurl, zipfile)
-			if (!file.exists(zipfile))	{
-			  message("\n Could not download file -- perhaps it does not exist")
-			}
-		} else {
-			message("File not available locally. Use 'download = TRUE'")
-		}
-	}
-	utils::unzip(zipfile, exdir=dirname(zipfile))
-	st <- rast(paste(path, tiffiles, sep=""))
-	return(st)	
-}
+.wcurl <- "http://biogeo.ucdavis.edu/data/worldclim/v2.1/"
 
 
-worldclim <- function(var, res) {
-	stopifnot(res %in% c(2.5, 5, 10))
-	if (res==2.5) { res <- "2-5" }
-	stopifnot(var %in% c("tmean", "tmin", "tmax", "prec", "bio", "alt"))
-	path <- file.path(path, paste0("wc", res, "/"))
+wordclim_tile <- function(var, lon, lat, path) {
+	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	if (var == "bioc") var <- "bio"
+	stopifnot(dir.exists(path))
+
+	r <- rast(res=30)
+	id <- cellFromXY(r, cbind(lon,lat))
+	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
+
+	path <- file.path(path, "wc2.1_tiles")
 	dir.create(path, showWarnings=FALSE)
 
-	zip <- paste(var, "_", res, "m.zip", sep="")
-	zipfile <- paste(path, zip, sep="")
-	if (var  == "alt") {
-		tiffiles <- paste(var, ".tif", sep="")
-	} else if (var  != "bio") {
-		tiffiles <- paste(var, 1:12, ".tif", sep="")
-	} else {
-		tiffiles <- paste(var, 1:19, ".tif", sep="")
+	fname <- paste0("tile_", id, "_wc2.1_30s_", var, ".tif")
+	outfname <- file.path(path, fname)
+	if (!file.exists(outfname)) {
+		turl <- paste0(.wcurl, "tiles/tile/", fname)
+		download.file(turl, outfname, mode="wb")
 	}
-	theurl <- paste("http://biogeo.ucdavis.edu/data/climate/worldclim/2.1/cur/", zip, sep="")
-	files <- file.path(path, tiffiles)
-	fc <- sum(file.exists(files))
-
-	if ( fc < length(files) ) {
-		if (!file.exists(zipfile)) {
-			.download(theurl, zipfile)
-			if (!file.exists(zipfile))	{
-				message("\n Could not download file -- perhaps it does not exist.")
-			}
-		}
-		utils::unzip(zipfile, exdir=dirname(zipfile))
-	}
-	st <- rast(files)
-	return(st)
+	rast(outfname)
 }
+
+wordclim_country <- function(iso, var) {
+	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	if (var == "bioc") var <- "bio"
+	iso <- getCountryISO(iso)
+	stopifnot(dir.exists(path))
+
+	path <- file.path(path, "wc2.1_country")
+	dir.create(path, showWarnings=FALSE)
+
+	fname <- paste0(iso, "_wc2.1_30s_", var, ".tif")
+	outfname <- file.path(path, fname)
+	if (!file.exists(outfname)) {
+		turl <- paste0(.wcurl, "tiles/iso/", fname)
+		download.file(turl, outfname, mode="wb")
+	}
+	rast(outfname)
+}
+
+
+worldclim_global <- function(var, res, path) {
+
+	res <- as.character(res)
+	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
+	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	if (var == "bioc") var <- "bio"
+	stopifnot(dir.exists(path))
+
+	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
+	path <- file.path(path, paste0("wc2.1_", fres, "/"))
+	dir.create(path, showWarnings=FALSE)
+	zip <- paste0("wc2.1_", fres, "_", var, ".zip")
+
+	if (var  == "alt") {
+		ff <- paste0("wc2.1_", fres, "_elev.tif")
+	} else {
+		nf <- if (var == "bio") 1:19 else formatC(1:12, width=2, flag=0)
+		ff <- paste0("wc2.1_", fres, "_", var, "_", nf, ".tif")
+	}
+	pzip <- file.path(path, zip)
+	if (!all(file.exists(ff))) {
+		download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
+		if (!file.exists(pzip)) {stop("download failed")}
+		fz <- try(unzip(pzip, exdir=path))
+		if (class(fz) == "try-error") {stop("download failed")}
+	}
+	rast(file.path(path, ff))
+}
+
+
+cmip6_global <- function(model, ssp, time, var, res, path) {
+
+	res <- as.character(res)
+	stopifnot(res %in% c("2.5", "5", "10"))
+	stopifnot(var %in% c("tmin", "tmax", "prec", "bio", "bioc"))
+	ssp <- as.character(ssp)
+	stopifnot(ssp %in% c("126", "245", "370", "585"))
+	stopifnot(model %in% c("BCC-CSM2-MR", "CanESM5", "CNRM-CM6-1", "CNRM-ESM2-1", "GFDL-ESM4", "IPSL-CM6A-LR", "MIROC-ES2L", "MIROC6", "MRI-ESM2-0"))
+	
+	# some combinations do not exist. Catch these here.
+	
+	if (var == "bio") var <- "bioc"
+	stopifnot(dir.exists(path))
+
+	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
+	path <- file.path(path, paste0("wc2.1_", fres, "/"))
+	dir.create(path, showWarnings=FALSE)
+	
+	zip <- paste0("wc2.1_", fres, "_", model, "_ssp", ssp, "_", time, ".zip")
+	pzip <- file.path(path, zip)
+	outf <- gsub("\\.zip$", ".tif", zip)
+	poutf <- file.path(path, outf)
+	if (!file.exists(pzip)) {
+		download.file(paste0(.wcurl, "fut/", res, "/", zip), pzip, mode="wb")
+		if (!file.exists(pzip)) {stop("download failed")}
+		fz <- try(unzip(pzip, exdir=path))
+		if (class(fz) == "try-error") {stop("download failed")}
+	}
+	rast(file.path(path, poutf))
+}
+
 
