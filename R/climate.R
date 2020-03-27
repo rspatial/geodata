@@ -23,10 +23,11 @@ wordclim_tile <- function(var, lon, lat, path) {
 	rast(outfname)
 }
 
-wordclim_country <- function(iso, var) {
+
+wordclim_country <- function(country, var) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
-	iso <- getCountryISO(iso)
+	iso <- getCountryISO(country)
 	stopifnot(dir.exists(path))
 
 	path <- file.path(path, "wc2.1_country")
@@ -42,7 +43,7 @@ wordclim_country <- function(iso, var) {
 }
 
 
-worldclim_global <- function(var, res, path) {
+worldclim_global <- function(var, res, path, ...) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
