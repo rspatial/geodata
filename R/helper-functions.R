@@ -17,7 +17,9 @@
 	}
 }
 
-
+.dataloc <- function() {
+	stop("path does not exist")
+}
 
 .getDataPath <- function(path) {
 	path <- trim(path)

@@ -1,20 +1,26 @@
-\name{climate}
-\alias{climate}
+\name{worldclim}
+\alias{worldclim_global}
+\alias{worldclim_country}
+\alias{worldclim_tile}
 
 \title{WorldClim climate data}
+
+\description{
+Download WorldClim data
+}
 
 
 \usage{
 worldclim_global(var, res, path, ...)
-wordclim_country(country, var, ...)
-wordclim_tile(var, lon, lat, path, ...)
+worldclim_country(country, var, path, ...)
+worldclim_tile(var, lon, lat, path, ...)
 }
 
 \arguments{
   \item{var}{character. Valid variables names are "tmin", "tmax", "tavg", "prec" and "bio"}
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5, and 0.5 (minutes of a degree)}
   \item{path}{character. Path where to download the data to} 
-  \item{country}{chraracter. Country name or code} 
+  \item{country}{character. Country name or code} 
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude} 
   \item{...}{additional arguments (none implemented)}  

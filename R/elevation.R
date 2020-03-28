@@ -4,17 +4,15 @@
 # Version 0.1
 # March 2016
 
-elevation_3s <- function(lon, lat, path) {
+elevation_3s <- function(lon, lat, path, ...) {
 	stopifnot(file.exists(path))
 	stopifnot(lon >= -180 & lon <= 180)
 	stopifnot(lat >= -60 & lat <= 60)
 
-	rs <- raster(nrows=24, ncols=72, xmn=-180, xmx=180, ymn=-60, ymx=60 )
-	rowTile <- rowFromY(rs, lat)
-	colTile <- colFromX(rs, lon)
-	if (rowTile < 10) { rowTile <- paste("0", rowTile, sep="") }
-	if (colTile < 10) { colTile <- paste("0", colTile, sep="") }
-
+	rs <- rast(res=5, ymin=-60, ymax=60 )
+	rowTile <- formatC(rowFromY(rs, lat), width=2, flag=0)
+	colTile <- formatC(colFromX(rs, lon), width=2, flag=0)
+	
 	f <- paste("srtm_", colTile, "_", rowTile, sep="")
 	zipfilename <- paste(path, "/", f, ".ZIP", sep="")
 	tiffilename <- paste(path, "/", f, ".tif", sep="")

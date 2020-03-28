@@ -1,5 +1,6 @@
 \name{gadm}
 \alias{gadm}
+\alias{world}
 
 \title{Administrative boundaries for a country}
 

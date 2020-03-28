@@ -20,7 +20,7 @@
 }
 
 
-world <- function(resolution=5, level=0, path, version=3.6) {
+world <- function(resolution=5, level=0, path, version=3.6, ...) {
 	stopifnot(level[1] == 0)
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)
@@ -30,7 +30,7 @@ world <- function(resolution=5, level=0, path, version=3.6) {
 }
 
 
-gadm <- function(country, level, path, version=3.6) {
+gadm <- function(country, level=1, path, version=3.6, ...) {
 
 	stopifnot(file.exists(path))
 	country <- .getCountryISO(country)

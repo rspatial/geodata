@@ -3,6 +3,11 @@
 
 \title{Get country codes}
 
+
+\description{
+Get country codes for all countries in the world.
+}
+
 \usage{
 country_codes()
 }
@@ -10,10 +15,6 @@ country_codes()
 
 \value{
 data.frame
-}
-
-\description{
-Get country codes for all countries in the world.
 }
 
 \examples{
