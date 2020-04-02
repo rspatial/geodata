@@ -87,13 +87,14 @@ worldclim_global <- function(var, res, path, ...) {
 		ff <- paste0("wc2.1_", fres, "_", var, "_", nf, ".tif")
 	}
 	pzip <- file.path(path, zip)
+	ff <- file.path(path, ff)
 	if (!all(file.exists(ff))) {
 		utils::download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
 		if (!file.exists(pzip)) {stop("download failed")}
 		fz <- try(utils::unzip(pzip, exdir=path))
 		if (class(fz) == "try-error") {stop("download failed")}
 	}
-	rast(file.path(path, ff))
+	rast(ff)
 }
 
 
