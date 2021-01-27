@@ -2,7 +2,11 @@
 \alias{gadm}
 \alias{world}
 
-\title{Administrative boundaries for a country}
+\title{Administrative boundaries}
+
+\description{
+Get administrative boundaries for any country in the world. Data are read from files that are downloaded if necessary.
+}
 
 \usage{
 gadm(country, level=1, path, version=3.6, ...)
@@ -22,16 +26,13 @@ world(resolution=5, level=0, path, version=3.6, ...)
 SpatVector
 }
 
-\description{
-Get administrative boundaries for any country in the world. Data are read from files that are downloaded if necessary.
-}
 
 \details{
 These data are from the \url{https://www.gadm.org}
 }
 
 \examples{
-\dontrun{
+\donttest{
 fra <- gadm(country='FRA', level=1, path=tempdir())
 w <- world(path=tempdir())
 }

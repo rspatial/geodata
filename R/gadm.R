@@ -1,5 +1,8 @@
 
 .gadm_download <- function(filename, gversion, upath="pck") {
+	if (!dir.exists(dirname(filename))) {
+		stop("path does not exist")
+	}
 	if (!file.exists(filename)) {
 		baseurl <- paste0("https://biogeo.ucdavis.edu/data/gadm", gversion)
 		if (upath=="") {

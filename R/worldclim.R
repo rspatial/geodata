@@ -5,6 +5,7 @@
 
 }
 
+
 .wcerad <- function(lon, lat, path, ...) {
 	stopifnot(dir.exists(path))
 	r <- rast(res=5)
@@ -15,11 +16,11 @@
 	outfname <- file.path(pth, fname)
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
-		turl <- paste0(.wcurl, "day/", fname)
+		turl <- paste0(.wcurl, "day/nc/", fname)
 		utils::download.file(turl, outfname, mode="wb")
 	}
-	vars <- c("tmin", "tmax", "prec", "srad", "vapr", "wind")
-	rast(outfname)
+	#vars <- c("tmin", "tmax", "prec", "srad", "vapr", "wind")
+	sds(outfname)
 }
 
 

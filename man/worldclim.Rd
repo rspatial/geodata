@@ -1,4 +1,5 @@
 \name{worldclim}
+
 \alias{worldclim_global}
 \alias{worldclim_country}
 \alias{worldclim_tile}
@@ -8,7 +9,6 @@
 \description{
 Download WorldClim data
 }
-
 
 \usage{
 worldclim_global(var, res, path, ...)
@@ -32,9 +32,8 @@ SpatRaster
 
 
 \examples{
-\dontrun{
-# To get current conditions:
-worldclim(var="tmin", res=10)
+\donttest{
+lux <- worldclim_country("Luxembourg", var="tmin", res=10, path=".")
 }
 }
 
