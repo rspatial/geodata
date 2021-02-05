@@ -1,8 +1,8 @@
 Package: geodata
 Type: Package
 Title: Download geographic data
-Version: 0.1-4
-Date: 2021-01-27
+Version: 0.1-5
+Date: 2021-02-05
 Depends: terra
 Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
 Maintainer: <r.hijmans@gmail.com>

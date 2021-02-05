@@ -1,21 +1,17 @@
 
 
-soil_africa <- function(var, depth=20, version=13, path, ...) {
+soil_africa <- function(var, depth=20, version=0.13, path) {
 
-	stopifnot(depth == 20)
-#	stopifnot(depth %in% c(20,50))
+	stopifnot(depth %in% c(20,50))
 	
-	stopifnot(var %in% c("ph", "cec", "orgC"))
+	stopifnot(var %in% c("ph_h2o", "log.ecec.f", "log.oc", "log.k_mehlich3", "log.p_mehlich3"))
 	stopifnot(dir.exists(path))
-	stopifnot(version == 13)
 	
+	stopifnot(version == 0.13)
 	
-	if (depth == 20) {
-		depth <- "0-20cm"
-	} else {
-		depth <- "20-50cm"	
-	}
-	filename <- paste0("isda", version, "_", var, "_", depth, ".tif")
+	depth <- ifelse(depth == 20, "0-20cm", "20-50cm")
+
+	filename <- paste0("isda", "_", var, "_", depth, "_v", version,  ".tif")
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
@@ -26,9 +22,10 @@ soil_africa <- function(var, depth=20, version=13, path, ...) {
 			try(file.remove(filepath), silent=TRUE)
 			stop("download failed")
 		}
-		return(r)
+	} else {
+		r <- rast(filepath)
 	}
-	rast(ff)
+	r
 }
 
 
