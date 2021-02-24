@@ -4,8 +4,9 @@ soil_africa <- function(var, depth=20, version=0.13, path) {
 
 	stopifnot(depth %in% c(20,50))
 	
-	stopifnot(var %in% c("ph_h2o", "log.ecec.f", "log.oc", "log.k_mehlich3", "log.p_mehlich3"))
+	stopifnot(var %in% c("ph_h2o", "log.ecec.f", "log.oc", "log.ca_mehlich3", "log.k_mehlich3", "log.p_mehlich3"))
 	stopifnot(dir.exists(path))
+	
 	
 	stopifnot(version == 0.13)
 	
