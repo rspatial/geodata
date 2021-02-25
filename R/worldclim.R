@@ -24,7 +24,7 @@
 }
 
 
-worldclim_tile <- function(var, lon, lat, path, ...) {
+worldclim_tile <- function(var, lon, lat, path) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
 	stopifnot(dir.exists(path))
@@ -47,7 +47,7 @@ worldclim_tile <- function(var, lon, lat, path, ...) {
 }
 
 
-worldclim_country <- function(country, var, path, ...) {
+worldclim_country <- function(country, var, path) {
 
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
@@ -68,7 +68,7 @@ worldclim_country <- function(country, var, path, ...) {
 }
 
 
-worldclim_global <- function(var, res, path, ...) {
+worldclim_global <- function(var, res, path) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
@@ -99,7 +99,7 @@ worldclim_global <- function(var, res, path, ...) {
 }
 
 
-.cmip6_global <- function(model, ssp, time, var, res, path, ...) {
+cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10"))
@@ -107,6 +107,7 @@ worldclim_global <- function(var, res, path, ...) {
 	ssp <- as.character(ssp)
 	stopifnot(ssp %in% c("126", "245", "370", "585"))
 	stopifnot(model %in% c("BCC-CSM2-MR", "CanESM5", "CNRM-CM6-1", "CNRM-ESM2-1", "GFDL-ESM4", "IPSL-CM6A-LR", "MIROC-ES2L", "MIROC6", "MRI-ESM2-0"))
+	stopifnot(time %in% c("2021-2040", "2041-2060", "2061-2080"))
 	
 	# some combinations do not exist. Catch these here.
 	
@@ -117,14 +118,16 @@ worldclim_global <- function(var, res, path, ...) {
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
 	
-	zip <- paste0("wc2.1_", fres, "_", model, "_ssp", ssp, "_", time, ".zip")
+	zip <- paste0("wc2.1_", fres, "_", var, "_", model, "_ssp", ssp, "_", time, ".zip")
 	pzip <- file.path(path, zip)
 	outf <- gsub("\\.zip$", ".tif", zip)
 	poutf <- file.path(path, outf)
 	if (!file.exists(pzip)) {
-		utils::download.file(paste0(.wcurl, "fut/", res, "/", zip), pzip, mode="wb")
+		url <- paste0(.wcurl, "fut/", fres, "/", zip)
+		ok <- try(utils::download.file(url, pzip, mode="wb"), silent=TRUE)
+		if (class(ok) == "try-error") {stop("download failed")}
 		if (!file.exists(pzip)) {stop("download failed")}
-		fz <- try(utils::unzip(pzip, exdir=path))
+		fz <- try(utils::unzip(pzip, exdir=path), silent=TRUE)
 		if (class(fz) == "try-error") {stop("download failed")}
 	}
 	rast(file.path(path, poutf))
