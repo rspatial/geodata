@@ -127,10 +127,12 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 		ok <- try(utils::download.file(url, pzip, mode="wb"), silent=TRUE)
 		if (class(ok) == "try-error") {stop("download failed")}
 		if (!file.exists(pzip)) {stop("download failed")}
-		fz <- try(utils::unzip(pzip, exdir=path), silent=TRUE)
-		if (class(fz) == "try-error") {stop("download failed")}
 	}
-	rast(file.path(path, poutf))
+	if (!file.exists(poutf)) {
+		fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
+		if (class(fz) == "try-error") {stop("unzip failed")}
+	}
+	rast(poutf)
 }
 
 
