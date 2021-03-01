@@ -33,7 +33,7 @@ SpatRaster
 
 \examples{
 \donttest{
-bio10 <- cmip6_world("CNRM-CM6-1", "245", "2041-2060", var="bio", res=10, path=".")
+bio10 <- cmip6_world("CNRM-CM6-1", "585", "2061-2080", var="bio", res=10, path=".")
 }
 }
 

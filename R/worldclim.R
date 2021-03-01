@@ -99,7 +99,7 @@ worldclim_global <- function(var, res, path) {
 }
 
 
-cmip6_world <- function(model, ssp, time, var, res, path, ...) {
+cmip6_world <- function(model, ssp, time, var, res, path) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10"))
