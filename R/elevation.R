@@ -45,6 +45,7 @@ elevation_3s <- function(lon, lat, path, ...) {
 }
 
 elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
+	stopifnot(file.exists(path))
 	iso3 <- .getCountryISO(country)
 	if (mask) {
 		mskname <- "_msk"
