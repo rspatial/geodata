@@ -63,7 +63,7 @@
 
 
 .ccodes <- function() {
-	path <- system.file(package="predicts")
+	path <- system.file(package="geodata")
 	readRDS(file.path(path, "ex/countries.rds"))
 }
 
@@ -137,8 +137,6 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		}		
 	}
 
-	
-	
 	start <- max(1, start)
 	stopifnot(start <= end)
 	nrecs <- min(max(nrecs, 1), 300)
