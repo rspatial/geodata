@@ -2,6 +2,7 @@
 
 \alias{elevation_3s}
 \alias{elevation_30s}
+\alias{elevation_global}
 
 \title{Elevation}
 
@@ -12,8 +13,9 @@ The 1 km (30 arc seconds) data were aggregated from SRTM 90 m resolution data an
 }
 
 \usage{
-elevation_3s(lon, lat, path, ...)
-elevation_30s(country, path, mask=TRUE, subs="", ...)
+elevation_3s(lon, lat, path)
+elevation_30s(country, path, mask=TRUE, subs="")
+elevation_global(res, path)
 }
 
 \arguments{
@@ -23,7 +25,7 @@ elevation_30s(country, path, mask=TRUE, subs="", ...)
   \item{country}{character. Country name or code} 
   \item{mask}{logical. set grid cells outside of the country boundaries to NA} 
   \item{subs}{character}  
-  \item{...}{additional arguments (none implemented)}  
+  \item{res}{numeric. Valid resolutions are 10, 5, 2.5, and 0.5 (minutes of a degree)}
 }
 
 \value{

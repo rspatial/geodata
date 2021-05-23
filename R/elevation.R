@@ -4,7 +4,7 @@
 # Version 0.1
 # March 2016
 
-elevation_3s <- function(lon, lat, path, ...) {
+elevation_3s <- function(lon, lat, path) {
 	stopifnot(file.exists(path))
 	stopifnot(lon >= -180 & lon <= 180)
 	stopifnot(lat >= -60 & lat <= 60)
@@ -44,7 +44,7 @@ elevation_3s <- function(lon, lat, path, ...) {
 	}
 }
 
-elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
+elevation_30s <- function(country, path, mask=TRUE, subs="") {
 	stopifnot(file.exists(path))
 	iso3 <- .getCountryISO(country)
 	if (mask) {
@@ -74,3 +74,26 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	return(rs)
 }
 
+
+
+elevation_global <- function(res, path) {
+
+	stopifnot(dir.exists(path))
+	res <- as.character(res)
+	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
+	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
+	path <- file.path(path, paste0("wc2.1_", fres, "/"))
+	dir.create(path, showWarnings=FALSE)
+	zip <- paste0("wc2.1_", fres, "_elev.zip")
+
+	ff <- paste0("wc2.1_", fres, "_elev.tif")
+	pzip <- file.path(path, zip)
+	ff <- file.path(path, ff)
+	if (!file.exists(ff)) {
+		utils::download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
+		if (!file.exists(pzip)) {stop("download failed")}
+		fz <- try(utils::unzip(pzip, exdir=path))
+		if (class(fz) == "try-error") {stop("download failed")}
+	}
+	rast(ff)
+}

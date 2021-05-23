@@ -81,7 +81,7 @@ worldclim_global <- function(var, res, path) {
 	dir.create(path, showWarnings=FALSE)
 	zip <- paste0("wc2.1_", fres, "_", var, ".zip")
 
-	if (var  == "alt") {
+	if (var  == "elev") {
 		ff <- paste0("wc2.1_", fres, "_elev.tif")
 	} else {
 		nf <- if (var == "bio") 1:19 else formatC(1:12, width=2, flag=0)
