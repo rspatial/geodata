@@ -1,12 +1,12 @@
 Package: geodata
 Type: Package
 Title: Download Geographic Data 
-Version: 0.2-0
-Date: 2021-04-30
+Version: 0.2-1
+Date: 2021-05-23
 Depends: R (>= 3.5.0), terra
 Suggests: jsonlite
 Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
 Maintainer: Robert J. Hijmans <r.hijmans@gmail.com>
-Description: A set of functions that enables automatic downloading of geographic data.
+Description: Functions for downloading of geographic data for use in spatial data analysis and mapping. The functions provide access to climate, elevation, soil, species occurrence, and administrative boundary data.
 License: GPL (>=3)
 

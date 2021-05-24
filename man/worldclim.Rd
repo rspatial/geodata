@@ -32,7 +32,7 @@ SpatRaster
 
 \examples{
 \donttest{
-lux <- worldclim_country("Luxembourg", var="tmin", res=10, path=".")
+lux <- worldclim_country("Luxembourg", var="tmin", path=tempdir())
 }
 }
 

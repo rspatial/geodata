@@ -33,6 +33,6 @@ SpatRaster
 
 \examples{
 \donttest{
-ph <- soil_africa(var="ph_h2o", path=".")
+ph <- soil_africa(var="ph_h2o", path=tempdir())
 }
 }

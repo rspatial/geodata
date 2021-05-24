@@ -35,7 +35,7 @@ RasterLayer
 
 \examples{
 \dontrun{
-elevation(country='FRA', res='1km')
+elevation_30s(country="FRA", path=tempdir() )
 }
 }
 
