@@ -7,7 +7,7 @@ Download species occurrence data from GBIF
 }
 
 \description{
-This function downloads species occurence records from the Global Biodiversity Information Facility (\href{http://www.gbif.org}{GBIF}) data portal. You can download either a single species (if you append a '*' to the species name) or a subspecies of comparable level. You can download the data for an entire genus by using \code{species='*'}. Before using this function, please first check the GBIF \href{http://www.gbif.org/terms/licences}{data use agreement}. 
+This function downloads species occurence records from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal. You can download either a single species (if you append a '*' to the species name) or a subspecies of comparable level. You can download the data for an entire genus by using \code{species='*'}. Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement}. 
 }
 
 
@@ -37,7 +37,7 @@ data frame
 
 
 \references{
-\url{http://www.gbif.org/occurrence}
+\url{https://www.gbif.org/occurrence}
 }
 
 \examples{

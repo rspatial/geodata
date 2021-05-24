@@ -37,6 +37,6 @@ lux <- worldclim_country("Luxembourg", var="tmin", path=tempdir())
 }
 
 \seealso{
-\url{http://www.worldclim.org/} 
+\url{https://www.worldclim.org/} 
 }
 

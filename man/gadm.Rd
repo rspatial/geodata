@@ -27,7 +27,7 @@ SpatVector
 
 
 \details{
-These data are from the \url{https://www.gadm.org}
+These data are from \url{https://gadm.org}
 }
 
 \examples{
