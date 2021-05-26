@@ -44,31 +44,3 @@ country_codes <- function() {
 
 
 
-
-.countries <- function(download, path, type='sp', ...) {
-
-	if (type == 'sf') {
-		f <- "countries_gadm36_sf.rds"
-	} else {
-		f <- "countries_gadm36_sp.rds"	
-	}
-	filename <- file.path(path, f, sep="")
-	
-	if (!file.exists(filename)) {
-		if (download) {
-			theurl <- paste0("https://biogeo.ucdavis.edu/data/gadm3.6/", f)
-			.download(theurl, filename)
-			if (!file.exists(filename)) {
-				message("\nCould not download file -- perhaps it does not exist") 
-			}
-		} else {
-			message("File not available locally. Use 'download = TRUE'")
-		}
-	}	
-	if (file.exists(filename)) {
-		#thisenvir = new.env()
-		#data <- get(load(filename, thisenvir), thisenvir)
-		data <- readRDS(filename)
-		return(data)
-	} 
-}

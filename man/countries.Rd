@@ -18,8 +18,6 @@ data.frame
 }
 
 \examples{
-\dontrun{
-# Returns all countries
-country_codes()
-}
+cc <- country_codes()
+head(cc)
 }
