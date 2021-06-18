@@ -1,11 +1,11 @@
-\name{soil}
+\name{soil_africa}
 
 \alias{soil_africa}
 
-\title{Soil data}
+\title{Soil data for Africa}
 
 \description{
-Download soil data. Currently only iSDA soil data for Africa. Aggregated to 30-seconds resolutin.
+Download iSDA soil data for Africa. Aggregated to 30-seconds resolution.
 }
 
 \usage{
@@ -28,8 +28,6 @@ SpatRaster
 \url{https://envirometrix.nl/isdasoil-open-soil-data-for-africa/} 
 \url{https://zenodo.org/search?page=1&size=20&q=iSDAsoil}
 }
-
-
 
 \examples{
 \donttest{
