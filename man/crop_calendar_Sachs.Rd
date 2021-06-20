@@ -22,12 +22,12 @@ crop_calendar_sacks(crop="", path=".")
 SpatRaster
 }
 
-\note{
-These data are described in 
-
+\references{
 Sacks, W.J., D. Deryng, J.A. Foley, and N. Ramankutty (2010). Crop planting dates: an analysis of global patterns. Global Ecology and Biogeography 19, 607-620. DOI: 10.1111/j.1466-8238.2010.00551.x. (Article)
+}
 
-And there is more information here: https://nelson.wisc.edu/sage/data-and-models/crop-calendar-dataset/index.php
+\seealso{
+\url{https://nelson.wisc.edu/sage/data-and-models/crop-calendar-dataset/index.php}
 }
 
 

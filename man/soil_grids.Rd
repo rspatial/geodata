@@ -13,10 +13,10 @@ soil_grids(var, depth, stat="mean", name="")
 }
 
 \arguments{
-  \item{var}{character. Variables name. One of: "bdod", "cfvo", "clay", "nitrogen", "ocd", "phh2o", "sand", "silt", "soc", "wrb". See Details}
-  \item{depth}{numeric. One of 5, 15, 30, 60, 100, 200. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Ignored if \code{var="wrb"}}
+  \item{var}{character. Variables name. One of: \code{"bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "wrb"}. See Details}
+  \item{depth}{numeric. One of \code{5, 15, 30, 60, 100, 200}. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Ignored if \code{var="wrb"}}
   \item{stat}{character. One of "mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95". Ignored if \code{var="wrb"}}
-  \item{name}{character. One of 'Acrisols', 'Albeluvisols', 'Alisols', 'Andosols', 'Arenosols', 'Calcisols', 'Cambisols', 'Chernozems', 'Cryosols', 'Durisols', 'Ferralsols', 'Fluvisols', 'Gleysols', 'Gypsisols', 'Histosols', 'Kastanozems', 'Leptosols', 'Lixisols', 'Luvisols', 'MostProbable', 'MostProbable_152160', 'Nitisols', 'Phaeozems', 'Planosols', 'Plinthosols', 'Podzols', 'Regosols', 'Solonchaks', 'Solonetz', 'Stagnosols', 'Umbrisols', 'Vertisols'. Only used when \code{var="wrb"}}  
+  \item{name}{character. One of \code{'Acrisols', 'Albeluvisols', 'Alisols', 'Andosols', 'Arenosols', 'Calcisols', 'Cambisols', 'Chernozems', 'Cryosols', 'Durisols', 'Ferralsols', 'Fluvisols', 'Gleysols', 'Gypsisols', 'Histosols', 'Kastanozems', 'Leptosols', 'Lixisols', 'Luvisols', 'Nitisols', 'Phaeozems', 'Planosols', 'Plinthosols', 'Podzols', 'Regosols', 'Solonchaks', 'Solonetz', 'Stagnosols', 'Umbrisols', 'Vertisols'}. Only used when \code{var="wrb"}}  
 }
 
 \value{
@@ -41,19 +41,17 @@ The below table lists the variable names, a brief description, and their units, 
 \tab\code{ocd} \tab Organic carbon density \tab hg/m3 \tab 10 \tab kg/m3 \cr
 \tab\code{ocs} \tab Organic carbon stocks \tab t/ha \tab 10 \tab kg/m2 \cr
 }
-}
 
-
-\note{
-Citation: 
-
-Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro, E., and Rossiter, D., 2021. SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. Soil 7:217-240, 2021. doi:10.5194/soil-7-217-2021
-
-\url{https://www.isric.org/explore/soilgrids}
 
 license: CC-BY 4.0
+}
 
+\references{
+Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro, E., and Rossiter, D., 2021. SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. Soil 7:217-240, 2021. doi:10.5194/soil-7-217-2021
+}
 
+\seealso{
+\url{https://www.isric.org/explore/soilgrids}
 }
 
 

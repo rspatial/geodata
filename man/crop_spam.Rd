@@ -26,12 +26,12 @@ crop_spam(crop="", var="area", path=".", africa=FALSE)
 SpatRaster
 }
 
-\note{
-Source: 
-
+\references{
 International Food Policy Research Institute, 2020. Spatially-Disaggregated Crop Production Statistics Data in Africa South of the Sahara for 2017. https://doi.org/10.7910/DVN/FSSKBW, Harvard Dataverse, V2
+}
 
-https://www.mapspam.info/data/
+\seealso{
+\url{https://www.mapspam.info/data/}
 }
 
 
