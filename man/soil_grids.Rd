@@ -1,15 +1,17 @@
-\name{soil_grids}
+\name{soil_grids_vrt}
 
-\alias{soil_grids}
+\alias{soil_grids_vrt}
 
-\title{soil grids}
+\title{soil grids_vrt}
 
 \description{
-Virtually connect to the soilgrids data. 
+Virtually connect to the global soilgrids data.  See \url{https://www.isric.org/explore/soilgrids} for more info
+
+data license: CC-BY 4.0
 }
 
 \usage{
-soil_grids(var, depth, stat="mean", name="")
+soil_grids_vrt(var, depth, stat="mean", name="")
 }
 
 \arguments{
@@ -43,7 +45,6 @@ The below table lists the variable names, a brief description, and their units, 
 }
 
 
-license: CC-BY 4.0
 }
 
 \references{
@@ -51,13 +52,13 @@ Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro
 }
 
 \seealso{
-\url{https://www.isric.org/explore/soilgrids}
+For Africa: \code{\link{af_soil_isda}}, \code{\link{af_soil}}, \code{\link{af_elements}}
 }
 
 
 
 \examples{
 \donttest{
-ph <- soil_grids(var="phh2o", depth=5)
+ph <- soil_grids_vrt(var="phh2o", depth=5)
 }
 }

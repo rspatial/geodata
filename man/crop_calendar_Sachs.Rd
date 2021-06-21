@@ -23,7 +23,7 @@ SpatRaster
 }
 
 \references{
-Sacks, W.J., D. Deryng, J.A. Foley, and N. Ramankutty (2010). Crop planting dates: an analysis of global patterns. Global Ecology and Biogeography 19, 607-620. DOI: 10.1111/j.1466-8238.2010.00551.x. (Article)
+Sacks, W.J., D. Deryng, J.A. Foley, and N. Ramankutty, 2010. Crop planting dates: an analysis of global patterns. Global Ecology and Biogeography 19: 607-620. doi:10.1111/j.1466-8238.2010.00551.x.
 }
 
 \seealso{
