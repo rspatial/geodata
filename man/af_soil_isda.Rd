@@ -21,7 +21,7 @@ af_soil_isda(var, depth=20, error=FALSE, path)
 }
 
 \arguments{
-  \item{var}{character. Variables name. One of: "al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph", "sand", "silt", "s", "texture", "wpg2", "zn" see Details}
+  \item{var}{character. The variables name, one of: "Al", "bdr", "clay", "C.tot", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH", "sand", "silt", "S", "texture", "wpg2", "Zn". see Details}
   \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm)}
   \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path name where the data should be downloaded to}  
@@ -33,27 +33,27 @@ SpatRaster
 
 \details{
 \tabular{lllr}{
-\tab \bold{name} \tab bold{description} \tab bold{unit} \cr
-\tab Al \tab extractable aluminum \tab mg kg-1 \cr
-\tab bdr \tab bed rock depth \tab cm \cr
+\tab \bold{name} \tab \bold{description} \tab \bold{unit} \cr
+\tab Al \tab extractable aluminum \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab bdr \tab bed rock depth \tab \ifelse{latex}{\out{$cm$}}{\out{cm}} \cr
 \tab clay \tab clay content \tab \% \cr
-\tab C.tot \tab total carbon \tab kg-1 \cr
-\tab Ca \tab extractable calcium \tab mg kg-1 \cr
-\tab db.od \tab bulk density 100 g m3 \tab \cr
-\tab eCEC.f \tab effective cation exchange capacity \tab cmol(+) kg-1 \cr
-\tab Fe \tab extractable iron \tab \cr
-\tab K \tab extractable potassium \tab mg kg-1 \cr
-\tab Mg \tab extractable magnesium \tab mg kg-1 \cr
-\tab N.tot \tab total organic nitrogen \tab g kg-1 \cr
-\tab OC \tab Organic Carbon \tab  g kg-1  \cr
-\tab P \tab Phosphorus content \tab mg kg-1 \cr
+\tab C.tot \tab total carbon \tab \ifelse{latex}{\out{$kg^{-1}$}}{\out{kg<sup>-1</sup>}} \cr
+\tab Ca \tab extractable calcium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab db.od \tab bulk density \tab \ifelse{latex}{\out{$kg\cdot m^{3}$}}{\out{kg m<sup>-3</sup>}} \cr
+\tab eCEC.f \tab effective cation exchange capacity \tab \ifelse{latex}{\out{$cmol(+)\dot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Fe \tab extractable iron \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab K \tab extractable potassium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab Mg \tab extractable magnesium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab N.tot \tab total organic nitrogen \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
+\tab OC \tab Organic Carbon \tab  \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
+\tab P \tab Phosphorus content \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 \tab pH \tab pH (H2O) \tab - \cr
 \tab sand \tab Sand content \tab \% \cr
 \tab silt \tab Silt content \tab \% \cr
-\tab S \tab Extractable sulfer \tab mg kg-1\cr
+\tab S \tab Extractable sulfer \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 \tab texture \tab texture class \tab - \cr
 \tab wpg2 \tab stone content \tab \% \cr
-\tab Zn \tab Extractable zinc \tab mg kg-1\cr
+\tab Zn \tab Extractable zinc \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 }
 }
 
