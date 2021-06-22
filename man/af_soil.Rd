@@ -35,35 +35,33 @@ SpatRaster
 
 
 \details{
-\tabular{llllr}{
-\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \cr
-\tab clay \tab Soil texture fraction clay \tab g 100 g-1 \cr
-\tab sand \tab Soil texture fraction sand \tab g 100 g-1 \cr
-\tab silt \tab Soil texture fraction silt \tab g 100 g-1 \cr
-\tab coarse \tab Coarse fragments volumetric \tab m3 100 m-3  \cr
-\tab SOC \tab Organic carbon \tab g kg-1 \cr
-\tab BLKD \tab Bulk density (fine earth) \tab kg dm-3 \cr
+\tabular{lllr}{
+\tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
+\tab clay \tab Soil texture fraction clay \tab \% \cr
+\tab sand \tab Soil texture fraction sand \tab \% \cr
+\tab silt \tab Soil texture fraction silt \tab \% \cr
+\tab coarse \tab Coarse fragments volumetric \tab \% \cr
+\tab SOC \tab Organic carbon \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} (‰) \cr
+\tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot dm^{-3}$}}{\out{kg dm<sup>-3</sup>}} \cr
 \tab poros \tab Porosity (volumetric fraction) based on PTF\tab - \cr
 \tab AWpF2.0 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.0 \tab - \cr
 \tab AWpF2.3 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.3 \tab - \cr
 \tab AWpF2.5 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.4 \tab - \cr
 \tab AWpF4.2 \tab Available soil water capacity (volumetric fraction) at wilting point (pF 4.2) \tab - \cr
 \tab BDR \tab Depth to bedrock \tab cm \cr
-
-\tab ---- \tab -----  \tab ----- \cr
-
-\tab pH \tab Soil pH (H2O) \tab - \tab \cr
-\tab ECN \tab Electrical condutivity \tab mS/m (?) \tab \cr
-\tab acid-exch \tab Exchangeable acidity \tab cmol+ kg-1 \cr
-\tab bases-exch \tab Sum of exchangeable bases \tab cmol+ kg-1 \cr
-\tab CEC \tab Cation Exchange Capacity \tab cmol+ kg-1 \cr
-\tab Al-extr \tab Extractable Aluminum (Mehlich 3) \tab mg kg-1 \cr
-\tab Al-exch \tab Exchangeable Aluminum \tab cmol+ kg-1 \cr
-\tab Ca-exch \tab Exchangeable Calcium \tab cmol+ kg-1 \cr
-\tab K-exch \tab Exchangeable Potassium \tab cmol+ kg-1  \cr
-\tab Mg-exch \tab Exchangeable Magnesium \tab cmol+ kg-1 \cr
-\tab Na-exch \tab Exchangeable Sodium \tab cmol+ kg-1 \cr
-\tab Ntot \tab Total nitrogen \tab g kg-1 \cr
+\tab . \tab . \tab . \cr
+\tab pH \tab Soil pH (H2O) \tab - \cr
+\tab ECN \tab Electrical conductivity \tab mS/m (?) \cr
+\tab acid-exch \tab Exchangeable acidity \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab bases-exch \tab Sum of exchangeable bases \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab CEC \tab Cation Exchange Capacity \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Al-extr \tab Extractable Aluminum (Mehlich 3) \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Al-exch \tab Exchangeable Aluminum \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Ca-exch \tab Exchangeable Calcium \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab K-exch \tab Exchangeable Potassium \tab  \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Mg-exch \tab Exchangeable Magnesium \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Na-exch \tab Exchangeable Sodium \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab Ntot \tab Total nitrogen \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 }
 }
 

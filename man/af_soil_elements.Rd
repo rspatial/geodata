@@ -28,23 +28,22 @@ af_soil_elements(var, path)
 SpatRaster
 }
 
-
 \details{
 \tabular{lllr}{
-\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \cr
-\tab Al \tab Extractable aluminum \tab mg kg-1 \cr
-\tab B \tab Extractable boron \tab mg kg-1 \cr
-\tab Ca \tab Extractable calcium \tab mg kg-1 \cr
-\tab Cu \tab Extractable copper \tab mg kg-1 \cr
-\tab Fe \tab Extractable iron \tab mg kg-1 \cr
-\tab K \tab Extractable potassium \tab mg kg-1 \cr
-\tab Mg \tab Extractable magnesium \tab mg kg-1 \cr
-\tab Mn \tab Extractable manganese \tab mg kg-1 \cr
-\tab N \tab Organic nitrogen \tab in mg kg-1 \cr
-\tab Na \tab Extractable sodium \tab mg kg-1 \cr
-\tab P \tab Extractable phosphorus \tab 100 mg kg-1 \cr
-\tab Ptot \tab Total phosphorus \tab 100 mg kg-1 \cr
-\tab Zn \tab Extractable zinc \tab mg kg-1 \cr
+\tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
+\tab Al \tab Extractable aluminum \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab B \tab Extractable boron \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Ca \tab Extractable calcium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Cu \tab Extractable copper \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Fe \tab Extractable iron \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab K \tab Extractable potassium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Mg \tab Extractable magnesium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Mn \tab Extractable manganese \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab N \tab Organic nitrogen \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab Na \tab Extractable sodium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
+\tab P \tab Extractable phosphorus \tab \ifelse{latex}{\out{$mg\cdot (100 \cdot kg^{-1})$}}{\out{mg (100 kg<sup>-1</sup>)}} \cr
+\tab Ptot \tab Total phosphorus \tab \ifelse{latex}{\out{$mg\cdot (100 \cdot kg^{-1})$}}{\out{mg (100 kg<sup>-1</sup>)}} \cr
+\tab Zn \tab Extractable zinc \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} (ppm) \cr
 }
 }
 

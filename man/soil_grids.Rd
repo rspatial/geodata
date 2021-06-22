@@ -35,19 +35,19 @@ SpatRaster
 \details{
 The below table lists the variable names, a brief description, and their units, as well as the conversion factor that can be used to get the conventional units.
 
-\tabular{lllllr}{
-\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \cr
-\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab kg/dm3 \cr
-\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab cmol(c)/kg \cr
-\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab cm3/100cm3 \cr
-\tab\code{nitrogen} \tab Total nitrogen (N) \tab g/kg \cr
-\tab\code{phh2o} \tab Soil pH \tab pH \cr
-\tab\code{sand} \tab Sand (>0.05 mm) in fine earth \tab g/100g\cr
-\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab g/100g\cr
-\tab\code{clay} \tab Clay (<0.002 mm) in fine earth \tab g/100g\cr
-\tab\code{soc} \tab Soil organic carbon in fine earth \tab g/kg \cr
-\tab\code{ocd} \tab Organic carbon density \tab kg/m3 \cr
-\tab\code{ocs} \tab Organic carbon stocks \tab kg/m2 \cr
+\tabular{lllr}{
+\tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
+\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab \ifelse{latex}{\out{$kg\cdot dm^{-3}$}}{\out{kg dm<sup>-3</sup>}} \cr
+\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab \ifelse{latex}{\out{$cmol(+)\dot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
+\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab \ifelse{latex}{\out{$cm\cdot (100\cdot cm^{-3})$}}{\out{cm (100 cm)<sup>-3</sup>}} \cr
+\tab\code{nitrogen} \tab Total nitrogen (N) \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
+\tab\code{phh2o} \tab Soil pH \tab - \cr
+\tab\code{sand} \tab Sand (>0.05 mm) in fine earth \tab \% \cr
+\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab \% \cr
+\tab\code{clay} \tab Clay (<0.002 mm) in fine earth \tab \% \cr
+\tab\code{soc} \tab Soil organic carbon in fine earth \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
+\tab\code{ocd} \tab Organic carbon density \tab \ifelse{latex}{\out{$kg\cdot m^{-3}$}}{\out{kg m<sup>-3</sup>}} \cr
+\tab\code{ocs} \tab Organic carbon stocks \tab  \ifelse{latex}{\out{$kg\cdot m^{-2}$}}{\out{kg m<sup>-2</sup>}} \cr
 }
 
 

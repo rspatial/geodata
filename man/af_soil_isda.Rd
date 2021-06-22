@@ -33,7 +33,7 @@ SpatRaster
 
 \details{
 \tabular{lllr}{
-\tab \bold{name} \tab \bold{description} \tab \bold{unit} \cr
+\tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
 \tab Al \tab extractable aluminum \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 \tab bdr \tab bed rock depth \tab \ifelse{latex}{\out{$cm$}}{\out{cm}} \cr
 \tab clay \tab clay content \tab \% \cr
