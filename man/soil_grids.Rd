@@ -2,12 +2,10 @@
 
 \alias{soil_world}
 
-\title{soil grids}
+\title{Global soil data}
 
 \description{
-Download global soilgrids data. 
-
-The data were aggregated and transformed to 30 second resolution longitude/latitude
+Download global soils data. The data are derived from the SoilGRIDS database. The data were aggregated and transformed to a longitude/latitude coordinate reference system with 30-second spatial resolution.
 
 See \url{https://www.isric.org/explore/soilgrids} for more info
 
@@ -19,10 +17,10 @@ soil_world(var, depth, stat="mean", name="", path)
 }
 
 \arguments{
-  \item{var}{character. Variables name. One of: \code{"bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "wrb"}. See Details}
+  \item{var}{character. Variables name. One of: "bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "wrb". See Details}
   \item{depth}{numeric. One of \code{5, 15, 30, 60, 100, 200}. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Ignored if \code{var="wrb"}}
   \item{stat}{character. One of "mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95". Ignored if \code{var="wrb"}}
-  \item{name}{character. One of \code{'Acrisols', 'Albeluvisols', 'Alisols', 'Andosols', 'Arenosols', 'Calcisols', 'Cambisols', 'Chernozems', 'Cryosols', 'Durisols', 'Ferralsols', 'Fluvisols', 'Gleysols', 'Gypsisols', 'Histosols', 'Kastanozems', 'Leptosols', 'Lixisols', 'Luvisols', 'Nitisols', 'Phaeozems', 'Planosols', 'Plinthosols', 'Podzols', 'Regosols', 'Solonchaks', 'Solonetz', 'Stagnosols', 'Umbrisols', 'Vertisols'}. Only used when \code{var="wrb"}}  
+  \item{name}{character. One of "Acrisols", "Albeluvisols", "Alisols", "Andosols", "Arenosols", "Calcisols", "Cambisols", "Chernozems", "Cryosols", "Durisols", "Ferralsols", "Fluvisols", "Gleysols", "Gypsisols", "Histosols", "Kastanozems", "Leptosols", "Lixisols", "Luvisols", "Nitisols", "Phaeozems", "Planosols", "Plinthosols", "Podzols", "Regosols", "Solonchaks", "Solonetz", "Stagnosols", "Umbrisols", "Vertisols". Only used when \code{var="wrb"}}  
   \item{path}{character. Path name where the data should be downloaded to}  
 
 }
@@ -50,7 +48,7 @@ SpatRaster
 }
 
 \references{
-Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro, E., and Rossiter, D., 2021. SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. Soil 7:217-240, 2021. doi:10.5194/soil-7-217-2021
+Poggio L., de Sousa L.M., Batjes N.H., Heuvelink G.B.M., Kempen B., Ribeiro E., Rossiter D., 2021. SoilGrids 2.0: producing soil information for the globe with quantified spatial uncertainty. Soil 7:217-240, 2021. doi:10.5194/soil-7-217-2021
 }
 
 \seealso{

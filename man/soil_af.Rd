@@ -2,7 +2,7 @@
 
 \alias{soil_af}
 
-\title{soil_af}
+\title{Soil data for Africa}
 
 \description{
 Download chemical soil properties data for Africa for different soil depths. The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250m resolution.

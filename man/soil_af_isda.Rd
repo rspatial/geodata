@@ -5,9 +5,7 @@
 \title{iSDA soil data for Africa}
 
 \description{
-Download iSDA soil data for Africa. 
-
-The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 30m resolution.
+Download soil data for Africa derived from the iDSA data set. The orginal data were aligned and aggregated to  30 arc-seconds (about 1 km2). The original spatial resolution was 30m.
 
 For more info see:
 

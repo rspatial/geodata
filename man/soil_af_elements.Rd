@@ -2,7 +2,7 @@
 
 \alias{soil_af_elements}
 
-\title{Elements in African soil}
+\title{Soil elements data for Africa}
 
 \description{
 Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa.
@@ -19,7 +19,7 @@ soil_af_elements(var, path)
 
 
 \arguments{
-  \item{var}{character. Variables name. One of: \code{"Al", "B", "Ca", "Cu", "Fe", "K", "Mg", "Mn", "N", "Na", "P", "Ptot", "Zn"}. See Details}
+  \item{var}{character. Variables name. One of: "Al", "B", "Ca", "Cu", "Fe", "K", "Mg", "Mn", "N", "Na", "P", "Ptot", "Zn". See Details}
   
   \item{path}{character. Path to download the data to}
 } 
