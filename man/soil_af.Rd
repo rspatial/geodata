@@ -1,13 +1,13 @@
-\name{af_soil}
+\name{soil_af}
 
-\alias{af_soil}
+\alias{soil_af}
 
-\title{af_soil}
+\title{soil_af}
 
 \description{
 Download chemical soil properties data for Africa for different soil depths. The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250m resolution.
 
-There are more recent estimations for some of the properties available in other data sets. See \code{\link{af_soil_isda}} and \code{\link{soil_grids}}. 
+There are more recent estimations for some of the properties available in other data sets. See \code{\link{soil_af_isda}} and \code{\link{soil_world}}. 
 
 
 For more info, see \url{https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution}
@@ -17,7 +17,7 @@ The data have a CC-BY 4.0 NC license
 }
 
 \usage{
-af_soil(var, depth, path)
+soil_af(var, depth, path)
 }
 
 
@@ -43,14 +43,14 @@ SpatRaster
 \tab coarse \tab Coarse fragments volumetric \tab \% \cr
 \tab SOC \tab Organic carbon \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} (‰) \cr
 \tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot dm^{-3}$}}{\out{kg dm<sup>-3</sup>}} \cr
-\tab poros \tab Porosity (volumetric fraction) based on PTF\tab - \cr
-\tab AWpF2.0 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.0 \tab - \cr
-\tab AWpF2.3 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.3 \tab - \cr
-\tab AWpF2.5 \tab Available soil water capacity (volumetric fraction) for FC = pF 2.4 \tab - \cr
-\tab AWpF4.2 \tab Available soil water capacity (volumetric fraction) at wilting point (pF 4.2) \tab - \cr
+\tab poros \tab Porosity (volum. fraction) based on PTF\tab - \cr
+\tab AWpF2.0 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.0 \tab - \cr
+\tab AWpF2.3 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.3 \tab - \cr
+\tab AWpF2.5 \tab Avail. soil water capacity (volum. fract.) for FC = pF 2.4 \tab - \cr
+\tab AWpF4.2 \tab Avail. soil water capacity (volum. fract.) at wilting point (pF 4.2) \tab - \cr
 \tab BDR \tab Depth to bedrock \tab cm \cr
 \tab . \tab . \tab . \cr
-\tab pH \tab Soil pH (H2O) \tab - \cr
+\tab pH \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}})  \tab - \cr
 \tab ECN \tab Electrical conductivity \tab mS/m (?) \cr
 \tab acid-exch \tab Exchangeable acidity \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
 \tab bases-exch \tab Sum of exchangeable bases \tab \ifelse{latex}{\out{$cmol(+)\cdot kg^{-1}$}}{\out{cmol(+) kg<sup>-1</sup>}} \cr
@@ -72,12 +72,12 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 
 \seealso{
-\code{\link{af_soil_elements}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids_vsi}}
+\code{\link{soil_af_elements}}, \code{\link{soil_af_isda}}, \code{\link{soil_world_vsi}}
 }
 
 
 \examples{
 \donttest{
-ph <- soil_afsis(var="phh2o", depth=5)
+ph <- soil_af(var="phh2o", depth=5)
 }
 }

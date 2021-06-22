@@ -1,6 +1,6 @@
-\name{af_soil_elements}
+\name{soil_af_elements}
 
-\alias{af_soil_elements}
+\alias{soil_af_elements}
 
 \title{Elements in African soil}
 
@@ -14,7 +14,7 @@ For more information, see \url{https://www.isric.org/projects/soil-property-maps
 }
 
 \usage{
-af_soil_elements(var, path)
+soil_af_elements(var, path)
 }
 
 
@@ -54,7 +54,7 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 
 \seealso{
-\code{\link{af_soil}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids}}
+\code{\link{soil_af}}, \code{\link{soil_af_isda}}, \code{\link{soil_world}}
 }
 
 

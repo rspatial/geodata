@@ -15,7 +15,7 @@
 
 
 
-af_soil <- function(var, depth=20, path) {
+soil_af <- function(var, depth=20, path) {
 
 	stopifnot(dir.exists(path))
 	
@@ -38,7 +38,7 @@ af_soil <- function(var, depth=20, path) {
 
 
 
-af_soil_elements <- function(var, path) {
+soil_af_elements <- function(var, path) {
 
 	stopifnot(dir.exists(path))
 	

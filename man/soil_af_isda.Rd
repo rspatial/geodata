@@ -1,6 +1,6 @@
-\name{af_soil_isda}
+\name{soil_af_isda}
 
-\alias{af_soil_isda}
+\alias{soil_af_isda}
 
 \title{iSDA soil data for Africa}
 
@@ -17,7 +17,7 @@ For more info see:
 }
 
 \usage{
-af_soil_isda(var, depth=20, error=FALSE, path) 
+soil_af_isda(var, depth=20, error=FALSE, path) 
 }
 
 \arguments{
@@ -47,7 +47,7 @@ SpatRaster
 \tab N.tot \tab total organic nitrogen \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 \tab OC \tab Organic Carbon \tab  \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 \tab P \tab Phosphorus content \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
-\tab pH \tab pH (H2O) \tab - \cr
+\tab pH \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}}) \tab - \cr
 \tab sand \tab Sand content \tab \% \cr
 \tab silt \tab Silt content \tab \% \cr
 \tab S \tab Extractable sulfer \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
@@ -63,12 +63,12 @@ Tomislav Hengl, Matthew A. E. Miller, Josip Križan, Keith D. Shepherd, Andrew S
 }
 
 \seealso{
-\code{\link{af_soil_elements}}, \code{\link{af_soil}}, \code{\link{soil_grids}}
+\code{\link{soil_af_elements}}, \code{\link{soil_af}}, \code{\link{soil_world}}
 }
 
 
 \examples{
 \donttest{
-ph <- af_soil_isda("ph", path=tempdir())
+ph <- soil_af_isda("ph", path=tempdir())
 }
 }

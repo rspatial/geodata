@@ -1,6 +1,6 @@
-\name{soil_grids_vsi}
+\name{soil_world_vsi}
 
-\alias{soil_grids_vsi}
+\alias{soil_world_vsi}
 
 \title{soil grids_vsi}
 
@@ -11,7 +11,7 @@ data license: CC-BY 4.0
 }
 
 \usage{
-soil_grids_vsi(var, depth, stat="mean", name="")
+soil_world_vsi(var, depth, stat="mean", name="")
 }
 
 \arguments{
@@ -27,24 +27,21 @@ SpatRaster
 
 
 \details{
-The below table lists the variable names, a brief description, and their units, as well as the conversion factor that can be used to get the conventional units.
-
-\tabular{lllllr}{
-\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \tab \bold{Fact} \tab \bold{Convent. units}\cr
-\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab cg/cm3 \tab 100 \tab kg/dm3 \cr
-\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab mmol(c)/kg \tab 10 \tab cmol(c)/kg \cr
-\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab cm3/dm3 \tab 10 \tab cm3/100cm3 \cr
-\tab\code{nitrogen} \tab Total nitrogen (N) \tab cg/kg \tab 100 \tab g/kg \cr
-\tab\code{phh2o} \tab Soil pH \tab pH x 10 \tab 10 \tab pH \cr
-\tab\code{sand} \tab Sand (>0.05 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
-\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
-\tab\code{clay} \tab Clay (<0.002 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
-\tab\code{soc} \tab Soil organic carbon in fine earth \tab dg/kg \tab 10 \tab g/kg \cr
-\tab\code{ocd} \tab Organic carbon density \tab hg/m3 \tab 10 \tab kg/m3 \cr
-\tab\code{ocs} \tab Organic carbon stocks \tab t/ha \tab 10 \tab kg/m2 \cr
+The below table lists the variable names, a description, and the units of the variables. Note that these units are not standard units, and are different from the data for other soil data available through this package.
+\tabular{lllr}{
+\tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
+\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab \ifelse{latex}{\out{$cg\cdot cm^{-3}$}}{\out{cg cm<sup>-3</sup>}} \cr
+\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab \ifelse{latex}{\out{$mmol(+)\dot kg^{-1}$}}{\out{mmol(+) kg<sup>-1</sup>}} \cr
+\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab ‰ \cr
+\tab\code{nitrogen} \tab Total nitrogen (N) \tab \ifelse{latex}{\out{$cg\cdot kg^{-1}$}}{\out{cg kg<sup>-1</sup>}} \cr
+\tab\code{phh2o} \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}}) \tab - \cr
+\tab\code{sand} \tab Sand (> 0.05 mm) in fine earth \tab ‰ \cr
+\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab ‰ \cr
+\tab\code{clay} \tab Clay (< 0.002 mm) in fine earth \tab ‰ \cr
+\tab\code{soc} \tab Soil organic carbon in fine earth \tab \ifelse{latex}{\out{$dg\cdot kg^{-1}$}}{\out{dg kg<sup>-1</sup>}} \cr
+\tab\code{ocd} \tab Organic carbon density \tab \ifelse{latex}{\out{$hg\cdot m^{-3}$}}{\out{hg m<sup>-3</sup>}} \cr
+\tab\code{ocs} \tab Organic carbon stocks \tab  \ifelse{latex}{\out{$hg\cdot m^{-2}$}}{\out{hg m<sup>-2</sup>}} \cr
 }
-
-
 }
 
 \references{
@@ -52,13 +49,13 @@ Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro
 }
 
 \seealso{
-For Africa: \code{\link{af_soil_isda}}, \code{\link{af_soil}}, \code{\link{af_soil_elements}}
+For Africa: \code{\link{soil_af_isda}}, \code{\link{soil_af}}, \code{\link{soil_af_elements}}
 }
 
 
 
 \examples{
 \donttest{
-ph <- soil_grids_vsi(var="phh2o", depth=5)
+ph <- soil_world_vsi(var="phh2o", depth=5)
 }
 }

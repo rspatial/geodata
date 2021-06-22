@@ -1,6 +1,6 @@
 
 
-af_soil_isda <- function(var, depth=20, error=FALSE, path) {
+soil_af_isda <- function(var, depth=20, error=FALSE, path) {
 
 	stopifnot(depth %in% c(20, 50))
 	
