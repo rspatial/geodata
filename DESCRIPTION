@@ -4,6 +4,7 @@ Title: Download Geographic Data
 Version: 0.2-4
 Date: 2021-06-16
 Depends: R (>= 3.5.0), terra
+Encoding: UTF-8
 Suggests: jsonlite, R.utils
 Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
 Maintainer: Robert J. Hijmans <r.hijmans@gmail.com>

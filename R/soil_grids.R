@@ -1,6 +1,12 @@
 
-soil_grids_vrt <- function(var, depth, stat="mean", name="") {
-	sg_url="/vsicurl/https://files.isric.org/soilgrids/latest/data/"
+.soil_grids_url <- function(var, depth, stat="mean", name="", vsi) {
+
+	if (vsi) {
+		sg_url <- "/vsicurl/https://files.isric.org/soilgrids/latest/data/"
+	} else {
+		sg_url <- "https://biogeo.ucdavis.edu/data/geodata/soil/soilgrids/"
+	}
+	
 	var <- var[1]
 	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "phh2o", "sand", "silt", "soc", "wrb"))
 	if (var == "wrb") {
@@ -29,9 +35,34 @@ soil_grids_vrt <- function(var, depth, stat="mean", name="") {
 		}
 		stat <- stat[1]
 		stopifnot(stat %in% c("mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95"))
-		u <- file.path(sg_url, var, paste0(var, "_", dd, "cm_", stat, ".vrt"))
+		if (vsi) {
+			u <- file.path(sg_url, var, paste0(var, "_", dd, "cm_", stat, ".vrt"))
+		} else {
+			u <- file.path(sg_url, paste0(var, "_", dd, "cm_", stat, ".vrt"))		
+		}
 	}
+	u
+}
+
+soil_grids_vsi <- function(var, depth, stat="mean", name="") {
+	u <- .soil_grids_url(var, depth, stat="mean", name="", vsi=TRUE)
 	rast(u)
+}
+
+
+soil_grids <- function(var, depth, stat="mean", name="", path) {
+	stopifnot(dir.exists(path))
+	u <- .soil_grids_url(var, depth, stat="mean", name="", vsi=FALSE)
+	u <- gsub(".vrt$", "_30s.tif", u)
+	filename <- basename(u)
+	filepath <- file.path(path, filename)
+	if (!file.exists(filepath)) {
+		ff <- readLines("https://biogeo.ucdavis.edu/data/geodata/soil/soilgrids/files.txt")
+		if (!(filename %in% ff)) {
+			stop(paste("file not yet available:", filename))
+		}
+	}
+	.donwload_url(u, filepath)
 }
 
 

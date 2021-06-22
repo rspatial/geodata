@@ -7,7 +7,7 @@
 \description{
 Download chemical soil properties data for Africa for different soil depths. The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250m resolution.
 
-There are more recent estimations for some of the properties available in other data sets. See \code{\link{af_soil_isda}} and \code{\link{soil_grids_vrt}}. 
+There are more recent estimations for some of the properties available in other data sets. See \code{\link{af_soil_isda}} and \code{\link{soil_grids}}. 
 
 
 For more info, see \url{https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution}
@@ -74,7 +74,7 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 
 \seealso{
-\code{\link{af_elements}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids_vrt}}
+\code{\link{af_soil_elements}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids_vsi}}
 }
 
 

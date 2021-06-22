@@ -13,7 +13,7 @@ af_soil_isda <- function(var, depth=20, error=FALSE, path) {
 	
 	depth <- ifelse(depth == 20, "0-20cm", "20-50cm")
 
-	filename <- paste0("isda", "_", var, "_", depth, "_v", version,  ".tif")
+	filename <- paste0("isda_", var, "_", depth, "_v", version,  "_30s.tif")
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {

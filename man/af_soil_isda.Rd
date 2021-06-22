@@ -17,13 +17,13 @@ For more info see:
 }
 
 \usage{
-af_soil_isda(var, depth=20, path) 
+af_soil_isda(var, depth=20, error=FALSE, path) 
 }
 
 \arguments{
   \item{var}{character. Variables name. One of: "al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph", "sand", "silt", "s", "texture", "wpg2", "zn" see Details}
   \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm)}
-  \item{version}{integer. Only version 0.13 is currently available} 
+  \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path name where the data should be downloaded to}  
 }
 
@@ -59,11 +59,11 @@ SpatRaster
 
 
 \references{
-Tomislav Hengl, Matthew A. E. Miller, Josip Križan, Keith D. Shepherd, Andrew Sila, Milan Kilibarda, Ognjen Antonijević, Luka Glušica, Achim Dobermann, Stephan M. Haefele, Steve P. McGrath, Gifty E. Acquah, Jamie Collinson, Leandro Parente, Mohammadreza Sheykhmousa, Kazuki Saito, Jean-Martial Johnson, Jordan Chamberlin, Francis B. T. Silatsa, Martin Yemefack, John Wendt, Robert A. MacMillan, Ichsani Wheeler & Jonathan Crouch, 2021. African soil properties and nutrients mapped at 30 m spatial resolution using two-scale ensemble machine learning. Scientific Reports 11: 6130. 
+Tomislav Hengl, Matthew A. E. Miller, Josip Križan, Keith D. Shepherd, Andrew Sila, Milan Kilibarda, Ognjen Antonijevic, Luka Glušica, Achim Dobermann, Stephan M. Haefele, Steve P. McGrath, Gifty E. Acquah, Jamie Collinson, Leandro Parente, Mohammadreza Sheykhmousa, Kazuki Saito, Jean-Martial Johnson, Jordan Chamberlin, Francis B. T. Silatsa, Martin Yemefack, John Wendt, Robert A. MacMillan, Ichsani Wheeler & Jonathan Crouch, 2021. African soil properties and nutrients mapped at 30 m spatial resolution using two-scale ensemble machine learning. Scientific Reports 11: 6130. 
 }
 
 \seealso{
-\code{\link{af_elements}}, \code{\link{af_soil}}, \code{\link{soil_grids_vrt}}
+\code{\link{af_soil_elements}}, \code{\link{af_soil}}, \code{\link{soil_grids}}
 }
 
 

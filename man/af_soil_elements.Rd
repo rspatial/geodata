@@ -1,8 +1,8 @@
-\name{af_elements}
+\name{af_soil_elements}
 
-\alias{af_elements}
+\alias{af_soil_elements}
 
-\title{Chemical elements in African soil}
+\title{Elements in African soil}
 
 \description{
 Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa.
@@ -14,12 +14,13 @@ For more information, see \url{https://www.isric.org/projects/soil-property-maps
 }
 
 \usage{
-soil_elements(var, path)
+af_soil_elements(var, path)
 }
 
 
 \arguments{
   \item{var}{character. Variables name. One of: \code{"Al", "B", "Ca", "Cu", "Fe", "K", "Mg", "Mn", "N", "Na", "P", "Ptot", "Zn"}. See Details}
+  
   \item{path}{character. Path to download the data to}
 } 
 
@@ -54,7 +55,7 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 
 \seealso{
-\code{\link{af_soil}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids_vrt}}
+\code{\link{af_soil}}, \code{\link{af_soil_isda}}, \code{\link{soil_grids}}
 }
 
 

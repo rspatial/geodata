@@ -1,21 +1,17 @@
-\name{soil_grids}
+\name{soil_grids_vsi}
 
-\alias{soil_grids}
+\alias{soil_grids_vsi}
 
-\title{soil grids}
+\title{soil grids_vsi}
 
 \description{
-Download global soilgrids data. 
-
-The data were aggregated and transformed to 30 second resolution longitude/latitude
-
-See \url{https://www.isric.org/explore/soilgrids} for more info
+Virtually connect to the global soilgrids data.  See \url{https://www.isric.org/explore/soilgrids} for more info
 
 data license: CC-BY 4.0
 }
 
 \usage{
-soil_grids(var, depth, stat="mean", name="", path)
+soil_grids_vsi(var, depth, stat="mean", name="")
 }
 
 \arguments{
@@ -23,8 +19,6 @@ soil_grids(var, depth, stat="mean", name="", path)
   \item{depth}{numeric. One of \code{5, 15, 30, 60, 100, 200}. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Ignored if \code{var="wrb"}}
   \item{stat}{character. One of "mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95". Ignored if \code{var="wrb"}}
   \item{name}{character. One of \code{'Acrisols', 'Albeluvisols', 'Alisols', 'Andosols', 'Arenosols', 'Calcisols', 'Cambisols', 'Chernozems', 'Cryosols', 'Durisols', 'Ferralsols', 'Fluvisols', 'Gleysols', 'Gypsisols', 'Histosols', 'Kastanozems', 'Leptosols', 'Lixisols', 'Luvisols', 'Nitisols', 'Phaeozems', 'Planosols', 'Plinthosols', 'Podzols', 'Regosols', 'Solonchaks', 'Solonetz', 'Stagnosols', 'Umbrisols', 'Vertisols'}. Only used when \code{var="wrb"}}  
-  \item{path}{character. Path name where the data should be downloaded to}  
-
 }
 
 \value{
@@ -36,18 +30,18 @@ SpatRaster
 The below table lists the variable names, a brief description, and their units, as well as the conversion factor that can be used to get the conventional units.
 
 \tabular{lllllr}{
-\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \cr
-\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab kg/dm3 \cr
-\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab cmol(c)/kg \cr
-\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab cm3/100cm3 \cr
-\tab\code{nitrogen} \tab Total nitrogen (N) \tab g/kg \cr
-\tab\code{phh2o} \tab Soil pH \tab pH \cr
-\tab\code{sand} \tab Sand (>0.05 mm) in fine earth \tab g/100g\cr
-\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab g/100g\cr
-\tab\code{clay} \tab Clay (<0.002 mm) in fine earth \tab g/100g\cr
-\tab\code{soc} \tab Soil organic carbon in fine earth \tab g/kg \cr
-\tab\code{ocd} \tab Organic carbon density \tab kg/m3 \cr
-\tab\code{ocs} \tab Organic carbon stocks \tab kg/m2 \cr
+\tab \bold{Name} \tab \bold{Description} \tab \bold{Unit} \tab \bold{Fact} \tab \bold{Convent. units}\cr
+\tab\code{bdod} \tab Bulk density of the fine earth fraction \tab cg/cm3 \tab 100 \tab kg/dm3 \cr
+\tab\code{cec} \tab Cation Exchange Capacity of the soil \tab mmol(c)/kg \tab 10 \tab cmol(c)/kg \cr
+\tab\code{cfvo} \tab Vol. fraction of coarse fragments (> 2 mm) \tab cm3/dm3 \tab 10 \tab cm3/100cm3 \cr
+\tab\code{nitrogen} \tab Total nitrogen (N) \tab cg/kg \tab 100 \tab g/kg \cr
+\tab\code{phh2o} \tab Soil pH \tab pH x 10 \tab 10 \tab pH \cr
+\tab\code{sand} \tab Sand (>0.05 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
+\tab\code{silt} \tab Silt (0.002-0.05 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
+\tab\code{clay} \tab Clay (<0.002 mm) in fine earth \tab g/kg \tab 10 \tab g/100g\cr
+\tab\code{soc} \tab Soil organic carbon in fine earth \tab dg/kg \tab 10 \tab g/kg \cr
+\tab\code{ocd} \tab Organic carbon density \tab hg/m3 \tab 10 \tab kg/m3 \cr
+\tab\code{ocs} \tab Organic carbon stocks \tab t/ha \tab 10 \tab kg/m2 \cr
 }
 
 
@@ -58,7 +52,6 @@ Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro
 }
 
 \seealso{
-For virtual access to the original data: \code{\link{soil_grids_vsi}}
 For Africa: \code{\link{af_soil_isda}}, \code{\link{af_soil}}, \code{\link{af_soil_elements}}
 }
 
@@ -66,6 +59,6 @@ For Africa: \code{\link{af_soil_isda}}, \code{\link{af_soil}}, \code{\link{af_so
 
 \examples{
 \donttest{
-ph <- soil_grids(var="phh2o", depth=5, path=tmpdir())
+ph <- soil_grids_vsi(var="phh2o", depth=5)
 }
 }
