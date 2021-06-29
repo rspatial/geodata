@@ -1,3 +1,18 @@
+	
+.soil_grids_wcs <- function(var, depth, stat="mean", name="") {
+	voi <- paste(var, depth, stat, sep="_")
+	burl <- "https://maps.isric.org/mapserv?map=/map/" 
+	wcs <- paste0(burl, voi, ".map&SERVICE=WCS&VERSION=2.0.1&DescribeCoverage")
+	xm <- newXMLNode("WCS_GDAL")
+	newXMLNode("ServiceURL", wcs, parent=xm)
+	newXMLNode("CoverageName", voi, parent=xm)
+	saveXML(xm, file = paste0(tempfile(), ".xml"))
+	r <- rast(fxml)
+	names(r) <- voi
+	r
+}	
+
+
 
 .soil_grids_url <- function(var, depth, stat="mean", name="", vsi) {
 
@@ -45,14 +60,14 @@
 }
 
 soil_world_vsi <- function(var, depth, stat="mean", name="") {
-	u <- .soil_grids_url(var, depth, stat="mean", name="", vsi=TRUE)
+	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=TRUE)
 	rast(u)
 }
 
 
 soil_world <- function(var, depth, stat="mean", name="", path) {
 	stopifnot(dir.exists(path))
-	u <- .soil_grids_url(var, depth, stat="mean", name="", vsi=FALSE)
+	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	u <- gsub(".vrt$", "_30s.tif", u)
 	filename <- basename(u)
 	filepath <- file.path(path, filename)

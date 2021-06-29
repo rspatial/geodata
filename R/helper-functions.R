@@ -2,7 +2,7 @@
 
 .download <- function(aurl, filename) {
 	fn <- paste(tempfile(), ".download", sep="")
-	res <- utils::download.file(url=aurl, destfile=fn, method="auto", quiet = FALSE, mode = "wb", cacheOK = TRUE)
+	res <- utils::download.file(url=aurl, destfile=fn, method="auto", quiet=FALSE, mode = "wb", cacheOK = TRUE)
 	if (res == 0) {
 		if (suppressWarnings(!file.rename(fn, filename)) ) { 
 			# rename failed, perhaps because fn and filename refer to different devices
