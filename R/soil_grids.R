@@ -4,8 +4,9 @@
 	burl <- "https://maps.isric.org/mapserv?map=/map/" 
 	wcs <- paste0(burl, voi, ".map&SERVICE=WCS&VERSION=2.0.1&DescribeCoverage")
 	xm <- newXMLNode("WCS_GDAL")
-	newXMLNode("ServiceURL", wcs, parent=xm)
-	newXMLNode("CoverageName", voi, parent=xm)
+	XML::newXMLNode("ServiceURL", wcs, parent=xm)
+	XML::newXMLNode("CoverageName", voi, parent=xm)
+	fxml <- paste0(tempfile(), ".xml")
 	saveXML(xm, file = paste0(tempfile(), ".xml"))
 	r <- rast(fxml)
 	names(r) <- voi
