@@ -5,7 +5,7 @@
 \title{iSDA soil data for Africa}
 
 \description{
-Download soil data for Africa derived from the iDSA data set. The orginal data were aligned and aggregated to  30 arc-seconds (about 1 km2). The original spatial resolution was 30m.
+Download soil data for Africa derived from the iDSA data set. The original data were aligned and aggregated to  30 arc-seconds (about 1 km2). The original spatial resolution was 30m.
 
 For more info see:
 
@@ -19,7 +19,7 @@ soil_af_isda(var, depth=20, error=FALSE, path)
 }
 
 \arguments{
-  \item{var}{character. The variables name, one of: "Al", "bdr", "clay", "C.tot", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH", "sand", "silt", "S", "texture", "wpg2", "Zn". see Details}
+  \item{var}{character. The variables name, one of: "Al", "bdr", "clay", "C.tot", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH.H2O", "sand", "silt", "S", "texture", "wpg2", "Zn". see Details}
   \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm)}
   \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path name where the data should be downloaded to}  
@@ -45,7 +45,7 @@ SpatRaster
 \tab N.tot \tab total organic nitrogen \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 \tab OC \tab Organic Carbon \tab  \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 \tab P \tab Phosphorus content \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
-\tab pH \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}}) \tab - \cr
+\tab pH.H2O \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}}) \tab - \cr
 \tab sand \tab Sand content \tab \% \cr
 \tab silt \tab Silt content \tab \% \cr
 \tab S \tab Extractable sulfer \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
@@ -67,6 +67,6 @@ Tomislav Hengl, Matthew A. E. Miller, Josip Križan, Keith D. Shepherd, Andrew S
 
 \examples{
 \donttest{
-ph <- soil_af_isda("ph", path=tempdir())
+ph <- soil_af_isda("ph.h2o", path=tempdir())
 }
 }
