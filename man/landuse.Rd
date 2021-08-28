@@ -27,7 +27,7 @@ SpatRaster
 }
 
 \seealso{
-\url{https://maps.qed.ai/}
+\url{https://about.maps.qed.ai/}
 }
 
 \examples{
