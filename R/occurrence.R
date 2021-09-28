@@ -110,7 +110,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	base <- "https://api.gbif.org/v1/occurrence/search?"
 	
 	if (!is.null(args)) {
-		args <- trim(as.character(args))
+		args <- trimws(as.character(args))
 		args <- paste("&", paste(args, collapse="&"), sep="")
 	}
 	
@@ -247,7 +247,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		vrs <- c("locality", "adm1", "adm2", "country", "continent") 
 		vrs <- vrs[vrs %in% colnames(z)]
 		if (length(vrs) > 0) {
-			fullloc <- trim(as.matrix(z[, vrs]))
+			fullloc <- trimws(as.matrix(z[, vrs]))
 			fullloc <- apply(fullloc, 1, function(x) paste(x, collapse=", "))
 			fullloc <- gsub("NA, ", "", fullloc)
 			fullloc <- gsub(", NA", "", fullloc)

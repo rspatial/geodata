@@ -16,7 +16,9 @@
 		}
 	}	
 	if (file.exists(filename)) {
-		return( vect(readRDS(filename)) ) 
+		r <- readRDS(filename)
+		r@crs <- "+proj=longlat +datum=WGS84"
+		return( vect(r) ) 
 	} else {
 		return(NULL)
 	}

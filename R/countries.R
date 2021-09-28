@@ -9,7 +9,7 @@ country_codes <- function() {
 
 .getCountryISO <- function(country) {
 
-	country <- toupper(trim(country[1]))
+	country <- toupper(trimws(country[1]))
 	cs <- country_codes()
 	cs <- sapply(cs, toupper)
 	cs <- data.frame(cs, stringsAsFactors=FALSE)

@@ -19,7 +19,7 @@
 }
 
 .getDataPath <- function(path) {
-	path <- trim(path)
+	path <- trimws(path)
 	if (path=="") {
 		path <- .dataloc()
 	} else {
