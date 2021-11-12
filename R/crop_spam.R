@@ -9,7 +9,8 @@ spamCrops <- function() {
 
 crop_spam <- function(crop="", var="area", path=".", africa=FALSE) {
 	folder <- file.path(path, "spam")
-	stopifnot(var %in% c("area", "yield"))
+	# area is allowed for backwards compatibility
+	stopifnot(var %in% c("area", "yield", "harv_area", "phys_area", "val_prod", "prod"))
 	stopifnot(dir.exists(path))
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))
@@ -23,8 +24,18 @@ crop_spam <- function(crop="", var="area", path=".", africa=FALSE) {
 	} else {
 		urlbase <- "https://s3.amazonaws.com/mapspam/2010/v1.1/geotiff/"
 	}
-	if (var == "area") {
+	if (var == "area" || var == "harv_area") {
 		url <- paste0(urlbase, "spam2010v1r1_global_harv_area.geotiff.zip")
+	} else if (var == "phys_area") {
+		if (!africa) {
+			url <- "https://s3.amazonaws.com/mapspam/2010/v2.0/geotiff/spam2010v2r0_global_phys_area.geotiff.zip"
+		} else {
+			url <- "https://s3.amazonaws.com/mapspam/2017/ssa/v2.1/geotiff/spam2017v2r1_ssa_phys_area.geotiff.zip"
+		}
+	} else if (var == "prod") {
+		url <- paste0(urlbase, "spam2010v1r1_global_prod.geotiff.zip")
+	} else if (var == "val_prod") {
+		url <- paste0(urlbase, "spam2010v1r1_global_val_prod.geotiff.zip")
 	} else {
 		url <- paste0(urlbase, "spam2010v1r1_global_yield.geotiff.zip")
 	}
