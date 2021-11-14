@@ -1,6 +1,6 @@
 
 
-cropland_africa <- function(path) {
+cropland_africa <- function(path, ...) {
 
 	stopifnot(dir.exists(path))
 	filename <- paste0("geosurvey_cropland.tif")
@@ -8,7 +8,8 @@ cropland_africa <- function(path) {
 
 	if (!(file.exists(filepath))) {
 		url <- paste0("https://biogeo.ucdavis.edu/data/geodata/landuse/", filename)
-		utils::download.file(url, filepath, mode="wb")
+		.downloadDirect(url, filepath, ...)
+		
 		r <- try(rast(filepath))
 		if (class(r) == "try-error") {
 			try(file.remove(filepath), silent=TRUE)

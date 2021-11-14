@@ -12,7 +12,7 @@ SPAM crop data
 
 \usage{
 spamCrops()
-crop_spam(crop="", var="area", path=".", africa=FALSE)
+crop_spam(crop="", var="area", path=".", africa=FALSE, ...)
 }
 
 \arguments{
@@ -20,6 +20,7 @@ crop_spam(crop="", var="area", path=".", africa=FALSE)
  \item{var}{character. variable of interest. Must be one of "yield", "harv_area" (harvested area), "phys_area" (physical area), "prod" (production) or "val_prod" (value of production)}  
  \item{path}{character. Path name where the data should be downloaded to}  
  \item{africa}{logical. retrieve the (updated) data for Africa instead of global data}  
+  \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 \value{

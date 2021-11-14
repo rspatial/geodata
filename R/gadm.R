@@ -1,5 +1,5 @@
 
-.gadm_download <- function(filename, gversion, upath="pck") {
+.gadm_download <- function(filename, gversion, upath="pck", ...) {
 	if (!dir.exists(dirname(filename))) {
 		stop("path does not exist")
 	}
@@ -10,7 +10,7 @@
 		} else {
 			theurl <- file.path(baseurl, upath, basename(filename))
 		}
-		.download(theurl, filename)
+		.download(theurl, filename, ...)
 		if (!file.exists(filename))	{ 
 			message("\nCould not download file -- perhaps it does not exist") 
 		}
@@ -25,17 +25,17 @@
 }
 
 
-world <- function(resolution=5, level=0, path, version=3.6) {
+world <- function(resolution=5, level=0, path, version=3.6, ...) {
 	stopifnot(level[1] == 0)
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)
 	stopifnot(version[1] == 3.6)
 	filename <- file.path(path, paste0("gadm36_adm", level, "_r", resolution, "_pk.rds"))
-	.gadm_download(filename, version[1], "")
+	.gadm_download(filename, version[1], "", ...)
 }
 
 
-gadm <- function(country, level=1, path, version=3.6) {
+gadm <- function(country, level=1, path, version=3.6, ...) {
 
 	stopifnot(file.exists(path))
 	country <- .getCountryISO(country)
@@ -45,7 +45,7 @@ gadm <- function(country, level=1, path, version=3.6) {
 	}
 	stopifnot(version == 3.6)
 	filename <- file.path(path, paste0('gadm36_', country, '_', level, "_pk.rds"))
-	.gadm_download(filename, version)
+	.gadm_download(filename, version, ...)
 }
 
 

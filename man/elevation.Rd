@@ -13,9 +13,9 @@ The 1 km (30 arc seconds) data were aggregated from SRTM 90 m resolution data an
 }
 
 \usage{
-elevation_3s(lon, lat, path)
-elevation_30s(country, path, mask=TRUE, subs="")
-elevation_global(res, path)
+elevation_3s(lon, lat, path, ...)
+elevation_30s(country, path, mask=TRUE, subs="", ...)
+elevation_global(res, path, ...)
 }
 
 \arguments{
@@ -26,6 +26,7 @@ elevation_global(res, path)
   \item{mask}{logical. set grid cells outside of the country boundaries to NA} 
   \item{subs}{character}  
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5, and 0.5 (minutes of a degree)}
+  \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 \value{

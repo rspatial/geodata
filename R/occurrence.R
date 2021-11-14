@@ -97,7 +97,7 @@
 }
 
 
-sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf) {
+sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, ...) {
 	
 	
 	if (! requireNamespace("jsonlite")) { stop("You need to install the jsonlite package to use this function") }
@@ -117,7 +117,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	ntries <- min(max(ntries, 1), 100)
 
 	url1 <- paste(base, "scientificname=", spec, "&limit=1", cds, ex, args, sep="")
-	test <- try (utils::download.file(url1, tmpfile), silent=TRUE)
+	test <- .downloadDirect(url1, tmpfile, ...)
 	json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
 	x <- jsonlite::fromJSON(json)
 	if (!download) {
@@ -170,7 +170,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 				breakout <- TRUE
 				break
 			}
-			test <- try (utils::download.file(aurl, tmpfile), silent=TRUE)
+			test <- .downloadDirect(aurl, tmpfile)
 			if (class(test) == "try-error") {
 				print("download failure, trying again...")
 			} else {

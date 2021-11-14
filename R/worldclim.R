@@ -17,14 +17,16 @@
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
 		turl <- paste0(.wcurl, "day/nc/", fname)
-		utils::download.file(turl, outfname, mode="wb")
+		.downloadDirect(turl, outfname, ...)
 	}
 	#vars <- c("tmin", "tmax", "prec", "srad", "vapr", "wind")
 	sds(outfname)
 }
 
 
-worldclim_tile <- function(var, lon, lat, path) {
+
+
+worldclim_tile <- function(var, lon, lat, path, ...) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
 	stopifnot(dir.exists(path))
@@ -41,13 +43,13 @@ worldclim_tile <- function(var, lon, lat, path) {
 
 	if (!file.exists(outfname)) {
 		turl <- paste0(.wcurl, "tiles/tile/", fname)
-		utils::download.file(turl, outfname, mode="wb")
+		.downloadDirect(turl, outfname, ...)
 	}
 	rast(outfname)
 }
 
 
-worldclim_country <- function(country, var, path) {
+worldclim_country <- function(country, var, path, ...) {
 
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
@@ -62,13 +64,13 @@ worldclim_country <- function(country, var, path) {
 	
 	if (!file.exists(outfname)) {
 		turl <- paste0(.wcurl, "tiles/iso/", fname)
-		utils::download.file(turl, outfname, mode="wb")
+		.downloadDirect(turl, outfname, ...)
 	}
 	rast(outfname)
 }
 
 
-worldclim_global <- function(var, res, path) {
+worldclim_global <- function(var, res, path, ...) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
@@ -90,16 +92,15 @@ worldclim_global <- function(var, res, path) {
 	pzip <- file.path(path, zip)
 	ff <- file.path(path, ff)
 	if (!all(file.exists(ff))) {
-		utils::download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
-		if (!file.exists(pzip)) {stop("download failed")}
+		.downloadDirect(paste0(.wcurl, "base/", zip), pzip, ...)
 		fz <- try(utils::unzip(pzip, exdir=path))
-		if (class(fz) == "try-error") {stop("download failed")}
+		if (inherits(fz, "try-error")) {stop("download failed")}
 	}
 	rast(ff)
 }
 
 
-cmip6_world <- function(model, ssp, time, var, res, path) {
+cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10"))
@@ -124,13 +125,11 @@ cmip6_world <- function(model, ssp, time, var, res, path) {
 	poutf <- file.path(path, outf)
 	if (!file.exists(pzip)) {
 		url <- paste0(.wcurl, "fut/", fres, "/", zip)
-		ok <- try(utils::download.file(url, pzip, mode="wb"), silent=TRUE)
-		if (class(ok) == "try-error") {stop("download failed")}
-		if (!file.exists(pzip)) {stop("download failed")}
+		.downloadDirect(url, pzip, ...)
 	}
 	if (!file.exists(poutf)) {
 		fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
-		if (class(fz) == "try-error") {stop("unzip failed")}
+		if (inherits(fz, "try-error")) { stop("unzip failed") }
 	}
 	rast(poutf)
 }

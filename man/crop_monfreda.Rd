@@ -12,12 +12,13 @@ Monfreda crop data
 
 \usage{
 monfredaCrops()
-crop_monfreda(crop="", path=".")
+crop_monfreda(crop="", path=".", ...)
 }
 
 \arguments{
  \item{crop}{character. Crop name. See \code{monfredaCrops} for valid names}  
- \item{path}{character. Path name where the data should be downloaded to}  
+ \item{path}{character. Path name where the data should be downloaded to} 
+ \item{...}{additional arguments passed to \code{\link{download.file}}} 
 }
 
 \value{

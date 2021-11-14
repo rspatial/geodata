@@ -66,7 +66,7 @@ soil_world_vsi <- function(var, depth, stat="mean", name="") {
 }
 
 
-soil_world <- function(var, depth, stat="mean", name="", path) {
+soil_world <- function(var, depth, stat="mean", name="", path, ...) {
 	stopifnot(dir.exists(path))
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	u <- gsub(".vrt$", "_30s.tif", u)
@@ -78,7 +78,7 @@ soil_world <- function(var, depth, stat="mean", name="", path) {
 			stop(paste("file not yet available:", filename))
 		}
 	}
-	.donwload_url(u, filepath)
+	.donwload_url(u, filepath, ...)
 }
 
 

@@ -7,7 +7,7 @@ spamCrops <- function() {
 
 
 
-crop_spam <- function(crop="", var="area", path=".", africa=FALSE) {
+crop_spam <- function(crop="", var="area", path=".", africa=FALSE, ...) {
 	folder <- file.path(path, "spam")
 	# area is allowed for backwards compatibility
 	stopifnot(var %in% c("area", "yield", "harv_area", "phys_area", "val_prod", "prod"))
@@ -48,7 +48,7 @@ crop_spam <- function(crop="", var="area", path=".", africa=FALSE) {
 	}
 	zipf <- file.path(folder, basename(url))
 	if (!file.exists(zipf)) {
-		utils::download.file(url, zipf, mode="wb")
+		.downloadDirect(url, zipf, ...)
 	}
 	ff <- utils::unzip(zipf, list=TRUE)
 	fs <- grep(crp, ff$Name, value=TRUE)

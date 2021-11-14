@@ -11,9 +11,9 @@ Download WorldClim data
 }
 
 \usage{
-worldclim_global(var, res, path)
-worldclim_country(country, var, path)
-worldclim_tile(var, lon, lat, path)
+worldclim_global(var, res, path, ...)
+worldclim_country(country, var, path, ...)
+worldclim_tile(var, lon, lat, path, ...)
 }
 
 \arguments{
@@ -23,6 +23,7 @@ worldclim_tile(var, lon, lat, path)
   \item{country}{character. Country name or code} 
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude} 
+  \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
 \value{

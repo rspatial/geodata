@@ -1,5 +1,5 @@
 
-crop_calendar_sacks <- function(crop="", path=".") {
+crop_calendar_sacks <- function(crop="", path=".", ...) {
 
 	stopifnot(dir.exists(path))
 	folder <- file.path(path, "sachs")
@@ -18,7 +18,7 @@ crop_calendar_sacks <- function(crop="", path=".") {
 		if (!file.exists(fout2)) {
 			baseurl <- "https://nelson.wisc.edu/sage/data-and-models/crop-calendar-dataset/netcdf/5min/" 
 			url <- paste0(baseurl, m[i,1])
-			utils::download.file(url, fout, mode="wb")
+			.downloadDirect(url, fout, ...)
 			R.utils::gunzip(fout)
 		}
 		r <- terra::rast(fout2)

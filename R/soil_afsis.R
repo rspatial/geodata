@@ -1,21 +1,6 @@
 
-.donwload_url <- function(url, filepath) {
-	if (!(file.exists(filepath))) {
-		utils::download.file(url, filepath, mode="wb")
-		r <- try(rast(filepath))
-		if (class(r) == "try-error") {
-			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
-		}
-	} else {
-		r <- rast(filepath)
-	}
-	r
-}
 
-
-
-soil_af <- function(var, depth=20, path) {
+soil_af <- function(var, depth=20, path, ...) {
 
 	stopifnot(dir.exists(path))
 	
@@ -33,12 +18,12 @@ soil_af <- function(var, depth=20, path) {
 	filepath <- file.path(path, filename)
 	url <- paste0("https://biogeo.ucdavis.edu/data/geodata/soil/afsis/", filename)
 
-	.donwload_url(url, filepath)
+	.donwload_url(url, filepath, ...)
 }
 
 
 
-soil_af_elements <- function(var, path) {
+soil_af_elements <- function(var, path, ...) {
 
 	stopifnot(dir.exists(path))
 	
@@ -49,7 +34,7 @@ soil_af_elements <- function(var, path) {
 	filepath <- file.path(path, filename)
 
 	url <- paste0("https://biogeo.ucdavis.edu/data/geodata/soil/afsis/", filename)
-	.donwload_url(url, filepath)
+	.donwload_url(url, filepath, ...)
 }
 
 

@@ -17,7 +17,7 @@ The data have a CC-BY 4.0 NC license
 }
 
 \usage{
-soil_af(var, depth, path)
+soil_af(var, depth, path, ...)
 }
 
 
@@ -27,6 +27,9 @@ soil_af(var, depth, path)
   \item{depth}{numeric. One of \code{5, 15, 30, 60, 100, 200}. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Or one of \code{20, 50} for 0-20 or 20-50 cm}
   
   \item{path}{character. Path to download the data to}
+  
+  \item{...}{additional arguments passed to \code{\link{download.file}}}
+  
 } 
 
 \value{

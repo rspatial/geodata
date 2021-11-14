@@ -7,7 +7,7 @@ data.frame(m)
 
 
 
-crop_monfreda <- function(crop="", path=".") {
+crop_monfreda <- function(crop="", path=".", ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
 	stopifnot(dir.exists(path))
 	folder <- file.path(path, "monfreda")
@@ -19,7 +19,7 @@ crop_monfreda <- function(crop="", path=".") {
 	url <- paste0(urlbase, crp, "_HarvAreaYield_Geotiff.zip")
 	zipf <- file.path(folder, basename(url))
 	if (!file.exists(zipf)) {
-		utils::download.file(url, zipf, mode="wb")
+		.downloadDirect(url, zipf, ...)
 	}
 	ff <- utils::unzip(zipf, list=TRUE)
 	fs <- grep(".tif$", ff$Name, value=TRUE)

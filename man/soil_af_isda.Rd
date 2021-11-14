@@ -15,7 +15,7 @@ For more info see:
 }
 
 \usage{
-soil_af_isda(var, depth=20, error=FALSE, path) 
+soil_af_isda(var, depth=20, error=FALSE, path, ...) 
 }
 
 \arguments{
@@ -23,6 +23,7 @@ soil_af_isda(var, depth=20, error=FALSE, path)
   \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm)}
   \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path name where the data should be downloaded to}  
+  \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
 \value{

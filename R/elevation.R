@@ -4,7 +4,7 @@
 # Version 0.1
 # March 2016
 
-elevation_3s <- function(lon, lat, path) {
+elevation_3s <- function(lon, lat, path, ...) {
 	stopifnot(file.exists(path))
 	stopifnot(lon >= -180 & lon <= 180)
 	stopifnot(lat >= -60 & lat <= 60)
@@ -20,13 +20,13 @@ elevation_3s <- function(lon, lat, path) {
 	if (!file.exists(tiffilename)) {
 		if (!file.exists(zipfilename)) {
 			theurl <- paste("http://srtm.csi.cgiar.org/SRT-ZIP/SRTM_V41/SRTM_Data_GeoTiff/", f, ".zip", sep="")
-			test <- try (.download(theurl, zipfilename) , silent=TRUE)
+			test <- try (.download(theurl, zipfilename, ...) , silent=TRUE)
 			if (class(test) == "try-error") {
 				theurl <- paste("http://droppr.org/srtm/v4.1/6_5x5_TIFs/", f, ".zip", sep="")
-				test <- try (.download(theurl, zipfilename) , silent=TRUE)
+				test <- try (.download(theurl, zipfilename, ...) , silent=TRUE)
 				if (class(test) == "try-error") {
 					theurl <- paste("ftp://xftp.jrc.it/pub/srtmV4/tiff/", f, ".zip", sep="")
-					.download(theurl, zipfilename)
+					.download(theurl, zipfilename, ...)
 				}
 			}
 		}
@@ -44,7 +44,7 @@ elevation_3s <- function(lon, lat, path) {
 	}
 }
 
-elevation_30s <- function(country, path, mask=TRUE, subs="") {
+elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	stopifnot(dir.exists(path))
 	iso3 <- .getCountryISO(country)
 	if (mask) {
@@ -58,7 +58,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="") {
 		zipfilename <- gsub("\\.tif$", ".zip", filename)
 		if (!file.exists(zipfilename)) {
 			theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
-			.download(theurl, zipfilename)
+			.download(theurl, zipfilename, ...)
 			if (!file.exists(zipfilename))	{
 				message("\nCould not download file -- perhaps it does not exist")
 			}
@@ -76,7 +76,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="") {
 
 
 
-elevation_global <- function(res, path) {
+elevation_global <- function(res, path, ...) {
 
 	stopifnot(dir.exists(path))
 	res <- as.character(res)
@@ -90,6 +90,8 @@ elevation_global <- function(res, path) {
 	pzip <- file.path(path, zip)
 	ff <- file.path(path, ff)
 	if (!file.exists(ff)) {
+		.downloadDirect(url, pzip, ...)
+
 		utils::download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
 		if (!file.exists(pzip)) {stop("download failed")}
 		fz <- try(utils::unzip(pzip, exdir=path))

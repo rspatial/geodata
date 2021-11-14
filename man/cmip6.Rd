@@ -9,7 +9,7 @@ Download downscaled and callibrated CMIP6 climate data for projected future clim
 }
 
 \usage{
-cmip6_world(model, ssp, time, var, res, path)
+cmip6_world(model, ssp, time, var, res, path, ...)
 }
 
 \arguments{
@@ -19,6 +19,7 @@ cmip6_world(model, ssp, time, var, res, path)
   \item{var}{character. Valid variables names are "tmin", "tmax", "tavg", "prec" and "bioc"}
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5 (minutes of a degree)}
   \item{path}{character. Path where to download the data to} 
+  \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 \value{

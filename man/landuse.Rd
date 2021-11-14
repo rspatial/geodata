@@ -15,11 +15,12 @@ License: CC-BY-SA 4.0
 }
 
 \usage{
-cropland_africa(path) 
+cropland_africa(path, ...) 
 }
 
 \arguments{
-  \item{path}{character. Path name where the data should be downloaded to}  
+  \item{path}{character. Path name where the data should be downloaded to} 
+  \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
 \value{

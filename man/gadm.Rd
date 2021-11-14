@@ -9,8 +9,8 @@ Get administrative boundaries for any country in the world. Data are read from f
 }
 
 \usage{
-gadm(country, level=1, path, version=3.6)
-world(resolution=5, level=0, path, version=3.6)
+gadm(country, level=1, path, version=3.6, ...)
+world(resolution=5, level=0, path, version=3.6, ...)
 }
 
 \arguments{
@@ -19,6 +19,7 @@ world(resolution=5, level=0, path, version=3.6)
   \item{path}{character. Path name indicating where to store the data}
   \item{version}{numeric. GADM version number (only 3.6 or higer)}
   \item{resolution}{integer between 1 and 5 indicating the level of detail. 1 is high 5 is low}
+  \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 \value{
