@@ -19,7 +19,7 @@ elevation_3s <- function(lon, lat, path, ...) {
 
 	if (!file.exists(tiffilename)) {
 		if (!file.exists(zipfilename)) {
-			theurl <- paste("http://srtm.csi.cgiar.org/SRT-ZIP/SRTM_V41/SRTM_Data_GeoTiff/", f, ".zip", sep="")
+			theurl <- paste("https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/", f, ".zip", sep="")
 			test <- try (.download(theurl, zipfilename, ...) , silent=TRUE)
 			if (class(test) == "try-error") {
 				theurl <- paste("http://droppr.org/srtm/v4.1/6_5x5_TIFs/", f, ".zip", sep="")
