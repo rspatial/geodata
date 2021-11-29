@@ -45,7 +45,7 @@ SpatRaster
 \tab silt \tab Soil texture fraction silt \tab \% \cr
 \tab coarse \tab Coarse fragments volumetric \tab \% \cr
 \tab SOC \tab Organic carbon \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} (‰) \cr
-\tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot dm^{-3}$}}{\out{kg dm<sup>-3</sup>}} \cr
+\tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot m^{-3}$}}{\out{kg m<sup>-3</sup>}} \cr
 \tab poros \tab Porosity (volum. fraction) based on PTF\tab - \cr
 \tab AWpF2.0 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.0 \tab - \cr
 \tab AWpF2.3 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.3 \tab - \cr
