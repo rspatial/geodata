@@ -38,7 +38,7 @@ country_codes <- function() {
 		i <- which(country==cs[,5])
 		return( cs$ISO3[i] )
 	} else {
-		stop('provide a valid name name or 3 letter ISO country code; you can get a list with "country_codes()"')
+		stop('provide a valid name or 3 letter ISO country code; you can get a list with "country_codes()"')
 	}
 }
 
