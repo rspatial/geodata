@@ -14,26 +14,12 @@ elevation_3s <- function(lon, lat, path, ...) {
 	colTile <- formatC(colFromX(rs, lon), width=2, flag=0)
 	
 	f <- paste("srtm_", colTile, "_", rowTile, sep="")
-	zipfilename <- paste(path, "/", f, ".ZIP", sep="")
 	tiffilename <- paste(path, "/", f, ".tif", sep="")
 
 	if (!file.exists(tiffilename)) {
-		if (!file.exists(zipfilename)) {
-			theurl <- paste("https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/", f, ".zip", sep="")
-			test <- try (.download(theurl, zipfilename, ...) , silent=TRUE)
-			if (class(test) == "try-error") {
-				theurl <- paste("http://droppr.org/srtm/v4.1/6_5x5_TIFs/", f, ".zip", sep="")
-				test <- try (.download(theurl, zipfilename, ...) , silent=TRUE)
-				if (class(test) == "try-error") {
-					theurl <- paste("ftp://xftp.jrc.it/pub/srtmV4/tiff/", f, ".zip", sep="")
-					.download(theurl, zipfilename, ...)
-				}
-			}
-		}
-		if (file.exists(zipfilename)) {
-			utils::unzip(zipfilename, exdir=dirname(zipfilename))
-			file.remove(zipfilename)
-		}
+		pzip <- paste(path, "/", f, ".ZIP", sep="")
+		theurl <- paste("https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/", f, ".zip", sep="")
+		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
 	if (file.exists(tiffilename)) {
 		rs <- rast(tiffilename)
@@ -55,21 +41,9 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	f <- paste0(iso3, "_elv", mskname, subs)
 	filename <- file.path(path, paste0(f, ".tif"))
 	if (!file.exists(filename)) {
-		zipfilename <- gsub("\\.tif$", ".zip", filename)
-		if (!file.exists(zipfilename)) {
-			theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
-			.download(theurl, zipfilename, ...)
-			if (!file.exists(zipfilename))	{
-				message("\nCould not download file -- perhaps it does not exist")
-			}
-		}
-		ff <- utils::unzip(zipfilename, exdir=dirname(zipfilename))
-		file.remove(zipfilename)
-	}
-	if (file.exists(filename)) {
-		rs <- rast(filename)
-	} else {
-		stop("something went wrong")
+		pzip <- gsub("\\.tif$", ".zip", filename)
+		theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
+		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
 	return(rs)
 }
