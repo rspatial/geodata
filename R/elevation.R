@@ -83,19 +83,16 @@ elevation_global <- function(res, path, ...) {
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
 	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
-	dir.create(path, showWarnings=FALSE)
 	zip <- paste0("wc2.1_", fres, "_elev.zip")
-
 	ff <- paste0("wc2.1_", fres, "_elev.tif")
 	pzip <- file.path(path, zip)
 	ff <- file.path(path, ff)
 	if (!file.exists(ff)) {
-		.downloadDirect(url, pzip, ...)
-
-		utils::download.file(paste0(.wcurl, "base/", zip), pzip, mode="wb")
-		if (!file.exists(pzip)) {stop("download failed")}
-		fz <- try(utils::unzip(pzip, exdir=path))
-		if (class(fz) == "try-error") {stop("download failed")}
+		dir.create(path, showWarnings=FALSE)
+		theurl <- paste0(geodata:::.wcurl, "base/", zip)
+		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
 	rast(ff)
 }
+
+
