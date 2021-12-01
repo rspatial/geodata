@@ -36,8 +36,8 @@ And there is more information here: http:://www.earthstat.org/harvested-area-yie
 
 \examples{
 \donttest{
-cas <- crop_monfreda("cassava", path=tempdir())
-cas
-names(cas)
+mcas <- crop_monfreda("cassava", path=tempdir())
+mcas
+names(mcas)
 }
 }

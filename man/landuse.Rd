@@ -33,6 +33,6 @@ SpatRaster
 
 \examples{
 \donttest{
-ph <- cropland_africa(path=tempdir())
+cropland <- cropland_africa(path=tempdir())
 }
 }

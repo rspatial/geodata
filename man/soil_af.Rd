@@ -81,6 +81,6 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 \examples{
 \donttest{
-ph <- soil_af(var="phh2o", depth=5)
+aph <- soil_af(var="ph", depth=5, path=tempdir())
 }
 }

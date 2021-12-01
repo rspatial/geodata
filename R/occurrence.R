@@ -127,12 +127,12 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 			return(x$count)
 		}
 	} else {
-		cnt <- ifelse(is.null(x$count), 0, x$count)
-		message(cnt, " records found")
-		if (cnt == 0) {
+		end <- ifelse(is.null(x$count), 0, x$count)
+		message(end, " records found")
+		if (end == 0) {
 			return(NULL)
 		}
-		if (cnt > 200000) {
+		if (end > 200000) {
 			stop("The number of records is larger than the maximum for download via this service (200,000)")
 		}		
 	}
@@ -161,6 +161,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		message(paste(start-1, "-", sep=""), appendLF = FALSE) 
 		utils::flush.console()
 		tries <- 0
+		np <- np + 1
+		
         #======= if download fails due to server problems, keep trying  =======#
         while (TRUE) {
 			tries <- tries + 1
@@ -170,7 +172,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 				breakout <- TRUE
 				break
 			}
-			test <- .downloadDirect(aurl, tmpfile)
+			test <- .downloadDirect(aurl, tmpfile, quiet = TRUE)
 			if (class(test) == "try-error") {
 				print("download failure, trying again...")
 			} else {
@@ -198,7 +200,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		if (breakout) break
 		if (x$endOfRecords) break
 	}
-	
+	message(end) 
+
 	message(min(end, x$count), " records downloaded")
 
 	if (length(g) == 0) {

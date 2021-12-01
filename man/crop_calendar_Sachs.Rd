@@ -10,7 +10,7 @@ Sachs crop calendar data
 }
 
 \usage{
-crop_calendar_sacks(crop="", path=".", ...)
+cal <- crop_calendar_sacks(crop="", path=tempdir())
 }
 
 \arguments{

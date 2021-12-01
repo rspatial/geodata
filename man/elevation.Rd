@@ -30,7 +30,7 @@ elevation_global(res, path, ...)
 }
 
 \value{
-RasterLayer
+SpatRaster
 }
 
 
@@ -40,6 +40,3 @@ elevation_30s(country="FRA", path=tempdir() )
 }
 }
 
-\author{
-Robert Hijmans, Aniruddha Ghosh, Alex Mandel
-}

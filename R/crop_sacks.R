@@ -16,7 +16,7 @@ crop_calendar_sacks <- function(crop="", path=".", ...) {
 		fout <- file.path(folder, m[i,1])
 		fout2 <- gsub(".gz$", "", fout)
 		if (!file.exists(fout2)) {
-			baseurl <- "https://nelson.wisc.edu/sage/data-and-models/crop-calendar-dataset/netcdf/5min/" 
+			baseurl <- "https://biogeo.ucdavis.edu/data/geodata/crops/sacks/"
 			url <- paste0(baseurl, m[i,1])
 			.downloadDirect(url, fout, ...)
 			R.utils::gunzip(fout)

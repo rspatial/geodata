@@ -45,7 +45,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 		theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
 		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
-	return(rs)
+	rast(filename)
 }
 
 
@@ -63,7 +63,7 @@ elevation_global <- function(res, path, ...) {
 	ff <- file.path(path, ff)
 	if (!file.exists(ff)) {
 		dir.create(path, showWarnings=FALSE)
-		theurl <- paste0(geodata:::.wcurl, "base/", zip)
+		theurl <- paste0(.wcurl, "base/", zip)
 		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
 	rast(ff)
