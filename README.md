@@ -26,15 +26,15 @@ remotes::install_github("rspatial/geodata")
 
 |Functions                                                       |Description                                                                                                     |
 |:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
-|`cmip6_world()`                                                 |Downscaled and calibrated CMIP6 climate data for projected future climates                            |
-|`country_codes()`                                               |Get country codes for all countries in the world                                                                |
+|`cmip6_world()`                                                 |Downscaled and calibrated CMIP6 projected future climate data                            |
+|`country_codes()`                                               |Get country codes                                                                |
 |`crop_calendar_sacks()`                                         |Sachs crop calendar data                                                                                        |
 |`crop_monfreda()`                                               |Monfreda crop data (area, yield)                                                                                             |
 |`crop_spam()`                                                   |SPAM crop data (area, yield, value)                                                                                                   |
-|`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Get elevation data for any country in the world                                                                 |
-|`gadm()`, `world()`                                             |Get administrative boundaries for any country in the world                                                      |
-|`cropland_africa()`                                             |Download cropland extent data for Africa                                                                        |
-|`population()`                                                  |Download population density data                                                                                |
+|`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
+|`gadm()`, `world()`                                             |Get administrative boundaries for any country, or the entire world                                                      |
+|`cropland_africa()`                                             |Cropland extent data for Africa                                                                        |
+|`population()`                                                  |Population density                                                                                 |
 |`soil_af_elements()`                                            |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa            |
 |`soil_af_isda()`                                                |Soil data for Africa derived from the iDSA data set                                                    |
 |`soil_af()`                                                     |Chemical soil properties data for Africa for different soil depths                                     |
