@@ -1,5 +1,5 @@
 
-crop_calendar_sacks <- function(crop="", path=".", ...) {
+crop_calendar_sacks <- function(crop="", path, ...) {
 
 	stopifnot(dir.exists(path))
 	folder <- file.path(path, "sachs")

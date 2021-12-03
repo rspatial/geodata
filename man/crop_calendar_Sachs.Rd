@@ -10,7 +10,7 @@ Sachs crop calendar data
 }
 
 \usage{
-cal <- crop_calendar_sacks(crop="", path=tempdir())
+crop_calendar_sacks(crop="", path, ...)
 }
 
 \arguments{
@@ -28,7 +28,7 @@ Sacks, W.J., D. Deryng, J.A. Foley, and N. Ramankutty, 2010. Crop planting dates
 }
 
 \seealso{
-\url{https://nelson.wisc.edu/sage/data-and-models/crop-calendar-dataset/index.php}
+\url{https://sage.nelson.wisc.edu/data-and-models/datasets/crop-calendar-dataset/}
 }
 
 
