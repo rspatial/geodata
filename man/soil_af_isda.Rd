@@ -5,7 +5,7 @@
 \title{iSDA soil data for Africa}
 
 \description{
-Download soil data for Africa derived from the iDSA data set. The original data were aligned and aggregated to  30 arc-seconds (about 1 km2). The original spatial resolution was 30m.
+Download soil data for Africa derived from the iDSA data set. The original data were aligned and aggregated to 30 arc-seconds (about 1 km2). The original spatial resolution was 30m.
 
 For more info see:
 
@@ -20,7 +20,7 @@ soil_af_isda(var, depth=20, error=FALSE, path, ...)
 
 \arguments{
   \item{var}{character. The variables name, one of: "Al", "bdr", "clay", "C.tot", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH.H2O", "sand", "silt", "S", "texture", "wpg2", "Zn".see Details}
-  \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm). Ignored if \code{var="bdr"} for which the depth is always 0-200 cm.
+  \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm). Ignored if \code{var="bdr"} for which the depth is always 0-200 cm}
   \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path name where the data should be downloaded to}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}  

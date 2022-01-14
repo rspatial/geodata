@@ -31,6 +31,7 @@
 \code{\link{soil_world_vsi}}     \tab   Virtually connect to the global soilgrids data \cr
 \code{\link{soil_world}}   \tab   Global soils data \cr
 \code{\link{sp_occurrence}}\tab   Species occurrence records from the Global Biodiversity Information Facility\cr
+\code{\link{travel_time}}\tab  Travel time to cities and ports \cr
 \code{\link{worldclim_global}}\tab   Glocal climate data\cr
 \code{\link{worldclim_country}}\tab  Climate data by country\cr
 \code{\link{worldclim_tile}} \tab   Climate data by tile\cr
