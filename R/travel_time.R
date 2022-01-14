@@ -1,6 +1,6 @@
 
 
-travel_time <- function(to="city", size=1, path, ...) {
+travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
 	stopifnot(dir.exists(path))
 
 	to <- tolower(to)
@@ -16,7 +16,9 @@ travel_time <- function(to="city", size=1, path, ...) {
 		stopifnot(size %in% 1:5)
 		f <- "travel_time_to_ports_"
 	}
-
+	if (up && (size != 1)) {
+		f <- paste0(f, "u")
+	}
 	filename <- paste0(f, size, ".tif")
 	filepath <- file.path(path, filename)
 
@@ -32,8 +34,11 @@ travel_time <- function(to="city", size=1, path, ...) {
 	} else {
 		r <- rast(filepath)
 	}
-	NAflag(r) <- 65535
+	if (!up) {
+		NAflag(r) <- 65535
+	}
 	r
 }
+
 
 
