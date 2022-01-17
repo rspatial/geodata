@@ -31,7 +31,7 @@ elevation_3s <- function(lon, lat, path, ...) {
 }
 
 elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	iso3 <- .getCountryISO(country)
 	if (mask) {
 		mskname <- "_msk"
@@ -52,7 +52,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 
 elevation_global <- function(res, path, ...) {
 
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
 	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))

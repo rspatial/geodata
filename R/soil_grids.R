@@ -67,7 +67,7 @@ soil_world_vsi <- function(var, depth, stat="mean", name="") {
 
 
 soil_world <- function(var, depth, stat="mean", name="", path, ...) {
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	u <- gsub(".vrt$", "_30s.tif", u)
 	filename <- basename(u)

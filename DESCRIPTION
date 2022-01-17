@@ -1,14 +1,14 @@
 Package: geodata
 Type: Package
 Title: Download Geographic Data 
-Version: 0.3-5
-Date: 2021-12-02
+Version: 0.3-6
+Date: 2021-01-16
 Depends: R (>= 3.5.0), terra
 Encoding: UTF-8
 Suggests: jsonlite, R.utils
 Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
 Maintainer: Robert J. Hijmans <r.hijmans@gmail.com>
-Description: Functions for downloading of geographic data for use in spatial data analysis and mapping. The package facilitates access to climate, elevation, soil, species occurrence, and administrative boundary data.
+Description: Functions for downloading of geographic data for use in spatial data analysis and mapping. The package facilitates access to climate, elevation, soil, species occurrence, accessibility, and administrative boundary data.
 License: GPL (>=3)
 BugReports: https://github.com/rspatial/geodata/issues/
 

@@ -1,7 +1,7 @@
 
 crop_calendar_sacks <- function(crop="", path, ...) {
 
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	folder <- file.path(path, "sachs")
 	dir.create(folder, FALSE, FALSE)
 	

@@ -1,7 +1,7 @@
 
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
-	stopifnot(dir.exists(path))
+	.check_path(path)
 
 
 	var <- tolower(var)

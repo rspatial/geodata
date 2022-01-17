@@ -9,7 +9,9 @@ data.frame(m)
 
 crop_monfreda <- function(crop="", path, ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
-	stopifnot(dir.exists(path))
+	.check_path(path)
+	
+	
 	folder <- file.path(path, "monfreda")
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))

@@ -12,7 +12,7 @@ Monfreda crop data
 
 \usage{
 monfredaCrops()
-crop_monfreda(crop="", path=".", ...)
+crop_monfreda(crop="", path, ...)
 }
 
 \arguments{

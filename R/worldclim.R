@@ -7,7 +7,7 @@
 
 
 .wcerad <- function(lon, lat, path, ...) {
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	r <- rast(res=5)
 	id <- cellFromXY(r, cbind(lon,lat))
 	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
@@ -29,7 +29,7 @@
 worldclim_tile <- function(var, lon, lat, path, ...) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
-	stopifnot(dir.exists(path))
+	.check_path(path)
 
 	r <- rast(res=30)
 	id <- cellFromXY(r, cbind(lon,lat))
@@ -55,7 +55,7 @@ worldclim_country <- function(country, var, path, ...) {
 	if (var == "bioc") var <- "bio"
 	iso <- .getCountryISO(country)
 	
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	pth <- file.path(path, "wc2.1_country")
 	dir.create(pth, showWarnings=FALSE)
 
@@ -76,7 +76,7 @@ worldclim_global <- function(var, res, path, ...) {
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
 	if (var == "bioc") var <- "bio"
-	stopifnot(dir.exists(path))
+	.check_path(path)
 
 	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
@@ -114,7 +114,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	# some combinations do not exist. Catch these here.
 	
 	if (var == "bio") var <- "bioc"
-	stopifnot(dir.exists(path))
+	.check_path(path)
 
 	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))

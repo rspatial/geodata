@@ -2,7 +2,7 @@
 
 cropland_africa <- function(path, ...) {
 
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	filename <- paste0("geosurvey_cropland.tif")
 	filepath <- file.path(path, filename)
 

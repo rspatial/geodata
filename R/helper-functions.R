@@ -1,5 +1,12 @@
 
 
+.check_path <- function(path) {
+	if (!dir.exists(path)) {
+		dir.create(path, recursive=FALSE)
+	}
+}
+
+
 .download <- function(aurl, filename, quiet=FALSE, mode = "wb", cacheOK = TRUE, ...) {
 	fn <- paste(tempfile(), ".download", sep="")
 	res <- utils::download.file(url=aurl, destfile=fn, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)

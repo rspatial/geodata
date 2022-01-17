@@ -2,7 +2,7 @@
 
 soil_af <- function(var, depth=20, path, ...) {
 
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	
 	var <- tolower(var)
 	knownvars <- c("clay", "sand", "silt", "coarse", "SOC", "BLKD", "poros", "AWpF2.0", "AWpF2.3", "AWpF2.5", "AWpF4.2", "BDR", "pH", "ECN", "acid-exch", "bases-exch", "CEC", "Al-extr", "Al-exch", "Ca-exch", "K-exch", "Mg-exch", "Na-exch", "Ntot")
@@ -27,7 +27,7 @@ soil_af <- function(var, depth=20, path, ...) {
 
 soil_af_elements <- function(var, path, ...) {
 
-	stopifnot(dir.exists(path))
+	.check_path(path)
 	
 	var <- tolower(var)
 	stopifnot(var %in% c("al", "b", "ca", "cu", "fe", "k", "mg", "mn", "n", "na", "p", "ptot", "zn"))
