@@ -28,9 +28,9 @@
 		}
 	}
 	if (unzip) {
-		zok <- try(utils::unzip(filename, exdir=dirname(filename)))
+		zok <- try(utils::unzip(filename, exdir=dirname(filename)), silent=TRUE)
+		try(file.remove(filename), silent=TRUE)
 		if (inherits(zok, "try-error")) {
-			file.remove(filename)
 			stop("download failed")
 		}
 	}

@@ -93,7 +93,8 @@ worldclim_global <- function(var, res, path, ...) {
 	ff <- file.path(path, ff)
 	if (!all(file.exists(ff))) {
 		.downloadDirect(paste0(.wcurl, "base/", zip), pzip, ...)
-		fz <- try(utils::unzip(pzip, exdir=path))
+		fz <- try(utils::unzip(pzip, exdir=path), silent=TRUE)
+		try(file.remove(pzip), silent=TRUE)
 		if (inherits(fz, "try-error")) {stop("download failed")}
 	}
 	rast(ff)
@@ -123,12 +124,13 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	pzip <- file.path(path, zip)
 	outf <- gsub("\\.zip$", ".tif", zip)
 	poutf <- file.path(path, outf)
-	if (!file.exists(pzip)) {
-		url <- paste0(.wcurl, "fut/", fres, "/", zip)
-		.downloadDirect(url, pzip, ...)
-	}
 	if (!file.exists(poutf)) {
+		if (!file.exists(pzip)) {
+			url <- paste0(.wcurl, "fut/", fres, "/", zip)
+			.downloadDirect(url, pzip, ...)
+		}
 		fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
+		try(file.remove(pzip), silent=TRUE)
 		if (inherits(fz, "try-error")) { stop("unzip failed") }
 	}
 	rast(poutf)
