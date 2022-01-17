@@ -1,8 +1,15 @@
 
+.data_url <- function() {
+	"http://geodata.ucdavis.edu/geodata/"
+}
 
 .check_path <- function(path) {
+	if (dir.exists(path)) {
+		return(TRUE)
+	}
+	try(dir.create(path, recursive=FALSE), silent=TRUE)
 	if (!dir.exists(path)) {
-		dir.create(path, recursive=FALSE)
+		stop("path does not exist")
 	}
 }
 

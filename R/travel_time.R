@@ -23,8 +23,7 @@ travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		burl <- "https://geodata.ucdavis.edu/geodata/travel/"
-		url <- file.path(burl, filename)
+		url <- paste0(.data_url(), "travel/", filename)
 		.downloadDirect(url, filepath, ...)
 		r <- try(rast(filepath))
 		if (class(r) == "try-error") {

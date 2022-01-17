@@ -7,7 +7,7 @@ cropland_africa <- function(path, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0("https://biogeo.ucdavis.edu/data/geodata/landuse/", filename)
+		url <- paste0(.data_url(), "landuse/", filename)
 		.downloadDirect(url, filepath, ...)
 		
 		r <- try(rast(filepath))

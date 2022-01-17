@@ -1,5 +1,5 @@
 
-.wcurl <- "https://biogeo.ucdavis.edu/data/worldclim/v2.1/"
+.wcurl <- "https://geodata.ucdavis.edu/climate/worldclim/v2.1/"
 
 .wccruts <- function(lon, lat, path, ...) {
 

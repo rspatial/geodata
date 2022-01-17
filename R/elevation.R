@@ -5,7 +5,9 @@
 # March 2016
 
 elevation_3s <- function(lon, lat, path, ...) {
-	stopifnot(file.exists(path))
+
+	.check_path(path)
+	
 	stopifnot(lon >= -180 & lon <= 180)
 	stopifnot(lat >= -60 & lat <= 60)
 
@@ -42,7 +44,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	filename <- file.path(path, paste0(f, ".tif"))
 	if (!file.exists(filename)) {
 		pzip <- gsub("\\.tif$", ".zip", filename)
-		theurl <- paste0("http://biogeo.ucdavis.edu/data/geodata/elv/", f, ".zip")
+		theurl <- paste0(.data_url(), "elv/", f, ".zip")
 		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
 	}
 	rast(filename)

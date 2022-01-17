@@ -10,7 +10,7 @@ population <- function(year, res="5", path, ...) {
 	filepath <- file.path(path, "pop", filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0("https://biogeo.ucdavis.edu/data/geodata/pop/", filename)
+		url <- paste0(.data_url(), "pop/", filename)
 		dir.create(dirname(filepath), showWarnings=FALSE)
 		.downloadDirect(url, filepath, ...)
 	} 

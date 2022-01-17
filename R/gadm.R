@@ -1,10 +1,10 @@
 
 .gadm_download <- function(filename, gversion, upath="pck", ...) {
-	if (!dir.exists(dirname(filename))) {
-		stop("path does not exist")
-	}
+	
+	.check_path(dirname(filename))
+
 	if (!file.exists(filename)) {
-		baseurl <- paste0("https://biogeo.ucdavis.edu/data/gadm", gversion)
+		baseurl <- paste0(.data_url(), "gadm", gversion)
 		if (upath=="") {
 			theurl <- file.path(baseurl, basename(filename))		
 		} else {
@@ -37,9 +37,7 @@ world <- function(resolution=5, level=0, path, version=3.6, ...) {
 
 gadm <- function(country, level=1, path, version=3.6, ...) {
 
-	stopifnot(file.exists(path))
 	country <- .getCountryISO(country)
-
 	if (missing(level)) {
 		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
 	}

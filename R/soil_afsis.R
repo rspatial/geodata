@@ -18,7 +18,7 @@ soil_af <- function(var, depth=20, path, ...) {
 	
 	filename <- paste0("af_", var, "_", depth, "cm_30s.tif")
 	filepath <- file.path(path, filename)
-	url <- paste0("https://biogeo.ucdavis.edu/data/geodata/soil/afsis/", filename)
+	url <- paste0(.data_url(), "soil/afsis/", filename)
 
 	.donwload_url(url, filepath, ...)
 }

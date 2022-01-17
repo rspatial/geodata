@@ -35,7 +35,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 
 
 	if (!(file.exists(filepath))) {
-		burl <- "https://geodata.ucdavis.edu/geodata/soil/isda/"
+		burl <- paste0(.data_url(), "soil/isda/")
 		url <- file.path(burl, filename)
 		.downloadDirect(url, filepath, ...)
 		if (file.exists(filepath) && grepl("texture", filename)) {
