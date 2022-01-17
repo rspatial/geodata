@@ -1,5 +1,5 @@
 
-.wcurl <- "https://geodata.ucdavis.edu/climate/worldclim/v2.1/"
+.wcurl <- "https://geodata.ucdavis.edu/climate/worldclim/2_1/"
 
 .wccruts <- function(lon, lat, path, ...) {
 
@@ -120,18 +120,16 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
 	
-	zip <- paste0("wc2.1_", fres, "_", var, "_", model, "_ssp", ssp, "_", time, ".zip")
-	pzip <- file.path(path, zip)
-	outf <- gsub("\\.zip$", ".tif", zip)
+	outf <- paste0("wc2.1_", fres, "_", var, "_", model, "_ssp", ssp, "_", time, ".tif")
 	poutf <- file.path(path, outf)
 	if (!file.exists(poutf)) {
-		if (!file.exists(pzip)) {
-			url <- paste0(.wcurl, "fut/", fres, "/", zip)
-			.downloadDirect(url, pzip, ...)
+		if (!file.exists(outf)) {
+			url <- paste0(.wcurl, "cmip6/", fres, "/", model, "/ssp", ssp, "/", outf)
+			.downloadDirect(url, poutf, ...)
 		}
-		fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
-		try(file.remove(pzip), silent=TRUE)
-		if (inherits(fz, "try-error")) { stop("unzip failed") }
+		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
+		#try(file.remove(pzip), silent=TRUE)
+		#if (inherits(fz, "try-error")) { stop("unzip failed") }
 	}
 	rast(poutf)
 }
