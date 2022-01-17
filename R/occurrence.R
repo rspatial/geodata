@@ -105,7 +105,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	tmpfile <- paste0(tempfile(), ".json")
 	ex <- .getExtGBIF(ext)
 	spec <- .fixNameGBIF(genus, species)
-	if (geo) { cds <- "&coordinatestatus=true" } else { cds <- "" }
+	if (geo) { cds <- "&hasCoordinate=true" } else { cds <- "" }
 
 	base <- "https://api.gbif.org/v1/occurrence/search?"
 	
