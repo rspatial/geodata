@@ -68,6 +68,6 @@ Tomislav Hengl, Matthew A. E. Miller, Josip Križan, Keith D. Shepherd, Andrew S
 
 \examples{
 \donttest{
-afph <- soil_af_isda("ph.h2o", path=tempdir())
+afph <- soil_af_isda("ph.h2o", path=tempdir(), quiet=TRUE)
 }
 }

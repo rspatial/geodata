@@ -31,8 +31,8 @@
 .downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=TRUE, ...) {
 	if (!file.exists(filename)) {
 		ok <- try(
-				utils::download.file(url=url, destfile=filename, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
-			)
+			utils::download.file(url=url, destfile=filename, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+		)
 		if (inherits(ok, "try-error")) {
 			if (file.exists(filename)) file.remove(filename)
 			stop("download failed")	

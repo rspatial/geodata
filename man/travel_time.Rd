@@ -64,7 +64,7 @@ Version 3 (2019-05-15) from \url{https://figshare.com/articles/dataset/Travel_ti
 
 \examples{
 \donttest{
-ttime <- travel_time("city", 2, path=tempdir())
+ttime <- travel_time("city", 2, path=tempdir(), quiet=TRUE)
 }
 }
 
