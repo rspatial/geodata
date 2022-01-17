@@ -7,7 +7,7 @@ data.frame(m)
 
 
 
-crop_monfreda <- function(crop="", path=".", ...) {
+crop_monfreda <- function(crop="", path, ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
 	stopifnot(dir.exists(path))
 	folder <- file.path(path, "monfreda")
@@ -15,6 +15,12 @@ crop_monfreda <- function(crop="", path=".", ...) {
 	crp <- tolower(trimws(crop))
 	crops <- monfredaCrops()$name
 	if (!(crp %in% crops)) { stop("crop name not avaiable; see monfredaCrops()") }
+
+	ff <- c('_DataQuality_HarvestedArea.tif', '_DataQuality_Yield.tif', '_HarvestedAreaFraction.tif', '_HarvestedAreaHectares.tif', '_Production.tif', '_YieldPerHectare.tif')
+	ff <- file.path(folder, paste0(crp, ff))
+	if (all(file.exists(ff))) {
+		return(terra::rast(ffs))
+	}
 	urlbase <- "https://s3.us-east-2.amazonaws.com/earthstatdata/HarvestedAreaYield175Crops_Indvidual_Geotiff/"
 	url <- paste0(urlbase, crp, "_HarvAreaYield_Geotiff.zip")
 	zipf <- file.path(folder, basename(url))
