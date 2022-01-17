@@ -4,7 +4,7 @@
 	.check_path(dirname(filename))
 
 	if (!file.exists(filename)) {
-		baseurl <- paste0(.data_url(), "gadm", gversion)
+		baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
 		if (upath=="") {
 			theurl <- file.path(baseurl, basename(filename))		
 		} else {
