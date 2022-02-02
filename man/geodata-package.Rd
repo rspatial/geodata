@@ -21,8 +21,9 @@
 \code{\link{elevation_3s}} \tab   Elevation data for tile (3 seconds resolution) \cr
 \code{\link{elevation_30s}} \tab   Elevation data for by country (30 seconds resolution) \cr
 \code{\link{elevation_global}} \tab  Global elevation data (various resolutions) \cr
-\code{\link{gadm}} \tab   Get administrative boundaries for any country in the world  \cr
-\code{\link{world}}\tab   Get boundaries for the countries in the world  \cr
+\code{\link{gadm}} \tab   Administrative boundaries for any country in the world  \cr
+\code{\link{world}}\tab   Boundaries for the countries in the world  \cr
+\code{\link{osm}} \tab   OpenStreetMap data by country  \cr
 \code{\link{cropland_africa}}\tab   Download cropland extent data for Africa \cr
 \code{\link{population}}\tab   Download population density data \cr
 \code{\link{soil_af_elements}} \tab   Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa \cr

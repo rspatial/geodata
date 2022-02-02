@@ -27,12 +27,13 @@ remotes::install_github("rspatial/geodata")
 |Functions                                                       |Description                                                                                                     |
 |:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
 |`cmip6_world()`                                                 |Downscaled and calibrated CMIP6 projected future climate data                            |
-|`country_codes()`                                               |Get country codes                                                                |
+|`country_codes()`                                               |Country codes                                                                |
 |`crop_calendar_sacks()`                                         |Sachs crop calendar data                                                                                        |
 |`crop_monfreda()`                                               |Monfreda crop data (area, yield)                                                                                             |
 |`crop_spam()`                                                   |SPAM crop data (area, yield, value)                                                                                                   |
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
-|`gadm()`, `world()`                                             |Get administrative boundaries for any country, or the entire world                                                      |
+|`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world                                                      |
+|`osm()`                                                         |OpenStreetMap data by country
 |`cropland_africa()`                                             |Cropland extent data for Africa                                                                        |
 |`population()`                                                  |Population density                                                                                 |
 |`soil_af_elements()`                                            |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa            |
@@ -43,3 +44,4 @@ remotes::install_github("rspatial/geodata")
 |`sp_occurrence()`                                               |Species occurrence records from the Global Biodiversity Information Facility |
 |`travel_time()`                                                 |Travel time to and from cities and ports                                                              |
 |`worldclim_global()`, `worldclim_country()`, `worldclim_tile()` |WorldClim glocal climate data                                                                                         |
+

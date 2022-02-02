@@ -49,6 +49,8 @@ Poggio, L., de Sousa, L.M., Batjes, N.H., Heuvelink, G.B.M., Kempen, B., Ribeiro
 }
 
 \seealso{
+\code{\link{soil_world}} to download these data at 30-seconds spatial resolution.
+
 For Africa: \code{\link{soil_af_isda}}, \code{\link{soil_af}}, \code{\link{soil_af_elements}}
 }
 
