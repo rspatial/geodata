@@ -30,18 +30,18 @@ remotes::install_github("rspatial/geodata")
 |`country_codes()`                                               |Country codes                                                                |
 |`crop_calendar_sacks()`                                         |Sachs crop calendar data                                                                                        |
 |`crop_monfreda()`                                               |Monfreda crop data (area, yield)                                                                                             |
-|`crop_spam()`                                                   |SPAM crop data (area, yield, value)                                                                                                   |
+|`crop_spam()`                                                   |[MapSPAM](https://www.mapspam.info/data/) crop data (area, yield, value)                                                                                                   |
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
 |`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world [GADM](https://gadm.org)                                                     |
 |`osm()`                                                         |OpenStreetMap data by country
 |`cropland_africa()`                                             |Cropland extent data for Africa                                                                        |
-|`population()`                                                  |Population density                                                                                 |
+|`population()`                                                  |Population density [Gridded Ppoulaion of the World](http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation)    |
 |`soil_af_elements()`                                            |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa            |
 |`soil_af_isda()`                                                |Soil data for Africa derived from the iDSA data set                                                    |
 |`soil_af()`                                                     |Chemical soil properties data for Africa for different soil depths                                     |
-|`soil_world_vsi()`                                              |Virtually connect to the global soilgrids data                                                                  |
-|`soil_world()`                                                  |Global soils data                                                                                      |
-|`sp_occurrence()`                                               |Species occurrence records from the Global Biodiversity Information Facility |
+|`soil_world_vsi()`                                              |Virtually connect to the global [SoilGrids](https://www.isric.org/explore/soilgrids) data        |
+|`soil_world()`                                                  |Global soils data from [SoilGrids](https://www.isric.org/explore/soilgrids)          |
+|`sp_occurrence()`                                               |Species occurrence records from the [Global Biodiversity Information Facility](https::/www.gbif.org) |
 |`travel_time()`                                                 |Travel time to and from cities and ports                                                              |
-|`worldclim_global()`, `worldclim_country()`, `worldclim_tile()` |[WorldClim](https::/worldclim.org) glocal climate data                                                                                         |
+|`worldclim_global()`, `worldclim_country()`, `worldclim_tile()` |[WorldClim](https://worldclim.org) glocal climate data                                                                                         |
 
