@@ -12,7 +12,7 @@
 \packageDescription{geodata}
 
 \tabular{ll}{
-\code{\bold{Function}\tab \bold{Description} \cr
+\bold{Function} \tab \bold{Description} \cr
 \code{\link{cmip6_world}}   \tab  Downscaled and calibrated CMIP6 projected future climate data\cr
 \code{\link{country_codes}}\tab   Country codes \cr
 \code{\link{crop_calendar_sacks}}\tab   Sachs crop calendar data\cr
