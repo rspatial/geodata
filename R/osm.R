@@ -1,6 +1,6 @@
 
 
-osm <- function(country, var, path, ...) {
+osm <- function(country, var, path, proxy=FALSE, ...) {
 	stopifnot(var %in% c("places", "highways"))
 	iso <- .getCountryISO(country)
 	.check_path(path)
@@ -12,8 +12,8 @@ osm <- function(country, var, path, ...) {
 		url <- paste0(.data_url(), "osm/", var, "/", filename)
 		.downloadDirect(url, filepath, ...)
 	} 
-	vect(filepath)
+	vect(filepath, proxy=proxy)
 }
 
-
+	
 

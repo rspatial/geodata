@@ -7,6 +7,8 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 	
 	m <- c("Barley.Winter.crop.calendar.nc.gz", "Barley (winter)", "Barley.crop.calendar.nc.gz", "Barley (spring)", "Cassava.crop.calendar.nc.gz", "Cassava", "Cotton.crop.calendar.nc.gz", "Cotton", "Groundnuts.crop.calendar.nc.gz", "Groundnut", "Maize.crop.calendar.nc.gz", "Maize (main season)", "Maize.2.crop.calendar.nc.gz", "Maize (2nd season)", "Millet.crop.calendar.nc.gz", "Millet", "Oats.Winter.crop.calendar.nc.gz", "Oat (winter)", "Oats.crop.calendar.nc.gz", "Oat (spring)", "Potatoes.crop.calendar.nc.gz", "Potato", "Pulses.crop.calendar.nc.gz", "Pulses", "Rapeseed.Winter.crop.calendar.nc.gz", "Rapeseed", "Rice.crop.calendar.nc.gz", "Rice (main season)", "Rice.2.crop.calendar.nc.gz", "Rice (2nd season)", "Rye.Winter.crop.calendar.nc.gz", "Rye", "Sorghum.crop.calendar.nc.gz", "Sorghum (main season)", "Sorghum.2.crop.calendar.nc.gz", "Sorghum (2nd season)", "Soybeans.crop.calendar.nc.gz", "soybean", "Sugarbeets.crop.calendar.nc.gz", "sugarbeet", "Sunflower.crop.calendar.nc.gz", "Sunflower", "Sweet.Potatoes.crop.calendar.nc.gz", "Sweetpotato", "Wheat.Winter.crop.calendar.nc.gz", "Wheat (winter)", "Wheat.crop.calendar.nc.gz", "Wheat (spring)", "Yams.crop.calendar.nc.gz", "Yam")
 	m <- matrix(m, ncol=2, byrow=TRUE)
+	m[,2] <- tolower(m[,2])
+	crop <- tolower(crop[1])
 
 	if (!(crop %in% m[,2])) {
 		cat("Choose one of:\n")
