@@ -32,7 +32,7 @@ remotes::install_github("rspatial/geodata")
 |`crop_monfreda()`                                               |Monfreda crop data (area, yield)                                                                                             |
 |`crop_spam()`                                                   |SPAM crop data (area, yield, value)                                                                                                   |
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
-|`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world                                                      |
+|`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world [GADM](https://gadm.org)                                                     |
 |`osm()`                                                         |OpenStreetMap data by country
 |`cropland_africa()`                                             |Cropland extent data for Africa                                                                        |
 |`population()`                                                  |Population density                                                                                 |
@@ -43,5 +43,5 @@ remotes::install_github("rspatial/geodata")
 |`soil_world()`                                                  |Global soils data                                                                                      |
 |`sp_occurrence()`                                               |Species occurrence records from the Global Biodiversity Information Facility |
 |`travel_time()`                                                 |Travel time to and from cities and ports                                                              |
-|`worldclim_global()`, `worldclim_country()`, `worldclim_tile()` |WorldClim glocal climate data                                                                                         |
+|`worldclim_global()`, `worldclim_country()`, `worldclim_tile()` |[WorldClim](https::/worldclim.org) glocal climate data                                                                                         |
 
