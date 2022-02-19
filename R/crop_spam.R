@@ -15,7 +15,7 @@ crop_spam <- function(crop="", var="area", path=".", africa=FALSE, ...) {
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))
 	crops <- spamCrops()
-	if (!(crp %in% crops)) { stop("crop not know to SPAM; see spamCrops()") }
+	if (!(crp %in% crops)) { stop("crop not in SPAM; see spamCrops()") }
 	i <- which(crp == crops)[1]
 	if (i > nrow(crops)) i = i - nrow(crops)
 	crp <- toupper(crops[i,2])

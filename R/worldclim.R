@@ -101,7 +101,7 @@ worldclim_global <- function(var, res, path, ...) {
 }
 
 
-cmip6_world <- function(model, ssp, time, var, res, path, ...) {
+.cmip6_world_old <- function(model, ssp, time, var, res, path, ...) {
 
 	res <- as.character(res)
 	stopifnot(res %in% c("2.5", "5", "10"))
@@ -134,4 +134,74 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	rast(poutf)
 }
 
+
+
+.cmods <- c('ACCESS-CM2', 'ACCESS-ESM1-5', 'AWI-CM-1-1-MR', 'BCC-CSM2-MR', 'CanESM5', 'CanESM5-CanOE', 'CMCC-ESM2', 'CNRM-CM6-1', 'CNRM-CM6-1-HR', 'CNRM-ESM2-1', 'EC-Earth3-Veg', 'EC-Earth3-Veg-LR', 'FIO-ESM-2-0', 'GFDL-ESM4', 'GISS-E2-1-G', 'GISS-E2-1-H', 'HadGEM3-GC31-LL', 'INM-CM4-8', 'INM-CM5-0', 'IPSL-CM6A-LR', 'MIROC-ES2L', 'MIROC6', 'MPI-ESM1-2-HR', 'MPI-ESM1-2-LR', 'MRI-ESM2-0', 'UKESM1-0-LL')
+
+.c6url <- "https://geodata.ucdavis.edu/cmip6/"
+
+
+.check_cmip6 <- function(res, var, ssp, model) {
+	stopifnot(ssp %in% c("126", "245", "370", "585"))
+	stopifnot(res %in% c("0.5", "2.5", "5", "10"))
+	stopifnot(var %in% c("tmin", "tmax", "prec", "bio", "bioc"))
+	if (!(model %in% .cmods)) {
+		stop(paste("not a valid model, use of of:\n", paste(.cmods, collapse=", ")))
+	}
+	stopifnot(time %in% c("2021-2040", "2041-2060", "2061-2080"))
+
+	# some combinations do not exist. Catch these here.
+
+}
+
+cmip6_world <- function(model, ssp, time, var, res, path, ...) {
+
+	res <- as.character(res)
+	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
+	ssp <- as.character(ssp)
+	if (var == "bio") var <- "bioc"
+	.check_cmip6(res, var, ssp, model)
+	.check_path(path)
+	path <- file.path(path, paste0("wc2.1_", fres, "/"))
+	dir.create(path, showWarnings=FALSE)
+	
+	outf <- paste0("wc2.1_", fres, "_", var, "_", model, "_ssp", ssp, "_", time, ".tif")
+	poutf <- file.path(path, outf)
+	if (!file.exists(poutf)) {
+		if (!file.exists(outf)) {
+			url <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
+			.downloadDirect(url, poutf, ...)
+		}
+		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
+		#try(file.remove(pzip), silent=TRUE)
+		#if (inherits(fz, "try-error")) { stop("unzip failed") }
+	}
+	rast(poutf)
+}
+
+
+cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
+	ssp <- as.character(ssp)
+	if (var == "bio") var <- "bioc"
+	.check_cmip6(0.5, var, ssp, model)
+	.check_path(path)
+	path <- file.path(path, paste0("wc2.1_30s/"))
+	dir.create(path, showWarnings=FALSE)
+
+	r <- rast(res=30)
+	id <- cellFromXY(r, cbind(lon,lat))
+	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
+
+	pth <- file.path(path, "wc2.1_tiles")
+	dir.create(pth, showWarnings=FALSE)
+
+	fname <- paste0("wc2.1_30s_", var, "_", model, "_ssp", ssp, "_", time, "_tile-", id, ".tif")
+	outfname <- file.path(path, fname)
+
+	if (!file.exists(outfname)) {
+		turl <- paste0(.c6url, "tiles/", model, "/ssp", ssp, "/", fname)
+		.downloadDirect(turl, outfname, ...)
+	}
+	rast(outfname)
+}
 

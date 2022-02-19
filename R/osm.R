@@ -1,7 +1,7 @@
 
 
 osm <- function(country, var, path, proxy=FALSE, ...) {
-	stopifnot(var %in% c("places", "highways"))
+	stopifnot(var %in% c("places", "highways", "railway"))
 	iso <- .getCountryISO(country)
 	.check_path(path)
 

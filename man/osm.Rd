@@ -13,7 +13,7 @@ osm(country, var, path, proxy=FALSE, ...)
 
 \arguments{
   \item{country}{character. Three-letter ISO code or full country name}
-  \item{var}{character. Currently either "places" or "highways"}
+  \item{var}{character. Currently it can be one of "places", "highways", or "railway"}
   \item{path}{character. Path name indicating where to store the data}
   \item{proxy}{logical. Return a SpatVectorProxy?}
   \item{...}{additional arguments passed to \code{\link{download.file}}}
