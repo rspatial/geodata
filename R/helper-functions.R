@@ -1,6 +1,6 @@
 
 .data_url <- function() {
-	"http://geodata.ucdavis.edu/geodata/"
+	"https://geodata.ucdavis.edu/geodata/"
 }
 
 .check_path <- function(path) {
