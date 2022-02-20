@@ -141,7 +141,7 @@ worldclim_global <- function(var, res, path, ...) {
 .c6url <- "https://geodata.ucdavis.edu/cmip6/"
 
 
-.check_cmip6 <- function(res, var, ssp, model) {
+.check_cmip6 <- function(res, var, ssp, model, time) {
 	stopifnot(ssp %in% c("126", "245", "370", "585"))
 	stopifnot(res %in% c("0.5", "2.5", "5", "10"))
 	stopifnot(var %in% c("tmin", "tmax", "prec", "bio", "bioc"))
@@ -160,7 +160,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
 	ssp <- as.character(ssp)
 	if (var == "bio") var <- "bioc"
-	.check_cmip6(res, var, ssp, model)
+	.check_cmip6(res, var, ssp, model, time)
 	.check_path(path)
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
@@ -183,7 +183,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
 	ssp <- as.character(ssp)
 	if (var == "bio") var <- "bioc"
-	.check_cmip6(0.5, var, ssp, model)
+	.check_cmip6(0.5, var, ssp, model, time)
 	.check_path(path)
 	path <- file.path(path, paste0("wc2.1_30s/"))
 	dir.create(path, showWarnings=FALSE)

@@ -30,7 +30,7 @@ Monfreda, C., N. Ramankutty, and J. A. Foley (2008), Farming the planet: 2. Geog
 }
 
 \seealso{
-\url{http:://www.earthstat.org/harvested-area-yield-175-crops/}
+\url{http://www.earthstat.org/harvested-area-yield-175-crops/}
 }
 
 

@@ -15,6 +15,8 @@
 
 \usage{
 cropland_africa(path, ...) 
+
+cropland_ESA(path, ...) 
 }
 
 \arguments{
@@ -27,17 +29,18 @@ SpatRaster
 }
 
 \seealso{
-WorldCover: \url{https://esa-worldcover.org/}
+WorldCover: \url{https://esa-worldcover.org/en}
 
 Africa cropland: \url{https://about.maps.qed.ai/}
 }
 
 \references{
-(for WorldCover:) Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
+(for WorldCover) Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
 }
 
 \examples{
 \donttest{
-cropland <- cropland_africa(path=tempdir())
+#cropland <- cropland_ESA(path=tempdir())
+#cropland <- cropland_africa(path=tempdir())
 }
 }

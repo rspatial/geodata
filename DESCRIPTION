@@ -8,7 +8,7 @@ Encoding: UTF-8
 Suggests: jsonlite, R.utils
 Author: Robert J. Hijmans [cre, aut], Aniruddha Ghosh [ctb], Alex Mandel [ctb]
 Maintainer: Robert J. Hijmans <r.hijmans@gmail.com>
-Description: Functions for downloading of geographic data for use in spatial data analysis and mapping. The package facilitates access to climate, elevation, soil, species occurrence, accessibility, and administrative boundary data.
+Description: Functions for downloading of geographic data for use in spatial analysis and mapping. The package facilitates access to climate, elevation, land use, soil, species occurrence, accessibility, administrative boundaries and other data.
 License: GPL (>=3)
 BugReports: https://github.com/rspatial/geodata/issues/
 
