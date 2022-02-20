@@ -23,7 +23,7 @@ cropland_africa <- function(path, ...) {
 
 
 
-cropland_ESA <- function(path, ...) {
+cropland_world <- function(path, ...) {
 	.check_path(path)
 	filename <- paste0("WorldCover_cropland_30s.tif")
 	filepath <- file.path(path, filename)

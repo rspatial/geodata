@@ -1,13 +1,13 @@
 \name{cropland}
 
-\alias{cropland_ESA}
+\alias{cropland_world}
 \alias{cropland_africa}
 
 \title{Cropland distribution data}
 
 \description{
 
-\code{cropland_ESA} downloads a 30-seconds raster for most of the world. Values are the fraction cropland in each cell. The values are derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0)
+\code{cropland_world} downloads a 30-seconds raster for (most of) the world. Values are the fraction cropland in each cell. The values are derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0)
 
 \code{cropland_africa} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point Geosurvey (https://geosurvey.qed.ai) conducted in 2015. (License: CC-BY-SA 4.0)
 
@@ -16,7 +16,7 @@
 \usage{
 cropland_africa(path, ...) 
 
-cropland_ESA(path, ...) 
+cropland_world(path, ...) 
 }
 
 \arguments{

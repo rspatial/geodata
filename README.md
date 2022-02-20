@@ -32,7 +32,7 @@ remotes::install_github("rspatial/geodata")
 |`crop_monfreda()`                        |Crop area and yield data for 175 crops by [Monfreda et al.](http:://www.earthstat.org/harvested-area-yield-175-crops/)    |
 |`crop_spam()`                                                   |[MapSPAM](https://www.mapspam.info/data/) crop data (area, yield, value)     |
 |`cropland_africa()`                                             |Cropland extent data for Africa by [QED](https://about.maps.qed.ai/)                      |
-|`cropland_ESA()`                         |Cropland extent derived from [ESA WorldCover](https://esa-worldcover.org/)|
+|`cropland_world()`                         |Cropland density for the world derived from [ESA WorldCover](https://esa-worldcover.org/)|
 
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
 |`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
