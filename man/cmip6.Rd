@@ -6,7 +6,8 @@
 \title{CMIP6 climate model data}
 
 \description{
-Download downscaled and calibrated CMIP6 climate data for projected future climates. Either for the entire world or for a 30 degrees tile. 
+Download downscaled and calibrated CMIP6 climate data for projected future climates. Either for the entire world or for a 30 degrees tile. For more information see \url{https://www.worldclim.org/} 
+
 }
 
 \usage{
@@ -33,7 +34,7 @@ SpatRaster
 
 
 \seealso{
-\url{https://www.worldclim.org/} 
+\code{\link[terra]{vrt}} to combine tiles
 }
 
 
