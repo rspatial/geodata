@@ -1,14 +1,16 @@
 
-.gadm_download <- function(filename, gversion, upath="pck", ...) {
+.gadm_download <- function(filename, gversion, upath="pck", check=TRUE, ...) {
 	
 	.check_path(dirname(filename))
 
 	if (!file.exists(filename)) {
 
-		f <- paste0("https://geodata.ucdavis.edu/gadm/gadm", gversion, ".txt")
-		ff <- readLines(f)
-		if (!(basename(filename) %in% ff)) {
-			return(vect())
+		if (check) {
+			f <- paste0("https://geodata.ucdavis.edu/gadm/gadm", gversion, ".txt")
+			ff <- readLines(f)
+			if (!(basename(filename) %in% ff)) {
+				return(vect())
+			}
 		}
 		baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
 		if (upath=="") {
@@ -38,7 +40,7 @@ world <- function(resolution=5, level=0, path, version="3.6", ...) {
 	version <- as.character(version)
 	stopifnot(version[1] == "3.6")
 	filename <- file.path(path, paste0("gadm36_adm", level, "_r", resolution, "_pk.rds"))
-	.gadm_download(filename, version[1], "", ...)
+	.gadm_download(filename, version[1], "", check=FALSE, ...)
 }
 
 
