@@ -24,7 +24,7 @@ remotes::install_github("rspatial/geodata")
 
 ## Data sources
 
-|Functions                                                       |Description                                                                                                     |
+|Functions                        |Description                                                                                                     |
 |:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
 |`cmip6_world()`, `cmip6_tile()`  |Downscaled and calibrated CMIP6 projected future climate data                            |
 |`country_codes()`                |Country codes                                                                |
@@ -34,8 +34,8 @@ remotes::install_github("rspatial/geodata")
 |`cropland_africa()`              |Cropland extent data for Africa by [QED](https://about.maps.qed.ai/)                      |
 |`cropland_world()`               |Cropland density for the world derived from [ESA WorldCover](https://esa-worldcover.org/) |
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
-|`gadm()`, `world()`                                             |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
-|`landcover()`                    |Landcover data derived from ERA WorldCover |
+|`gadm()`, `world()`              |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
+|`landcover()`                    |Landcover data derived from ESA WorldCover |
 |`osm()`                          |OpenStreetMap data by country (places and roads) |
 |`population()`                   |Population density [Gridded Population of the World](http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation)    |
 |`soil_af_elements()`             |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa  |

@@ -38,7 +38,7 @@ SpatRaster
 
 \examples{
 \donttest{
-#cropland <- cropland_ESA(path=tempdir())
+#cropland <- cropland_world(path=tempdir())
 #cropland <- cropland_africa(path=tempdir())
 }
 }
