@@ -2,11 +2,10 @@
 
 \alias{landcover}
 
-\title{Cropland distribution data}
+\title{Landcover data}
 
 \description{
-
-landcover data at 30-seconds spatial resolution for (most of) the world. Values are the fraction of a landcover class in each cell. The values are derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0)
+Landcover data at 30-seconds spatial resolution for (most of) the world. Values are the fraction of a landcover class in each cell. The values are derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0)
 }
 
 \usage{

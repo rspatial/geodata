@@ -43,7 +43,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 			.downloadDirect(url, paste0(filepath, ".aux.xml"), ...)
 		}
 		r <- try(rast(filepath))
-		if (class(r) == "try-error") {
+		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
 			stop("download failed")
 		}

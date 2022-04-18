@@ -148,8 +148,7 @@ worldclim_global <- function(var, res, path, ...) {
 	if (!(model %in% .cmods)) {
 		stop(paste("not a valid model, use of of:\n", paste(.cmods, collapse=", ")))
 	}
-	stopifnot(time %in% c("2021-2040", "2041-2060", "2061-2080"))
-
+	stopifnot(time %in% c("2021-2040", "2041-2060", "2061-2080", "2081-2100"))
 	# some combinations do not exist. Catch these here.
 
 }

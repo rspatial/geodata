@@ -35,7 +35,7 @@ soil_af_elements <- function(var, path, ...) {
 	filename <- paste0("af_", var, "_0-30cm_30s.tif")
 	filepath <- file.path(path, filename)
 
-	url <- paste0("https://biogeo.ucdavis.edu/data/geodata/soil/afsis_nuts/", filename)
+	url <- paste0(.data_url(), "soil/afsis_nuts/", filename)
 	.donwload_url(url, filepath, ...)
 }
 

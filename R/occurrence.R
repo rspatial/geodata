@@ -36,7 +36,7 @@
 		
 		e <- cnx[(cnx %in% cnd)]	
 		for (j in e) {
-			if (class(x[,j]) != class(dd[,j])) {
+			if (!all(class(x[,j]) == class(dd[,j]))) {
 				x[,j] <- as.character(x[,j])
 				dd[,j] <- as.character(dd[,j])
 			}
@@ -174,7 +174,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 				break
 			}
 			test <- .downloadDirect(aurl, tmpfile, quiet=TRUE, ...)
-			if (class(test) == "try-error") {
+			if (inherits(test, "try-error")) {
 				print("download failure, trying again...")
 			} else {
 				json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")

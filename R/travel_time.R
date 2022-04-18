@@ -26,7 +26,7 @@ travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
 		url <- paste0(.data_url(), "travel/", filename)
 		.downloadDirect(url, filepath, ...)
 		r <- try(rast(filepath))
-		if (class(r) == "try-error") {
+		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
 			stop("download failed")
 		}

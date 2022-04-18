@@ -29,14 +29,14 @@
 \code{\link{landcover}} \tab   Global landcover data \cr
 \code{\link{osm}} \tab   OpenStreetMap data by country  \cr
 \code{\link{population}}\tab   Download population density data \cr
-\code{\link{soil_af_elements}} \tab   Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa \cr
+\code{\link{soil_af_elements}} \tab   Soil element concentration data for Africa \cr
 \code{\link{soil_af_isda}} \tab   Soil data for Africa derived from the iDSA data set\cr
 \code{\link{soil_af}}      \tab   Chemical soil properties data for Africa for different soil depths \cr
 \code{\link{soil_world_vsi}}     \tab   Virtually connect to the global soilgrids data \cr
 \code{\link{soil_world}}   \tab   Global soils data \cr
-\code{\link{sp_occurrence}}\tab   Species occurrence records from the Global Biodiversity Information Facility\cr
+\code{\link{sp_occurrence}}\tab   Species occurrence data from the Global Biodiversity Information Facility\cr
 \code{\link{travel_time}}\tab  Travel time to cities and ports \cr
-\code{\link{worldclim_global}}\tab   Glocal climate data\cr
+\code{\link{worldclim_global}}\tab   Global climate data\cr
 \code{\link{worldclim_country}}\tab  Climate data by country\cr
 \code{\link{worldclim_tile}} \tab   Climate data by tile\cr
 }}
