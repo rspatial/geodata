@@ -1,6 +1,6 @@
 
 
-cropland_africa <- function(path, ...) {
+.cropland_africa <- function(path, ...) {
 
 	.check_path(path)
 	filename <- paste0("geosurvey_cropland.tif")
@@ -23,7 +23,7 @@ cropland_africa <- function(path, ...) {
 
 
 
-cropland_world <- function(path, ...) {
+.cropland_world <- function(path, ...) {
 	.check_path(path)
 	filename <- paste0("WorldCover_cropland_30s.tif")
 	filepath <- file.path(path, filename)
@@ -41,6 +41,46 @@ cropland_world <- function(path, ...) {
 		r <- rast(filepath)
 	}
 	r	
+}
+
+
+
+
+.cropland_glad <- function(path, year, ...) {
+	.check_path(path)
+	if (missing(year)) {
+		filename <- "glad_cropland.tif"
+	} else {
+		year <- as.numeric(year)
+		stopifnot(year in c(2003, 2007, 2011, 2015, 2019))
+		filename <- paste0("glad_cropland", year, ".tif")
+	}
+	filepath <- file.path(path, filename)
+	if (!(file.exists(filepath))) {
+		url <- paste0(.data_url(), "cropland/", filename)
+		.downloadDirect(url, filepath, ...)
+		r <- try(rast(filepath))
+		if (inherits(r, "try-error")) {
+			try(file.remove(filepath), silent=TRUE)
+			stop("download failed")
+		}
+	} else {
+		r <- rast(filepath)
+	}
+	r	
+}
+
+cropland <- function(source, path, year, ...) {
+	.check_path(path)
+	source = trimws(tolower(source))
+	stopifnot(source %in% c("geosurvey", "worldcover", "glad"))
+	if (source == "geosurvey") {
+		.cropland_africa(path, ...)
+	} else if (source == "worldcover") {
+		.cropland_world(path, ...)	
+	} else {
+		.cropland_glad(path, year, ...)
+	}
 }
 
 

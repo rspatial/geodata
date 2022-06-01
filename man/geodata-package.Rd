@@ -19,8 +19,7 @@
 \code{\link{crop_calendar_sacks}}\tab   Sachs crop calendar data\cr
 \code{\link{crop_monfreda}}\tab   Monfreda crop data (area, yield)\cr
 \code{\link{crop_spam}}    \tab   SPAM crop data (area, yield, value)\cr
-\code{\link{cropland_africa}}\tab   Cropland extent data for Africa \cr
-\code{\link{cropland_world}}\tab   Cropland density for the world \cr
+\code{\link{cropland}}\tab   Cropland density for the world from three sources\cr
 \code{\link{elevation_3s}} \tab   Elevation data for tile (3 seconds resolution) \cr
 \code{\link{elevation_30s}} \tab   Elevation data for by country (30 seconds resolution) \cr
 \code{\link{elevation_global}} \tab  Global elevation data (various resolutions) \cr

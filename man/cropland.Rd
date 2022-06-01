@@ -1,25 +1,27 @@
 \name{cropland}
 
-\alias{cropland_world}
-\alias{cropland_africa}
+\alias{cropland}
 
 \title{Cropland distribution data}
 
 \description{
+Cropland distribution data at a 30-seconds spatial resolution from three sources:
 
-\code{cropland_world} downloads a 30-seconds raster for (most of) the world. Values are the fraction cropland in each cell. The values are derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0), see \url{https://esa-worldcover.org/en}
+\code{worldcover} is derived from the ESA WorldCover data set at 0.3-seconds resolution. (License CC BY 4.0), see \url{https://esa-worldcover.org/en}. Values were aggregated and represent the fraction cropland in each cell. 
 
-\code{cropland_africa} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point Geosurvey (https://geosurvey.qed.ai) conducted in 2015. (License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
+\code{glad} is derived from the "Global cropland expansion in the 21st century" (Potatov et al) data available \href{here}{https://glad.umd.edu/dataset/croplands}. Values were aggregated and resampled and represent the fraction cropland in each cell. There are five layers representing the following years: 2003, 2007, 2011, 2015, and 2019.
+
+\code{geosurvey} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point Geosurvey (https://geosurvey.qed.ai) conducted in 2015. (License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
 }
 
 \usage{
-cropland_africa(path, ...) 
-
-cropland_world(path, ...) 
+cropland(source, path, year, ...) 
 }
 
 \arguments{
   \item{path}{character. Path name where the data should be downloaded to} 
+  \item{source}{character. One of "WorldCover", "GLAD", or "geosurvey"} 
+  \item{year}{numeric. Optional for the GLAD dataset. One of 2003, 2007, 2011, 2015, and 2019} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
@@ -32,13 +34,17 @@ SpatRaster
 }
 
 \references{
-(for WorldCover) Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
+WorldCover: 
+Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
+
+GLAD:
+Potapov, P., S. Turubanova, M.C. Hansen, A. Tyukavina, V. Zalles, A. Khan, X.-P. Song, A. Pickens, Q. Shen, J. Cortez, 2021. Global maps of cropland extent and change show accelerated cropland expansion in the twenty-first century. Nature Food. \url{ https://doi.org/10.1038/s43016-021-00429-z}
 }
+
 
 
 \examples{
 \donttest{
-#cropland <- cropland_world(path=tempdir())
-#cropland <- cropland_africa(path=tempdir())
+#x <- cropland("WorldCover", path=tempdir())
 }
 }
