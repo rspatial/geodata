@@ -52,8 +52,8 @@
 		filename <- "glad_cropland.tif"
 	} else {
 		year <- as.numeric(year)
-		stopifnot(year in c(2003, 2007, 2011, 2015, 2019))
-		filename <- paste0("glad_cropland", year, ".tif")
+		stopifnot(year %in% c(2003, 2007, 2011, 2015, 2019))
+		filename <- paste0("glad_cropland_", year, ".tif")
 	}
 	filepath <- file.path(path, filename)
 	if (!(file.exists(filepath))) {
@@ -72,9 +72,8 @@
 
 cropland <- function(source, path, year, ...) {
 	.check_path(path)
-	source = trimws(tolower(source))
-	stopifnot(source %in% c("geosurvey", "worldcover", "glad"))
-	if (source == "geosurvey") {
+	source = match.arg(trimws(tolower(source)), c("qed", "worldcover", "glad"))
+	if (source == "qed") {
 		.cropland_africa(path, ...)
 	} else if (source == "worldcover") {
 		.cropland_world(path, ...)	

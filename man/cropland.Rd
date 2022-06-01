@@ -11,7 +11,7 @@ Cropland distribution data at a 30-seconds spatial resolution from three sources
 
 \code{glad} is derived from the "Global cropland expansion in the 21st century" (Potatov et al) data available \href{here}{https://glad.umd.edu/dataset/croplands}. Values were aggregated and resampled and represent the fraction cropland in each cell. There are five layers representing the following years: 2003, 2007, 2011, 2015, and 2019.
 
-\code{geosurvey} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point Geosurvey (https://geosurvey.qed.ai) conducted in 2015. (License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
+\code{QED} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point Geosurvey (https://geosurvey.qed.ai) conducted in 2015. (License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
 }
 
 \usage{
@@ -21,7 +21,7 @@ cropland(source, path, year, ...)
 \arguments{
   \item{path}{character. Path name where the data should be downloaded to} 
   \item{source}{character. One of "WorldCover", "GLAD", or "geosurvey"} 
-  \item{year}{numeric. Optional for the GLAD dataset. One of 2003, 2007, 2011, 2015, and 2019} 
+  \item{year}{numeric. Optional for the GLAD dataset to get data for a single year. One of 2003, 2007, 2011, 2015, and 2019} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
