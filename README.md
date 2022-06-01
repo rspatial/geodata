@@ -31,8 +31,7 @@ remotes::install_github("rspatial/geodata")
 |`crop_calendar_sacks()`          |Crop calendar data by [Sacks et al](https://sage.nelson.wisc.edu/data-and-models/datasets/crop-calendar-dataset/)     |
 |`crop_monfreda()`                |Crop area and yield data for 175 crops by [Monfreda et al.](http:://www.earthstat.org/harvested-area-yield-175-crops/)    |
 |`crop_spam()`                    |[MapSPAM](https://www.mapspam.info/data/) crop data (area, yield, value)     |
-|`cropland_africa()`              |Cropland extent data for Africa by [QED](https://about.maps.qed.ai/)                      |
-|`cropland_world()`               |Cropland density for the world derived from [ESA WorldCover](https://esa-worldcover.org/) |
+|`cropland`                       |Cropland density for the world derived from different sources (ESA, GLAD, QED) |
 |`elevation_3s()`, `elevation_30s()`, `elevation_global()`       |Elevation data                                                                  |
 |`gadm()`, `world()`              |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
 |`landcover()`                    |Landcover data derived from ESA WorldCover |
