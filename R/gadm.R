@@ -38,19 +38,21 @@ world <- function(resolution=5, level=0, path, version="3.6", ...) {
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)
 	version <- as.character(version)
+	if (version == "latest") version <- "3.6"
 	stopifnot(version[1] == "3.6")
 	filename <- file.path(path, paste0("gadm36_adm", level, "_r", resolution, "_pk.rds"))
 	.gadm_download(filename, version[1], "", check=FALSE, ...)
 }
 
 
-gadm <- function(country, level=1, path, version="3.6", ...) {
+gadm <- function(country, level=1, path, version="latest", ...) {
 
 	country <- .getCountryISO(country)
 	if (missing(level)) {
 		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
 	}
 	version <- as.character(version)
+	if (version == "latest") version <- "4.0"
 	stopifnot(version[1] %in% c("3.6", "4.0"))
 	fversion <- gsub("\\.", "", version)
 	filename <- file.path(path, paste0("gadm", fversion, "_", country, "_", level, "_pk.rds"))
