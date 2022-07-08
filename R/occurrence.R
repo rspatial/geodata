@@ -97,7 +97,7 @@
 }
 
 
-sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, ...) {
+sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...) {
 	
 	
 	if (! requireNamespace("jsonlite")) { stop("You need to install the jsonlite package to use this function") }
@@ -213,43 +213,43 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	} else {
 		z <- do.call(.frbind, g)
 	}
-	cn <- colnames(z)
-	cn <- gsub("decimalLatitude", "lat", cn)
-	cn <- gsub("decimalLongitude", "lon", cn)
-	cn <- gsub("stateProvince", "adm1", cn)
-	cn <- gsub("county", "adm2", cn)
-	cn <- gsub("countryCode", "ISO2", cn)
-	cn <- gsub("country", "fullCountry", cn)
-	colnames(z) <- cn
-
-	if (("lat" %in% cn) & ("lon" %in% cn)) {
-		z[,"lon"] <- gsub(",", ".", z[,"lon"])
-		z[,"lat"] <- gsub(",", ".", z[,"lat"])
-		z[,"lon"] <- as.numeric(z[,"lon"])
-		z[,"lat"] <- as.numeric(z[,"lat"])
-		k <- apply(z[ ,c("lon", "lat")], 1, function(x) isTRUE(any(x==0)))
+	lat <- "decimalLatitude"
+	lon <- "decimalLongitude"
+	cn <- colnames(z)	
+	if ((lat %in% cn) & (lon %in% cn)) {
+		z[,lon] <- gsub(",", ".", z[,lon])
+		z[,lat] <- gsub(",", ".", z[,lat])
+		z[,lon] <- as.numeric(z[,lon])
+		z[,lat] <- as.numeric(z[,lat])
+		k <- apply(z[ ,c(lon, lat)], 1, function(x) isTRUE(any(x==0)))
 		
 		if (removeZeros) {
 			if (geo) {
 				z <- z[!k, ]
 			} else {
-				z[k, c("lat", "lon")] <- NA 
+				z[k, c(lat, lon)] <- NA 
 			}
 		} else {
-			z[k, c("lat", "lon")] <- NA 
+			z[k, c(lat, lon)] <- NA 
 		}
 	} 
 	
-	if (nrow(z) > 0) {
-	
+	if (fixnames && (nrow(z) > 0)) {
+		cn <- gsub("decimalLatitude", "lat", cn)
+		cn <- gsub("decimalLongitude", "lon", cn)
+		cn <- gsub("stateProvince", "adm1", cn)
+		cn <- gsub("county", "adm2", cn)
+		cn <- gsub("countryCode", "ISO2", cn)
+		colnames(z) <- cn
 		if ("ISO2" %in% cn) {
+			z$fullCountry <- z$country
 			iso <- .ccodes()
 			i <- match(z$ISO2, iso[, "ISO2"])
 			z$country <- iso[i, 1]
 			z$country[is.na(z$ISO2)] <- NA
 		}
 		
-		vrs <- c("locality", "adm1", "adm2", "country", "continent") 
+		vrs <- c("locality", "stateProvince", "county", "country", "continent") 
 		vrs <- vrs[vrs %in% colnames(z)]
 		if (length(vrs) > 0) {
 			fullloc <- trimws(as.matrix(z[, vrs]))
@@ -265,14 +265,13 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 	z <- z[, sort(colnames(z))]
 	d <- as.Date(Sys.time())
-	z <- cbind(z, downloadDate=d)
-	
-	#	if (inherits(ext, "SpatialPolygons")) { overlay	}
-	
+	z <- cbind(z, downloadDate=d)	
 	return(z)
 }
 
-#sa <- gbif("solanum")
+#p <- sp_occurrence("solanum", "cantense")
+#pp <- sp_occurrence("solanum", "cantense", fix=F)
+
 #sa <- gbif("solanum", "*")
 #sa <- gbif("solanum", "acaule*")
 #sa <- gbif("solanum", "acaule var acaule")

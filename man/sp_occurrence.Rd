@@ -12,8 +12,8 @@ This function downloads species occurence records from the Global Biodiversity I
 
 
 \usage{
-sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, 
-   removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, ...)
+sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE,
+        download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...)
 }
  
 \arguments{
@@ -28,6 +28,7 @@ sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE,
   \item{nrecs}{integer. How many records to download in a single request (max is 300)?}
   \item{start}{integer. Record number from which to start requesting data}
   \item{end}{integer. Last record to request}
+  \item{fixnames}{If \code{TRUE} a few unwieldy and poorly chosen variable names are changed as follows. "decimalLatitude" to "lat", "decimalLongitude" to "lon", "stateProvince" to "adm1", "county" to "adm2", "countryCode" to "ISO2". The names in "country" are replaced with the common (short form) country name, the original values are stored as "fullCountry"}
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
