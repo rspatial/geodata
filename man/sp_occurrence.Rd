@@ -7,7 +7,7 @@ Download species occurrence data from GBIF
 }
 
 \description{
-This function downloads species occurence records from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal. You can download either a single species (if you append a '*' to the species name) or a subspecies of comparable level. You can download the data for an entire genus by using \code{species='*'}. Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement}. 
+This function downloads species occurence records from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal. You can download either a single species (if you append a '*' to the species name) or a subspecies of comparable level. You can download the data for an entire genus by using \code{species='*'}. Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
 }
 
 
@@ -37,9 +37,14 @@ sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALS
 data frame 
 }
 
+\note{
+Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Good citation also rewards data-publishing institutions and individuals and provides support for sharing open data [\href{https://docs.ropensci.org/rgbif/articles/gbif_citations.html}{1}] and [\href{https://www.gbif.org/citation-guidelines}{2}]. You can get a DOI for the data you download with th is funciton by creating a \href{https://www.gbif.org/derived-dataset/about}{"derived" dataset}. For proper attribution to work, you need to keep the "datasetKey" variable in your dataset.
+}
+
 
 \references{
 \url{https://www.gbif.org/occurrence}
+\url{https://www.gbif.org/derived-dataset/about}
 }
 
 \examples{
