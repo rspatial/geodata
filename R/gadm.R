@@ -60,14 +60,11 @@ gadm <- function(country, level=1, path, version="latest", ...) {
 		return( do.call(rbind, x))
 	}
 	country <- .getCountryISO(country)
-	if (missing(level)) {
-		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
-	}
 	fversion <- gsub("\\.", "", version)
 	filename <- file.path(path, paste0("gadm", fversion, "_", country, "_", level, "_pk.rds"))
 	v <- .gadm_download(filename, version[1], ...)
 	if (nrow(v) == 0) {
-		stop(paste(country, "level", level, "is not available")) 
+		stop(paste(country, "level", level, "is not available"), call. = FALSE) 
 	}
 	v
 }
