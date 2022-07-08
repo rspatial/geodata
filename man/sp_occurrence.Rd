@@ -38,7 +38,7 @@ data frame
 }
 
 \note{
-Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Good citation also rewards data-publishing institutions and individuals and provides support for sharing open data [\href{https://docs.ropensci.org/rgbif/articles/gbif_citations.html}{1}] and [\href{https://www.gbif.org/citation-guidelines}{2}]. You can get a DOI for the data you download with th is funciton by creating a \href{https://www.gbif.org/derived-dataset/about}{"derived" dataset}. For proper attribution to work, you need to keep the "datasetKey" variable in your dataset.
+Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Citation rewards data-publishing institutions and individuals and provides support for sharing open data [\href{https://docs.ropensci.org/rgbif/articles/gbif_citations.html}{1}][\href{https://www.gbif.org/citation-guidelines}{2}]. You can get a DOI for the data you downloaded by creating a \href{https://www.gbif.org/derived-dataset/about}{"derived" dataset}. For this to work, you need to keep the "datasetKey" variable in your dataset.
 }
 
 
