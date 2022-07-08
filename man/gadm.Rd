@@ -10,14 +10,15 @@ Get administrative boundaries for any country in the world. Data are read from f
 
 \usage{
 gadm(country, level=1, path, version="latest", ...)
+
 world(resolution=5, level=0, path, version="latest", ...)
 }
 
 \arguments{
-  \item{country}{character. Three-letter ISO code or full country name}
-  \item{level}{numeric. level of administrative subdivision (starting with 0 for country, then 1 for the first level of subdivision). For \code{world} only level 0 is currently avaialable}
+  \item{country}{character. Three-letter ISO code or full country name. If you provide mutliple names they are all downloaded and \code{rbind}-ed together }
+  \item{level}{numeric. The level of administrative subdivision requested. (starting with 0 for country, then 1 for the first level of subdivision). For \code{world} only level 0 is currently available}
   \item{path}{character. Path name indicating where to store the data}
-  \item{version}{character. Either "lastest" or GADM version number (can be "3.6" or "4.0" for \code{gadm}, and only "3.6" for \code{world}}
+  \item{version}{character. Either "latest" or GADM version number (can be "3.6" or "4.0" for \code{gadm}, and only "3.6" for \code{world}}
   \item{resolution}{integer between 1 and 5 indicating the level of detail. 1 is high 5 is low}
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
@@ -28,7 +29,7 @@ SpatVector
 
 
 \details{
-These data are from \url{https://gadm.org}
+The data are from \url{https://gadm.org}
 }
 
 \examples{

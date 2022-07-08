@@ -47,13 +47,22 @@ world <- function(resolution=5, level=0, path, version="3.6", ...) {
 
 gadm <- function(country, level=1, path, version="latest", ...) {
 
+	if (length(level) > 1) {
+		stop("level can only have a single value")
+	}
+	path <- path[1]
+	version <- as.character(version)
+	if (version == "latest") version <- "4.0"
+	stopifnot(version[1] %in% c("3.6", "4.0"))
+	country <- unique(country)
+	if (length(country) > 1) {
+		x <- lapply(country, function(i) { gadm(i, level=level, path=path, version=version, ...) })
+		return( do.call(rbind, x))
+	}
 	country <- .getCountryISO(country)
 	if (missing(level)) {
 		stop('provide a "level=" argument; levels can be 0, 1, or 2 for most countries, and higher for some')
 	}
-	version <- as.character(version)
-	if (version == "latest") version <- "4.0"
-	stopifnot(version[1] %in% c("3.6", "4.0"))
 	fversion <- gsub("\\.", "", version)
 	filename <- file.path(path, paste0("gadm", fversion, "_", country, "_", level, "_pk.rds"))
 	v <- .gadm_download(filename, version[1], ...)
