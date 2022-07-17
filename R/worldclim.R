@@ -202,19 +202,24 @@ cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
 	dir.create(path, showWarnings=FALSE)
 
 	r <- rast(res=30)
-	id <- cellFromXY(r, cbind(lon,lat))
-	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
+	ids <- cellFromXY(r, cbind(lon, lat))
+	if (any(is.na(ids))) stop("invalid coordinates (lon/lat reversed?)")
 
 	pth <- file.path(path, "wc2.1_tiles")
 	dir.create(pth, showWarnings=FALSE)
 
-	fname <- paste0("wc2.1_30s_", var, "_", model, "_ssp", ssp, "_", time, "_tile-", id, ".tif")
+	fname <- paste0("wc2.1_30s_", var, "_", model, "_ssp", ssp, "_", time, "_tile-", ids, ".tif")
 	outfname <- file.path(path, fname)
-
-	if (!file.exists(outfname)) {
-		turl <- paste0(.c6url, "tiles/", model, "/ssp", ssp, "/", fname)
-		.downloadDirect(turl, outfname, ...)
+	for (i in 1:length(outfname)) {
+		if (!file.exists(outfname[i])) {
+			turl <- paste0(.c6url, "tiles/", model, "/ssp", ssp, "/", fname[i])
+			.downloadDirect(turl, outfname[i], ...)
+		}
 	}
-	rast(outfname)
+	if (length(outfname) == 1) {
+		rast(outfname)
+	} else {
+		vrt(outfname)
+	}
 }
 
