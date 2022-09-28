@@ -32,7 +32,7 @@ International Food Policy Research Institute, 2020. Spatially-Disaggregated Crop
 }
 
 \seealso{
-\url{https://www.mapspam.info/data/}
+https://www.mapspam.info/data/
 }
 
 

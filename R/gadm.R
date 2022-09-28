@@ -25,15 +25,18 @@
 	}	
 	if (file.exists(filename)) {
 		r <- readRDS(filename)
-		r@crs <- "+proj=longlat +datum=WGS84"
-		return( vect(r) ) 
+		if (packageVersion("terra") < "1.6.22") {
+			vect(r)
+		} else {
+			r
+		}
 	} else {
-		return(NULL)
+		NULL
 	}
 }
 
 
-world <- function(resolution=5, level=0, path, version="3.6", ...) {
+world <- function(resolution=5, level=0, path, version="latest", ...) {
 	stopifnot(level[1] == 0)
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)

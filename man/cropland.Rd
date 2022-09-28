@@ -38,7 +38,7 @@ WorldCover:
 Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
 
 GLAD:
-Potapov, P., S. Turubanova, M.C. Hansen, A. Tyukavina, V. Zalles, A. Khan, X.-P. Song, A. Pickens, Q. Shen, J. Cortez, 2021. Global maps of cropland extent and change show accelerated cropland expansion in the twenty-first century. Nature Food. \url{ https://doi.org/10.1038/s43016-021-00429-z}
+Potapov, P., S. Turubanova, M.C. Hansen, A. Tyukavina, V. Zalles, A. Khan, X.-P. Song, A. Pickens, Q. Shen, J. Cortez, 2021. Global maps of cropland extent and change show accelerated cropland expansion in the twenty-first century. Nature Food. doi:10.1038/s43016-021-00429-z
 }
 
 

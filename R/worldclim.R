@@ -154,10 +154,10 @@ worldclim_global <- function(var, res, path, ...) {
     #find 30s -type f -printf "%f\n"  | cut -c11-100 > files.txt
 	tmpfile <- file.path(tempdir(), "cmip6_files.txt")
 	if (!file.exists(tmpfile)) {
-		suppressWarnings(try(download.file(paste0(.c6url, "files.txt"), tmpfile,  quiet=TRUE), silent=TRUE))
+		suppressWarnings(try(utils::download.file(paste0(.c6url, "files.txt"), tmpfile,  quiet=TRUE), silent=TRUE))
 	}
 	if (file.exists(tmpfile)) {
-		ff <- read.table(tmpfile, sep="_")
+		ff <- utils::read.table(tmpfile, sep="_")
 		i <- ff[,1] == var & ff[,2] == model & ff[,3] == paste0("ssp", ssp) & ff[,4] == paste0(time, ".tif")
 		if (sum(i) != 1) {
 			stop("This dataset is not available")
