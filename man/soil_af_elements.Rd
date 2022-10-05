@@ -6,11 +6,11 @@
 
 \description{
 Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa.
-The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250m resolution.
+The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250 m spatial resolution.
 
 The data have an Open Data Commons Open Database License (ODbL)
 
-For more information, see \url{https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution}
+For more information, see https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
 }
 
 \usage{

@@ -25,7 +25,7 @@
 	}	
 	if (file.exists(filename)) {
 		r <- readRDS(filename)
-		if (packageVersion("terra") < "1.6.22") {
+		if (utils::packageVersion("terra") < "1.6.22") {
 			vect(r)
 		} else {
 			r

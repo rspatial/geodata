@@ -7,7 +7,7 @@
 \description{
 Download global soils data. The data are derived from the SoilGRIDS database. The data were aggregated and transformed to a longitude/latitude coordinate reference system with 30-second spatial resolution.
 
-See \url{https://www.isric.org/explore/soilgrids} for more info
+See https://www.isric.org/explore/soilgrids for more info.
 
 data license: CC-BY 4.0
 }

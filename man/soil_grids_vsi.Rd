@@ -5,7 +5,7 @@
 \title{soil grids_vsi}
 
 \description{
-Virtually connect to the global soilgrids data.  See \url{https://www.isric.org/explore/soilgrids} for more info
+Virtually connect to the global soilgrids data. See https://www.isric.org/explore/soilgrids for more info.
 
 data license: CC-BY 4.0
 }

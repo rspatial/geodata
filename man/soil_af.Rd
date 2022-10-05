@@ -10,7 +10,7 @@ Download chemical soil properties data for Africa for different soil depths. The
 There are more recent estimations for some of the properties available in other data sets. See \code{\link{soil_af_isda}} and \code{\link{soil_world}}. 
 
 
-For more info, see \url{https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution}
+For more info, see https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
 
 
 The data have a CC-BY 4.0 NC license

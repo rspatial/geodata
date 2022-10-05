@@ -19,7 +19,7 @@ cropland(source, path, year, ...)
 }
 
 \arguments{
-  \item{source}{character. One of "WorldCover", "GLAD", or "geosurvey"} 
+  \item{source}{character. One of "WorldCover", "GLAD", or "QED"} 
   \item{path}{character. Path name where the data should be downloaded to} 
   \item{year}{numeric. Optional for the GLAD dataset to get data for a single year. One of 2003, 2007, 2011, 2015, and 2019} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
