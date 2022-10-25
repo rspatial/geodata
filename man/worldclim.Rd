@@ -43,7 +43,7 @@ These are the WorldClim monthly average climate data.
 \tab\code{srad} \tab incident solar radiation \tab 
 \ifelse{latex}{\out{$kJ \cdot m^{-2} \cdot day^{-1}$}}{\out{kJ m<sup>-2</sup> day<sup>-1</sup>}} \cr
 \tab\code{wind} \tab wind speed (2 m above the ground) \tab 
-\ifelse{latex}{\out{$m \cdot  s^{-1}$}}{\out{m<sup>-1</sup>}} \cr
+\ifelse{latex}{\out{$m \cdot  s^{-1}$}}{\out{m s<sup>-1</sup>}} \cr
 \tab\code{vapr} \tab vapor pressure \tab kPa \cr
 }
 }
