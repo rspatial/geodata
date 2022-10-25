@@ -28,7 +28,7 @@
 	}
 }
 
-.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=TRUE, ...) {
+.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, ...) {
 	if (!file.exists(filename)) {
 		ok <- try(
 			utils::download.file(url=url, destfile=filename, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
