@@ -26,8 +26,10 @@
 
 
 
-worldclim_tile <- function(var, lon, lat, path, ...) {
+worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	version <- as.character(version)
+	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
 	.check_path(path)
 
@@ -49,9 +51,11 @@ worldclim_tile <- function(var, lon, lat, path, ...) {
 }
 
 
-worldclim_country <- function(country, var, path, ...) {
+worldclim_country <- function(country, var, path, version="2.1", ...) {
 
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	version <- as.character(version)
+	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
 	iso <- .getCountryISO(country)
 	
@@ -70,11 +74,13 @@ worldclim_country <- function(country, var, path, ...) {
 }
 
 
-worldclim_global <- function(var, res, path, ...) {
+worldclim_global <- function(var, res, path, version="2.1", ...) {
 
 	res <- as.character(res)
+	version <- as.character(version)
 	stopifnot(res %in% c("2.5", "5", "10", "0.5"))
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev"))
+	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
 	.check_path(path)
 

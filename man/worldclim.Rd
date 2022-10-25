@@ -7,13 +7,13 @@
 \title{WorldClim climate data}
 
 \description{
-Download WorldClim data
+Download climate data from WorldClim version 2.1
 }
 
 \usage{
-worldclim_global(var, res, path, ...)
-worldclim_country(country, var, path, ...)
-worldclim_tile(var, lon, lat, path, ...)
+worldclim_global(var, res, path, version="2.1", ...)
+worldclim_country(country, var, path, version="2.1", ...)
+worldclim_tile(var, lon, lat, path, version="2.1", ...)
 }
 
 \arguments{
@@ -23,6 +23,7 @@ worldclim_tile(var, lon, lat, path, ...)
   \item{country}{character. Country name or code} 
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude} 
+  \item{version}{character or numeric. WorldClim version number. Only "2.1" supported at the moment} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
