@@ -127,19 +127,21 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		} else {
 			return(x$count)
 		}
-	} else {
-		end <- ifelse(is.null(x$count), 0, x$count)
-		message(end, " records found")
-		if (end == 0) {
-			return(NULL)
-		}
-		if (end > 200000) {
-			stop("The number of records is larger than the maximum for download via this service (200,000)")
-		}		
 	}
-
+	
+	ntot <- ifelse(is.null(x$count), 0, x$count)
+	end = min(end, ntot)
+	message(end, " records found")
+	if (ntot == 0) {
+		return(NULL)
+	}
 	start <- max(1, start)
 	stopifnot(start <= end)
+
+	if ((end-start) > 200000) {
+		stop("The number of records is larger than the maximum for download via this service (200,000)")
+	}		
+
 	nrecs <- min(max(nrecs, 1), 300)
 	url1 <- paste(base, "scientificname=", spec, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
 	
