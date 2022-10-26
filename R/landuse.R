@@ -110,3 +110,27 @@ landcover <- function(var, path, ...) {
 	r	
 }
 
+
+footprint <- function(year=2009, path, ...) {
+	.check_path(path)
+	
+	year <- as.character(year)
+	stopifnot(year %in% c("1993", "2009"))
+	filename <- paste0("wildareas-v3-", year, "-human-footprint_geo.tif")
+	filepath <- file.path(path, filename)
+
+	if (!(file.exists(filepath))) {
+		url <- paste0(.data_url(), "footprint/", filename)
+		.downloadDirect(url, filepath, ...)
+		
+		r <- try(rast(filepath))
+		if (inherits(r, "try-error")) {
+			try(file.remove(filepath), silent=TRUE)
+			stop("download failed")
+		}
+	} else {
+		r <- rast(filepath)
+	}
+	r	
+}
+

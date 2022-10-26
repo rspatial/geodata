@@ -26,6 +26,7 @@
 \code{\link{gadm}} \tab   Administrative boundaries for any country in the world  \cr
 \code{\link{world}}\tab   Boundaries for the countries in the world  \cr
 \code{\link{landcover}} \tab   Global landcover data \cr
+\code{\link{footprint}} \tab   Human footprint data \cr
 \code{\link{osm}} \tab   OpenStreetMap data by country  \cr
 \code{\link{population}}\tab   Download population density data \cr
 \code{\link{soil_af_elements}} \tab   Soil element concentration data for Africa \cr

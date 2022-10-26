@@ -7,11 +7,23 @@ Download species occurrence data from GBIF
 }
 
 \description{
-This function downloads species occurence records from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal. You can download either a single species (if you append a '*' to the species name) or a subspecies of comparable level. You can download the data for an entire genus by using \code{species='*'}. Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
+Download data from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal.
+
+\code{sp_genus} returns a data.frame with all the species names associated with a genus. 
+
+\code{sp_occurrence} downloads species occurrence records. You can download data for a single species or for an entire genus by using \code{species=""}. Note that the maximum number of records that can be downloaded for a single search is 100,000. 
+
+You can check the number of records returned by using the option \code{download=FALSE}.
+
+To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
+
+Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
 }
 
 
 \usage{
+sp_genus(genus, simple=TRUE, ...)
+
 sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE,
         download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...)
 }
@@ -19,7 +31,7 @@ sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALS
 \arguments{
   \item{genus}{character. genus name}
   \item{species}{character. species name. Use '*' to download the entire genus. Append '*' to the species name to get all naming variants (e.g. with and witout species author name) and sub-taxa }
-  \item{ext}{Extent object to limit the geographic extent of the records. An extent can be created using functions like \code{\link[terra]{draw}} and \code{\link[terra]{ext}}}
+  \item{ext}{Extent object to limit the geographic extent of the records. An extent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
   \item{args}{character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details}
   \item{geo}{logical. If \code{TRUE}, only records that have a georeference (longitude and latitude values) will be downloaded}
   \item{removeZeros}{logical. If \code{TRUE}, all records that have a latitude OR longitude of zero will be removed if \code{geo==TRUE}, or set to \code{NA} if \code{geo==FALSE}. If \code{FALSE}, only records that have a latitude AND longitude that are zero will be removed or set to \code{NA}}
@@ -29,6 +41,8 @@ sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALS
   \item{start}{integer. Record number from which to start requesting data}
   \item{end}{integer. Last record to request}
   \item{fixnames}{If \code{TRUE} a few unwieldy and poorly chosen variable names are changed as follows. "decimalLatitude" to "lat", "decimalLongitude" to "lon", "stateProvince" to "adm1", "county" to "adm2", "countryCode" to "ISO2". The names in "country" are replaced with the common (short form) country name, the original values are stored as "fullCountry"}
+
+  \item{simple}{logical. If \code{TRUE}, a vector the accepted species names are returned. Otherwise a data.frame with much more information is returned}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 

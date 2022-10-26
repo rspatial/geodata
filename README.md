@@ -35,6 +35,7 @@ remotes::install_github("rspatial/geodata")
 |`elevation_3s`, `elevation_30s`, `elevation_global`       |Elevation data                                                                  |
 |`gadm`, `world`              |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
 |`landcover`                    |Landcover data derived from ESA WorldCover |
+|`footprint`                    |Human footprint data from the [Last of the Wild project](https://sedac.ciesin.columbia.edu/data/collection/wildareas-v3) |
 |`osm`                          |OpenStreetMap data by country (places and roads) |
 |`population`                   |Population density [Gridded Population of the World](http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation)    |
 |`soil_af_elements`             |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa  |

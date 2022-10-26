@@ -96,6 +96,60 @@
 	return(spec)
 }
 
+sp_genus <- function(genus, simple=TRUE, ...) {
+	gurl <- paste0("https://api.gbif.org/v1/species/match?name=", genus)
+	tmpfile <- tempfile()
+	test <- .downloadDirect(gurl, tmpfile, quiet=TRUE, ...)
+	if (inherits(test, "try-error")) {
+		stop("download failure, try again?")
+	}
+	json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
+	try(file.remove(tmpfile), silent=TRUE)
+	json <- chartr("\a\v", "  ", json)
+	x <- jsonlite::fromJSON(json)
+	x <- as.data.frame(x)
+	key <- x[(tolower(x$rank)) == "genus", "genusKey"]
+
+	res <- list()
+	off <- 0
+	i <- 1
+	while (TRUE) {
+		surl <- paste0("https://api.gbif.org/v1/species/search?rank=SPECIES&highertaxon_key=", key, "&offset=", off, "&limit=1000")
+		tmpfile <- tempfile()
+		test <- .downloadDirect(surl, tmpfile, quiet=TRUE, ...)
+		if (inherits(test, "try-error")) {
+			stop("download failure, try again?")
+		}
+		json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
+		try(file.remove(tmpfile), silent=TRUE)
+		x <- jsonlite::fromJSON(json)
+		res[[i]] <- as.data.frame(x$results)
+		if ( x$endOfRecords ) break;
+		i <- i + 1;
+		off <- off + 1000
+	}
+	res <- do.call(rbind, res)
+	if (simple) {
+		return(unique(res$species))
+	}
+	res$higherClassificationMap <- NULL
+	res$nomenclaturalStatus <- NULL
+	res$descriptions <- NULL
+	res$numOccurrences <- NULL
+#	res$descriptions <- sapply(res$descriptions, function(i) paste(unlist(i), collapse="; "))
+	res$habitats <- sapply(res$habitats, function(i) paste(unlist(i), collapse="; "))
+	res$threatStatuses <- sapply(res$threatStatuses, function(i) paste(unlist(i), collapse="; "))
+	res$vernacularNames <- sapply(res$vernacularNames, function(i) {
+			if (ncol(i) > 0) {
+				paste(sort(unique(i[,1])), collapse="; ")
+			} else {
+				""
+			}
+		}
+	)
+	res
+}
+
 
 sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...) {
 	
@@ -129,18 +183,24 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		}
 	}
 	
-	ntot <- ifelse(is.null(x$count), 0, x$count)
-	end = min(end, ntot)
-	message(end, " records found")
-	if (ntot == 0) {
-		return(NULL)
-	}
 	start <- max(1, start)
+	ntot <- ifelse(is.null(x$count), 0, x$count)
+	end <- min(end, ntot)
 	stopifnot(start <= end)
 
-	if ((end-start) > 200000) {
+	if (end > 100000) {
+		error("GBIF does not allow using this service for record numbers that are > 100,000")
+	}
+
+	ntot <- (end-start)+1
+	message(ntot, " records found")
+	if (ntot <= 0) {
+		return(NULL)
+	}
+
+	if (ntot > 200000) {
 		stop("The number of records is larger than the maximum for download via this service (200,000)")
-	}		
+	}
 
 	nrecs <- min(max(nrecs, 1), 300)
 	url1 <- paste(base, "scientificname=", spec, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
@@ -153,15 +213,15 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 			nrecs <- end - start + 1
 			url1 <- paste(base, "scientificname=", spec, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
 			breakout <- TRUE
-		}	
+		}
 	
 		aurl <- paste(url1, "&offset=", format(start-1, scientific=FALSE), sep="")
-		
+
 		if (np > 20) {
 			np <- 1
 			message("")
 		}
-		message(paste(start-1, "-", sep=""), appendLF = FALSE) 
+		message(paste(format(start-1, scientific=FALSE), "-", sep=""), appendLF = FALSE) 
 		utils::flush.console()
 		tries <- 0
 		np <- np + 1
