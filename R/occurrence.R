@@ -130,7 +130,7 @@ sp_genus <- function(genus, simple=TRUE, ...) {
 	}
 	res <- do.call(rbind, res)
 	if (simple) {
-		return(unique(res$species))
+		return(sort(unique(res$species)))
 	}
 	res$higherClassificationMap <- NULL
 	res$nomenclaturalStatus <- NULL
