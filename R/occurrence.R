@@ -253,7 +253,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 					}
 				}
 				r <- x$results
-				r <- r[, ! sapply(r, class) %in% c("data.frame", "list")]
+				ok <- !(sapply(r, function(i) class(i)[1]) %in% c("data.frame", "list"))
+				r <- r[, ok]
 				rownames(r) <- NULL
 				g[[i]] <- r
 				break
