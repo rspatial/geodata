@@ -9,6 +9,7 @@ get_id <- function(lon, lat) {
 	r <- rast(res=5)	
 	id <- cellFromXY(r, cbind(lon,lat))[1]
 	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
+	path <- system.file(package="geodata")
 	tiles <- readRDS(file.path(path, "ex/tiles.rds"))
 	if (!(id %in% tiles)) {
 		stop("there is no weather data for this location (not on land?)")
