@@ -7,18 +7,21 @@
 \title{Monfreda crop data}
 
 \description{
-Monfreda global crop data (area, yield) for 175 crops
+Monfreda global crop data (area, yield) for 175 crops.
+
+Data may be freely used for research, study, or teaching, but must be cited appropriately (see below). Re-release of the data, or incorporation of the data into a commercial product, is allowed only with explicit permission.
 }
 
 \usage{
 monfredaCrops()
-crop_monfreda(crop="", path, ...)
+crop_monfreda(crop="", var="area_ha", path, ...)
 }
 
 \arguments{
- \item{crop}{character. Crop name. See \code{monfredaCrops} for valid names}  
- \item{path}{character. Path name where the data should be downloaded to} 
- \item{...}{additional arguments passed to \code{\link{download.file}}} 
+ \item{crop}{character. Crop name(s). See \code{monfredaCrops} for valid names}
+ \item{var}{character. The variable(s) of interest. Choose from "area_ha" (crop area in ha per cell), "area_f" (crop area as a fraction of each cell), "area_q" (quality of the crop area data), "yield" (crop yield in Mg/ha), "yield_q" (quality of the yield data), "prod" (production per grid cell in Mg), or "all"}
+ \item{path}{character. Path name where the data should be downloaded to}
+ \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 \value{

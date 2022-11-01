@@ -7,34 +7,90 @@ data.frame(m)
 
 
 
-crop_monfreda <- function(crop="", path, ...) {
+crop_monfreda <- function(crop="", var="area_ha", path, ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
 	.check_path(path)
-	
 	
 	folder <- file.path(path, "monfreda")
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))
-	crops <- monfredaCrops()$name
-	if (!(crp %in% crops)) { stop("crop name not avaiable; see monfredaCrops()") }
-
-	ff <- c('_DataQuality_HarvestedArea.tif', '_DataQuality_Yield.tif', '_HarvestedAreaFraction.tif', '_HarvestedAreaHectares.tif', '_Production.tif', '_YieldPerHectare.tif')
-	ff <- file.path(folder, paste0(crp, ff))
-	if (all(file.exists(ff))) {
-		return(terra::rast(ffs))
+	vars <- c("area_ha", "area_f", "area_q", "yield", "yield_q", "prod", "all")
+	subds <- c("_HarvestedAreaHectares.tif", "_HarvestedAreaFraction.tif", "_DataQuality_HarvestedArea.tif", "_YieldPerHectare.tif", "_DataQuality_Yield.tif", "_Production.tif")
+	
+	var <- tolower(var)
+	good <- var %in% vars
+	if (!all(good)) {
+		var <- paste(var[!good], collapse=", ")
+		stop(paste(var, "is not a valid variable name"))
+	}	 
+	if (any(var %in% c("", "all"))) {
+		ss <- subds	
+		var <- vars[1:6]
+	} else {
+		ss <- subds[match(var, vars)]
 	}
-	urlbase <- "https://s3.us-east-2.amazonaws.com/earthstatdata/HarvestedAreaYield175Crops_Indvidual_Geotiff/"
-	url <- paste0(urlbase, crp, "_HarvAreaYield_Geotiff.zip")
-	zipf <- file.path(folder, basename(url))
-	if (!file.exists(zipf)) {
-		.downloadDirect(url, zipf, ...)
+	
+	if (crp[1] == "all") {
+		x <- vector(mode="list", length=length(ss))
+		for (i in seq_along(ss)) {
+			url <- paste0("https://geodata.ucdavis.edu/geodata/crops/monfreda/Monfreda", gsub(".tif$", ".zip", ss[i]))
+			zipf <- file.path(folder, basename(url))
+			if (!file.exists(zipf)) {
+				.downloadDirect(url, zipf)
+			}
+			ff <- utils::unzip(zipf, list=TRUE)
+			ff <- grep(".tif$", ff$Name, value=TRUE)
+			fs <- file.path(folder, basename(ff))
+			if (!all(file.exists(fs))) {
+				utils::unzip(zipf, files=ff, junkpaths=TRUE, exdir=folder)
+			}
+			x[[i]] <- rast(fs)
+		}
+		if (length(x) > 1) {
+			names(x) <- var
+			sds(x)
+		} else {
+			x[[1]]
+		}
+	} else {
+		crops <- monfredaCrops()$name
+		j <- crp %in% crops
+		if (!all(j)) { 
+			crp <- paste(crp[j], collapse=", ")
+			stop(paste(crp, "is not available; see monfredaCrops()"))
+		}
+		x <- vector(mode="list", length=length(ss))	
+		for (j in seq_along(ss)) {
+			s <- ss[j]
+			y <- vector(mode="list", length=length(crp))
+			for (i in 1:length(crp)) {
+				ff <- file.path(folder, paste0(crp[i], s))
+				if (!all(file.exists(ff))) {
+					urlbase <- "https://s3.us-east-2.amazonaws.com/earthstatdata/HarvestedAreaYield175Crops_Indvidual_Geotiff/"
+					url <- paste0(urlbase, crp[i], "_HarvAreaYield_Geotiff.zip")
+					zipf <- file.path(folder, basename(url))
+					if (!file.exists(zipf)) {
+						.downloadDirect(url, zipf, ...)
+					}
+					zf <- utils::unzip(zipf, list=TRUE)
+					zf <- grep(".tif$", zf$Name, value=TRUE)
+					zf <- grep(s, zf, value=TRUE)
+					utils::unzip(zipf, files=zf, junkpaths=TRUE, exdir=folder)
+				}
+				y[[i]] <- terra::rast(ff)			
+			}
+			if (length(y) > 1) {
+				x[[j]] <- rast(y)
+			} else {
+				x[[j]] <- y[[1]]
+			}
+		}
+		if (length(x) > 1) {
+			names(x) <- var
+			sds(x)
+		} else {
+			x[[1]]
+		}
 	}
-	ff <- utils::unzip(zipf, list=TRUE)
-	fs <- grep(".tif$", ff$Name, value=TRUE)
-	ffs <- file.path(folder, basename(fs))
-	if (all(!file.exists(ffs))) {
-		utils::unzip(zipf, files=fs, junkpaths=TRUE, exdir=folder)
-	}
-	terra::rast(ffs)
 }
 
