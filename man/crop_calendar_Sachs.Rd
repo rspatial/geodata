@@ -12,7 +12,7 @@ Download Sacks crop calendar data for a crop. The crops available are returned b
 \usage{
 crop_calendar_sacks(crop="", path, ...)
 
-sacks_cropnames()
+sacksCrops()
 }
 
 \arguments{

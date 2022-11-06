@@ -6,7 +6,7 @@
 	m
 }
 
-sacks_cropnames <- function() {
+sacksCrops <- function() {
 	.sacks_crops()[,2]
 }
 
