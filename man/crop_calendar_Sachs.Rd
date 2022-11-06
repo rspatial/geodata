@@ -3,14 +3,16 @@
 \alias{crop_calendar_sacks}
 
 
-\title{Sachs crop calendar data}
+\title{Sacks crop calendar data}
 
 \description{
-Sachs crop calendar data
+Download Sacks crop calendar data for a crop. The crops available are returned by \code{sacks_cropnames} 
 }
 
 \usage{
 crop_calendar_sacks(crop="", path, ...)
+
+sacks_cropnames()
 }
 
 \arguments{
