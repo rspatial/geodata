@@ -1,6 +1,7 @@
 \name{sp_occurrence}
 
 \alias{sp_occurrence}
+\alias{sp_genus}
 
 \title{
 Download species occurrence data from GBIF

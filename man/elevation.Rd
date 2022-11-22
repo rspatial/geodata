@@ -7,7 +7,7 @@
 \title{Elevation}
 
 \description{
-Get elevation data for any country in the world. The main data source is Shuttle Radar Topography Mission (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) \url{https://srtm.csi.cgiar.org/}. These data are only available for latitudes between -60 and 60. 
+Get elevation data for any country in the world. The main data source is Shuttle Radar Topography Mission (SRTM) , specifically the hole-filled CGIAR-SRTM (90 m resolution) from https://srtm.csi.cgiar.org/. These data are only available for latitudes between -60 and 60. 
 
 The 1 km (30 arc seconds) data were aggregated from SRTM 90 m resolution data and supplemented with the GTOP30 data for high latitudes (>60 degrees). 
 }

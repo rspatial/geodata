@@ -5,7 +5,7 @@
 }
 
 
-get_id <- function(lon, lat) {
+.get_id <- function(lon, lat) {
 	r <- rast(res=5)	
 	id <- cellFromXY(r, cbind(lon,lat))[1]
 	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
@@ -19,7 +19,7 @@ get_id <- function(lon, lat) {
 
 .wcerad <- function(lon, lat, path, ...) {
 	.check_path(path)
-	id <- get_id(lon, lat)	
+	id <- .get_id(lon, lat)	
 	pth <- file.path(path, "wcdera")
 	fname <- paste0("wcdera_", id, ".nc")
 	outfname <- file.path(pth, fname)
@@ -34,7 +34,7 @@ get_id <- function(lon, lat) {
 
 .wcerad21 <- function(lon, lat, path, ...) {
 	.check_path(path)
-	id <- get_id(lon, lat)
+	id <- .get_id(lon, lat)
 
 	pth <- file.path(path, "wcdera")
 	fname <- paste0("wcdera_", id, ".nc")
