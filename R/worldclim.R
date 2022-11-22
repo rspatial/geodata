@@ -202,7 +202,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
 	ssp <- as.character(ssp)
 	if (var == "bio") var <- "bioc"
-	.check_cmip6(res, var, ssp, model, time)
+	try(.check_cmip6(res, var, ssp, model, time), silent=TRUE)
 	.check_path(path)
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
