@@ -7,7 +7,7 @@
 \title{Sacks crop calendar data}
 
 \description{
-Download Sacks crop calendar data for a crop. The crops available are returned by \code{sacks_cropnames} 
+Download Sacks crop calendar data. The crops available are returned by \code{sacksCrops} 
 }
 
 \usage{
