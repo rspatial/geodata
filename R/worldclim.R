@@ -26,9 +26,9 @@
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
 		turl <- paste0(.wcurl, "day/nc/", fname)
-		.downloadDirect(turl, outfname, ...)
+		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
-		sds(outfname)
+	sds(outfname)
 }
 
 
@@ -42,7 +42,7 @@
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
 		turl <- paste0(.wcurl, "day/nc21/", fname)
-		.downloadDirect(turl, outfname, ...)
+		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	sds(outfname)
 }
@@ -68,7 +68,7 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 
 	if (!file.exists(outfname)) {
 		turl <- paste0(.wcurl, "tiles/tile/", fname)
-		.downloadDirect(turl, outfname, ...)
+		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	rast(outfname)
 }
@@ -91,7 +91,7 @@ worldclim_country <- function(country, var, path, version="2.1", ...) {
 	
 	if (!file.exists(outfname)) {
 		turl <- paste0(.wcurl, "tiles/iso/", fname)
-		.downloadDirect(turl, outfname, ...)
+		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	rast(outfname)
 }
@@ -121,10 +121,13 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	pzip <- file.path(path, zip)
 	ff <- file.path(path, ff)
 	if (!all(file.exists(ff))) {
-		.downloadDirect(paste0(.wcurl, "base/", zip), pzip, ...)
+		if (!.downloadDirect(paste0(.wcurl, "base/", zip), pzip, ...)) return(NULL)
 		fz <- try(utils::unzip(pzip, exdir=path), silent=TRUE)
 		try(file.remove(pzip), silent=TRUE)
-		if (inherits(fz, "try-error")) {stop("download failed")}
+		if (inherits(fz, "try-error")) {
+			message("download failed")
+			return(NULL)
+		}
 	}
 	rast(ff)
 }
@@ -154,11 +157,8 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	if (!file.exists(poutf)) {
 		if (!file.exists(outf)) {
 			url <- paste0(.wcurl, "cmip6/", fres, "/", model, "/ssp", ssp, "/", outf)
-			.downloadDirect(url, poutf, ...)
+			if(!.downloadDirect(url, poutf, ...)) return(NULL)
 		}
-		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
-		#try(file.remove(pzip), silent=TRUE)
-		#if (inherits(fz, "try-error")) { stop("unzip failed") }
 	}
 	rast(poutf)
 }
@@ -187,9 +187,11 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	}
 	if (file.exists(tmpfile)) {
 		ff <- utils::read.table(tmpfile, sep="_")
-		i <- ff[,1] == var & ff[,2] == model & ff[,3] == paste0("ssp", ssp) & ff[,4] == paste0(time, ".tif")
-		if (sum(i) != 1) {
-			stop("This dataset is not available")
+		if (nrow(ff) > 1000) {
+			i <- ff[,1] == var & ff[,2] == model & ff[,3] == paste0("ssp", ssp) & ff[,4] == paste0(time, ".tif")
+			if (sum(i) != 1) {
+				stop("This dataset is not available")
+			}
 		}
 	}
 }
@@ -212,7 +214,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	if (!file.exists(poutf)) {
 		if (!file.exists(outf)) {
 			url <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
-			.downloadDirect(url, poutf, ...)
+			if (!.downloadDirect(url, poutf, ...)) return(NULL)
 		}
 		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
 		#try(file.remove(pzip), silent=TRUE)
@@ -242,7 +244,7 @@ cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
 	for (i in 1:length(outfname)) {
 		if (!file.exists(outfname[i])) {
 			turl <- paste0(.c6url, "tiles/", model, "/ssp", ssp, "/", fname[i])
-			.downloadDirect(turl, outfname[i], ...)
+			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
 		}
 	}
 	if (length(outfname) == 1) {

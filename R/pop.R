@@ -12,7 +12,7 @@ population <- function(year, res="5", path, ...) {
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "pop/", filename)
 		dir.create(dirname(filepath), showWarnings=FALSE)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 	} 
 	r <- rast(filepath)
 	names(r) <- "population_density"

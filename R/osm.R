@@ -10,7 +10,7 @@ osm <- function(country, var, path, proxy=FALSE, ...) {
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "osm/", var, "/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 	} 
 	vect(filepath, proxy=proxy)
 }

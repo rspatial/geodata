@@ -34,7 +34,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 		if (!file.exists(fout)) {
 			baseurl <- paste0(.data_url(), "crops/sacks2/")
 			url <- paste0(baseurl, m[i,1])
-			.downloadDirect(url, fout, ...)
+			if (!.downloadDirect(url, fout, ...)) return(NULL)
 		}
 		r <- terra::rast(fout)
 		return(r)
@@ -59,7 +59,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 		if (!file.exists(fout2)) {
 			baseurl <- paste0(.data_url(), "crops/sacks/")
 			url <- paste0(baseurl, m[i,1])
-			.downloadDirect(url, fout, ...)
+			if (!.downloadDirect(url, fout, ...)) return(NULL)
 			R.utils::gunzip(fout)
 		}
 		r <- terra::rast(fout2)

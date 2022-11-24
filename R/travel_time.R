@@ -24,15 +24,10 @@ travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "travel/", filename)
-		.downloadDirect(url, filepath, ...)
-		r <- try(rast(filepath))
-		if (inherits(r, "try-error")) {
-			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
-		}
-	} else {
-		r <- rast(filepath)
-	}
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
+	} 
+	
+	r <- rast(filepath)
 	if (!up) {
 		NAflag(r) <- 65535
 	}

@@ -14,9 +14,17 @@
 }
 
 
-.download <- function(aurl, filename, quiet=FALSE, mode = "wb", cacheOK = TRUE, ...) {
+.old.download <- function(aurl, filename, quiet=FALSE, mode = "wb", cacheOK = TRUE, ...) {
 	fn <- paste(tempfile(), ".download", sep="")
-	res <- utils::download.file(url=aurl, destfile=fn, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+	res <- try(
+			suppressWarnings(
+				utils::download.file(url=aurl, destfile=fn, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+			)
+		)
+	if (inherits(res, "try-error")) {
+		message("download failed" )
+		return(NULL)
+	}
 	if (res == 0) {
 		if (suppressWarnings(!file.rename(fn, filename)) ) { 
 			# rename failed, perhaps because fn and filename refer to different devices
@@ -24,28 +32,33 @@
 			file.remove(fn)
 		}
 	} else {
-		stop("could not download the file" )
+		message("download failed" )
 	}
 }
 
 .downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, ...) {
 	if (!file.exists(filename)) {
 		ok <- try(
-			utils::download.file(url=url, destfile=filename, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+			suppressWarnings(
+				utils::download.file(url=url, destfile=filename, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+			)
 		)
 		if (inherits(ok, "try-error")) {
 			if (file.exists(filename)) file.remove(filename)
-			stop("download failed")	
+			message("download failed")
+			return(FALSE)
 		}
 		if (!file.exists(filename)) {
-			stop("download failed")
+			message("download failed")
+			return(FALSE)
 		}
 	}
 	if (unzip) {
 		zok <- try(utils::unzip(filename, exdir=dirname(filename)), silent=TRUE)
 		try(file.remove(filename), silent=TRUE)
 		if (inherits(zok, "try-error")) {
-			stop("download failed")
+			message("download failed")
+			return(FALSE)
 		}
 	}
 	TRUE	
@@ -58,7 +71,8 @@
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)

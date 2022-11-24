@@ -48,7 +48,7 @@ crop_spam <- function(crop="", var="area", path=".", africa=FALSE, ...) {
 	}
 	zipf <- file.path(folder, basename(url))
 	if (!file.exists(zipf)) {
-		.downloadDirect(url, zipf, ...)
+		if (!.downloadDirect(url, zipf, ...)) return(NULL)
 	}
 	ff <- utils::unzip(zipf, list=TRUE)
 	fs <- grep(crp, ff$Name, value=TRUE)

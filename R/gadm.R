@@ -1,15 +1,24 @@
 
+.check_gadm <- function(filename, gversion) {
+	f <- paste0("https://geodata.ucdavis.edu/gadm/gadm", gversion, ".txt")
+	ff <- readLines(f)
+	if (!(gsub("_low", "", basename(filename)) %in% ff)) {
+		return(FALSE)
+	}
+	TRUE
+}
+
+
 .gadm_download <- function(filename, gversion, upath="pck", check=TRUE, ...) {
-	
 	.check_path(dirname(filename))
-
 	if (!file.exists(filename)) {
-
 		if (check) {
-			f <- paste0("https://geodata.ucdavis.edu/gadm/gadm", gversion, ".txt")
-			ff <- readLines(f)
-			if (!(gsub("_low", "", basename(filename)) %in% ff)) {
-				return(vect())
+			exists <- try(.check_gadm(filename, gversion))
+		}
+		if (!inherits(exists, "try-error")) {
+			if (!exists) {
+				message("this file does not exist")
+				return(NULL)
 			}
 		}
 		baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
@@ -18,10 +27,7 @@
 		} else {
 			theurl <- file.path(baseurl, upath, basename(filename))
 		}
-		.download(theurl, filename, ...)
-		if (!file.exists(filename))	{ 
-			message("\nCould not download file -- perhaps it does not exist") 
-		}
+		if (!.downloadDirect(theurl, filename, ...)) return(NULL)
 	}	
 	if (file.exists(filename)) {
 		r <- readRDS(filename)

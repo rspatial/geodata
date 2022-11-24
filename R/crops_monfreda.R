@@ -36,7 +36,7 @@ crop_monfreda <- function(crop="", var="area_ha", path, ...) {
 			url <- paste0("https://geodata.ucdavis.edu/geodata/crops/monfreda/Monfreda", gsub(".tif$", ".zip", ss[i]))
 			zipf <- file.path(folder, basename(url))
 			if (!file.exists(zipf)) {
-				.downloadDirect(url, zipf)
+				if (!.downloadDirect(url, zipf)) return(NULL)
 			}
 			ff <- utils::unzip(zipf, list=TRUE)
 			ff <- grep(".tif$", ff$Name, value=TRUE)
@@ -70,7 +70,7 @@ crop_monfreda <- function(crop="", var="area_ha", path, ...) {
 					url <- paste0(urlbase, crp[i], "_HarvAreaYield_Geotiff.zip")
 					zipf <- file.path(folder, basename(url))
 					if (!file.exists(zipf)) {
-						.downloadDirect(url, zipf, ...)
+						if(!.downloadDirect(url, zipf, ...)) return(NULL)
 					}
 					zf <- utils::unzip(zipf, list=TRUE)
 					zf <- grep(".tif$", zf$Name, value=TRUE)

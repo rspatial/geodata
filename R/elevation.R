@@ -21,7 +21,7 @@ elevation_3s <- function(lon, lat, path, ...) {
 	if (!file.exists(tiffilename)) {
 		pzip <- paste(path, "/", f, ".ZIP", sep="")
 		theurl <- paste("https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/", f, ".zip", sep="")
-		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
+		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
 	}
 	if (file.exists(tiffilename)) {
 		rs <- rast(tiffilename)
@@ -45,7 +45,7 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	if (!file.exists(filename)) {
 		pzip <- gsub("\\.tif$", ".zip", filename)
 		theurl <- paste0(.data_url(), "elv/", f, ".zip")
-		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
+		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
 	}
 	rast(filename)
 }
@@ -66,7 +66,7 @@ elevation_global <- function(res, path, ...) {
 	if (!file.exists(ff)) {
 		dir.create(path, showWarnings=FALSE)
 		theurl <- paste0(.wcurl, "base/", zip)
-		.downloadDirect(theurl, pzip, unzip=TRUE, ...)
+		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
 	}
 	rast(ff)
 }

@@ -37,15 +37,16 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 	if (!(file.exists(filepath))) {
 		burl <- paste0(.data_url(), "soil/isda/")
 		url <- file.path(burl, filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		if (file.exists(filepath) && grepl("texture", filename)) {
 			url <- file.path(burl, paste0(filename, ".aux.xml"))
-			.downloadDirect(url, paste0(filepath, ".aux.xml"), ...)
+			if (!.downloadDirect(url, paste0(filepath, ".aux.xml"), ...)) return(NULL)
 		}
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)

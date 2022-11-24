@@ -8,12 +8,13 @@
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "landuse/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)
@@ -30,12 +31,13 @@
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "landuse/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)
@@ -58,11 +60,12 @@
 	filepath <- file.path(path, filename)
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "cropland/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)
@@ -97,12 +100,13 @@ landcover <- function(var, path, ...) {
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "landuse/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)
@@ -121,12 +125,13 @@ footprint <- function(year=2009, path, ...) {
 
 	if (!(file.exists(filepath))) {
 		url <- paste0(.data_url(), "footprint/", filename)
-		.downloadDirect(url, filepath, ...)
+		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
 			try(file.remove(filepath), silent=TRUE)
-			stop("download failed")
+			message("download failed")
+			return(NULL)
 		}
 	} else {
 		r <- rast(filepath)
