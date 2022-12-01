@@ -177,8 +177,12 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		}
 	}
 	
-	start <- max(1, start)
 	ntot <- ifelse(is.null(x$count), 0, x$count)
+	if (ntot == 0) {
+		message("no records found")
+		return(NULL)
+	}
+	start <- max(1, start)
 	end <- min(end, ntot)
 	stopifnot(start <= end)
 
