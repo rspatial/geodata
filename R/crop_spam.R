@@ -11,7 +11,8 @@ crop_spam <- function(crop="", var="area", path=".", africa=FALSE, ...) {
 	folder <- file.path(path, "spam")
 	# area is allowed for backwards compatibility
 	stopifnot(var %in% c("area", "yield", "harv_area", "phys_area", "val_prod", "prod"))
-	.check_path(path)
+
+	path <- .get_path(path)
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))
 	crops <- spamCrops()

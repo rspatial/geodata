@@ -7,10 +7,31 @@
 	if (dir.exists(path)) {
 		return(TRUE)
 	}
-	try(dir.create(path, recursive=FALSE), silent=TRUE)
+	test <- try(dir.create(path, recursive=FALSE), silent=TRUE)
+	if (inherits(test, "try-error")) {
+		stop("path cannot be created")	
+	}
 	if (!dir.exists(path)) {
 		stop("path does not exist")
 	}
+}
+
+
+.get_path <- function(path, check=TRUE) {
+	if (missing(path) || (path=="")) {
+		path <- default_path()
+	}
+	if (path == "") stop("path is missing")
+	if (check) .check_path(path)
+	path
+}
+
+default_path <- function(path) {
+	if (missing(path)) {
+		return( getOption("geodata_detault_path", default = "") )
+	}
+	path <- .get_path(path, TRUE)
+	options(geodata_detault_path=path)
 }
 
 

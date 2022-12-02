@@ -1,8 +1,8 @@
 
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
-	.check_path(path)
 
+	path <- .get_path(path)
 
 	var <- tolower(var)
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")

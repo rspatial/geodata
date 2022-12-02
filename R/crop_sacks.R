@@ -20,7 +20,7 @@ sacksCrops <- function() {
 
 crop_calendar_sacks <- function(crop="", path, ...) {
 
-	.check_path(path)
+	path <- .get_path(path)
 	folder <- file.path(path, "cal_sacks")
 	dir.create(folder, FALSE, FALSE)
 
@@ -44,7 +44,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 
 .old_crop_calendar_sacks <- function(crop="", path, ...) {
 
-	.check_path(path)
+	path <- .get_path(path)
 	folder <- file.path(path, "sacks")
 	dir.create(folder, FALSE, FALSE)
 

@@ -10,15 +10,16 @@
 
 
 .gadm_download <- function(filename, gversion, upath="pck", check=TRUE, ...) {
+
 	.check_path(dirname(filename))
 	if (!file.exists(filename)) {
 		if (check) {
 			exists <- try(.check_gadm(filename, gversion))
-		}
-		if (!inherits(exists, "try-error")) {
-			if (!exists) {
-				message("this file does not exist")
-				return(NULL)
+			if (!inherits(exists, "try-error")) {
+				if (!exists) {
+					message("this file does not exist")
+					return(NULL)
+				}
 			}
 		}
 		baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
@@ -43,6 +44,7 @@
 
 
 world <- function(resolution=5, level=0, path, version="latest", ...) {
+	path <- .get_path(path)
 	stopifnot(level[1] == 0)
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)
@@ -59,7 +61,7 @@ gadm <- function(country, level=1, path, version="latest", resolution=1, ...) {
 	if (length(level) > 1) {
 		stop("level can only have a single value", call. = FALSE)
 	}
-	path <- path[1]
+	path <- .get_path(path)
 
 	version <- as.character(version[1])
 	if (version == "latest") version <- "4.1"

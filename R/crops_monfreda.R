@@ -9,7 +9,7 @@ data.frame(m)
 
 crop_monfreda <- function(crop="", var="area_ha", path, ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
-	.check_path(path)
+	path <- .get_path(path)
 	
 	folder <- file.path(path, "monfreda")
 	dir.create(folder, FALSE, FALSE)

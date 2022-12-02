@@ -1,7 +1,7 @@
 
 
 travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
-	.check_path(path)
+	path <- .get_path(path)
 
 	to <- tolower(to)
 	vars <- c("city", "port")
