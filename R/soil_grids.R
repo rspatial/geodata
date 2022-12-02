@@ -61,13 +61,19 @@
 }
 
 soil_world_vsi <- function(var, depth, stat="mean", name="") {
-	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=TRUE)
+	u <- .soil_grids_url(var[1], depth[1], stat=stat[1], name=name[1], vsi=TRUE)
 	rast(u)
 }
 
 
 soil_world <- function(var, depth, stat="mean", name="", path, ...) {
 
+	if (length(var) > 1) {
+		r <- lapply(var, function(v) soil_world(v, depth, stat=stat, name=name, path, ...))
+		return(rast(r))
+	}
+	depth <- depth[1]
+	stat <- stat[1]
 	path <- .get_path(path)
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	u <- gsub(".vrt$", "_30s.tif", u)

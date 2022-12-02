@@ -3,6 +3,12 @@
 soil_af <- function(var, depth=20, path, ...) {
 
 	path <- .get_path(path)
+	depth <- depth[1]
+	
+	if (length(var) > 1) {
+		r <- lapply(var, function(v) soil_af(v, depth, path, ...))
+		return(rast(r))
+	}
 	
 	var <- tolower(var)
 	knownvars <- c("clay", "sand", "silt", "coarse", "SOC", "BLKD", "poros", "AWpF2.0", "AWpF2.3", "AWpF2.5", "AWpF4.2", "BDR", "pH", "ECN", "acid-exch", "bases-exch", "CEC", "Al-extr", "Al-exch", "Ca-exch", "K-exch", "Mg-exch", "Na-exch", "Ntot")
@@ -28,6 +34,10 @@ soil_af <- function(var, depth=20, path, ...) {
 soil_af_elements <- function(var, path, ...) {
 
 	path <- .get_path(path)
+	if (length(var) > 1) {
+		r <- lapply(var, function(v) soil_af_elements(v, path, ...))
+		return(rast(r))
+	}
 	
 	var <- tolower(var)
 	stopifnot(var %in% c("al", "b", "ca", "cu", "fe", "k", "mg", "mn", "n", "na", "p", "ptot", "zn"))

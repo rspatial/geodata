@@ -2,9 +2,14 @@
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 
+	if (length(var) > 1) {
+		r <- lapply(var, function(v) soil_af_isda(v, depth[1], error=error, path, ...))
+		return(rast(r))
+	}
+
 	path <- .get_path(path)
 
-	var <- tolower(var)
+	var <- tolower(var[1])
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")
 	if (!(var %in% vars)) {
 		stop(paste("unknown variable. Use one of:\n", vars))
@@ -21,6 +26,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 	if (var == "bdr") {
 		depth = "0-200cm"
 	} else {
+		depth <- depth[1]
 		stopifnot(as.numeric(depth) %in% c(20, 50))
 		depth <- ifelse(depth == 20, "0-20cm", "20-50cm")
 	}
