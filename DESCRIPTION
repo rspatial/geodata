@@ -2,7 +2,7 @@ Package: geodata
 Type: Package
 Title: Download Geographic Data 
 Version: 0.5-4
-Date: 2022-12-01
+Date: 2022-12-02
 Depends: R (>= 3.5.0), terra
 Encoding: UTF-8
 Suggests: jsonlite, R.utils

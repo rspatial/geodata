@@ -1,7 +1,16 @@
 
 .data_url <- function() {
-	"https://geodata.ucdavis.edu/geodata/"
+	durl <- "https://geodata.ucdavis.edu/geodata/"
+	con <- url(durl)
+	check <- suppressWarnings(try(open.connection(con, open="rt", timeout=5), silent=TRUE)[1])
+	suppressWarnings(try(close.connection(con), silent=TRUE))
+	if (!is.null(check)) {
+		message("The geodata server seems to be off-line")
+	}
+	durl
 }
+
+
 
 .check_path <- function(path) {
 	if (dir.exists(path)) {
@@ -9,53 +18,36 @@
 	}
 	test <- try(dir.create(path, recursive=FALSE), silent=TRUE)
 	if (inherits(test, "try-error")) {
-		stop("path cannot be created")	
+		stop("path cannot be created", call.=FALSE)	
 	}
 	if (!dir.exists(path)) {
-		stop("path does not exist")
+		stop("path does not exist", call.=FALSE)
 	}
 }
 
 
 .get_path <- function(path, check=TRUE) {
-	if (missing(path) || (path=="")) {
-		path <- default_path()
+	if (missing(path)) {
+		path <- geodata_path()
 	}
-	if (path == "") stop("path is missing")
+	path <- path[1]
+	if (!is.character(path)) stop("path is not a character value", call.=FALSE)
+	if (is.null(path)) stop("path cannot be NULL", call.=FALSE)
+	if (is.na(path)) stop("path cannot be NA", call.=FALSE)
+	if (path == "") stop("path is missing", call.=FALSE)
 	if (check) .check_path(path)
 	path
 }
 
-default_path <- function(path) {
+geodata_path <- function(path) {
 	if (missing(path)) {
-		return( getOption("geodata_detault_path", default = "") )
+		return( getOption("geodata_default_path", default = "") )
 	}
 	path <- .get_path(path, TRUE)
 	options(geodata_detault_path=path)
 }
 
 
-.old.download <- function(aurl, filename, quiet=FALSE, mode = "wb", cacheOK = TRUE, ...) {
-	fn <- paste(tempfile(), ".download", sep="")
-	res <- try(
-			suppressWarnings(
-				utils::download.file(url=aurl, destfile=fn, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
-			)
-		)
-	if (inherits(res, "try-error")) {
-		message("download failed" )
-		return(NULL)
-	}
-	if (res == 0) {
-		if (suppressWarnings(!file.rename(fn, filename)) ) { 
-			# rename failed, perhaps because fn and filename refer to different devices
-			file.copy(fn, filename)
-			file.remove(fn)
-		}
-	} else {
-		message("download failed" )
-	}
-}
 
 .downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, ...) {
 	if (!file.exists(filename)) {
@@ -103,11 +95,11 @@ default_path <- function(path) {
 
 
 
-.dataloc <- function() {
-	stop("path does not exist")
-}
 
-.getDataPath <- function(path) {
+...getDataPath <- function(path) {
+	.dataloc <- function() {
+		stop("path does not exist")
+	}
 	path <- trimws(path)
 	if (path=="") {
 		path <- .dataloc()
@@ -130,3 +122,24 @@ default_path <- function(path) {
 }
 
 
+...old.download <- function(aurl, filename, quiet=FALSE, mode = "wb", cacheOK = TRUE, ...) {
+	fn <- paste(tempfile(), ".download", sep="")
+	res <- try(
+			suppressWarnings(
+				utils::download.file(url=aurl, destfile=fn, quiet=quiet, mode=mode, cacheOK=cacheOK, ...)
+			)
+		)
+	if (inherits(res, "try-error")) {
+		message("download failed" )
+		return(NULL)
+	}
+	if (res == 0) {
+		if (suppressWarnings(!file.rename(fn, filename)) ) { 
+			# rename failed, perhaps because fn and filename refer to different devices
+			file.copy(fn, filename)
+			file.remove(fn)
+		}
+	} else {
+		message("download failed" )
+	}
+}
