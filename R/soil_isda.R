@@ -2,12 +2,13 @@
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 
+
 	if (length(var) > 1) {
 		r <- lapply(var, function(v) soil_af_isda(v, depth[1], error=error, path, ...))
 		return(rast(r))
 	}
 
-	path <- .get_path(path)
+	path <- .get_path(path, add="soil_af_isda")
 
 	var <- tolower(var[1])
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")

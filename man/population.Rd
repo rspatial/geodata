@@ -19,7 +19,7 @@ population(year, res, path, ...)
 \arguments{
   \item{year}{numeric. One of 2000, 2005, 2010, 2015, 2020}
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5, and 0.5 (minutes of a degree)}
-  \item{path}{character. Path where to download the data to} 
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 

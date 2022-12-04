@@ -74,7 +74,9 @@ soil_world <- function(var, depth, stat="mean", name="", path, ...) {
 	}
 	depth <- depth[1]
 	stat <- stat[1]
-	path <- .get_path(path)
+	
+	path <- .get_path(path, add="soil_world")
+	
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	u <- gsub(".vrt$", "_30s.tif", u)
 	filename <- basename(u)

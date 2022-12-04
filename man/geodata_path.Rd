@@ -2,25 +2,20 @@
 
 \alias{geodata_path}
 
-\title{geodata_path}
+\title{Set the data path}
 
 \description{
-Set or get the default download path for the geodata package.
+This function allows you set or get the default download path for the geodata package. By setting this path you can avoid downloading the same data many times over. This also guards against service interruptions.
+
+The default path is ignored if you use the path variable in a function.
+
+To save the default path across sessions, you can add a line like this \code{options(geodata_geodata_path="c:/your/geodata/path")} to the file returned by this command  \code{file.path(R.home(), "etc/Rprofile.site")}
 }
 
 \usage{
 geodata_path(path)
 }
 
-\note{
-To save the default path across sessions, you can add a line like this 
-
-\code{options(geodata_geodata_path="c:/your/geodata/path")}
-
-to this filename returned by this command 
-
-\code{file.path(R.home(), "etc/Rprofile.site")}
-}
 
 \arguments{
   \item{path}{character. Path name where the data should be downloaded to. If missing, the current default path is returned} 
@@ -33,3 +28,4 @@ character
 \examples{
 geodata_path()
 }
+

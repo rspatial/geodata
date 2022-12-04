@@ -18,7 +18,7 @@ footprint(year=2009, path, ...)
 
 \arguments{
   \item{year}{character. "1993" or "2009"} 
-  \item{path}{character. Path name where the data should be downloaded to} 
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}} 
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 

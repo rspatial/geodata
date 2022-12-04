@@ -21,7 +21,7 @@ soil_af_elements(var, path, ...)
 \arguments{
   \item{var}{character. Variables name. One of: "Al", "B", "Ca", "Cu", "Fe", "K", "Mg", "Mn", "N", "Na", "P", "Ptot", "Zn". See Details}
   
-  \item{path}{character. Path to download the data to}
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}
   
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 } 

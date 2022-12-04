@@ -21,7 +21,7 @@ elevation_global(res, path, ...)
 \arguments{
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude} 
-  \item{path}{character. Path where to download the data to} 
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}} 
   \item{country}{character. Country name or code} 
   \item{mask}{logical. set grid cells outside of the country boundaries to NA} 
   \item{subs}{character}  

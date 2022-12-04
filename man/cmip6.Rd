@@ -22,7 +22,7 @@ cmip6_tile(lon, lat, model, ssp, time, var, path, ...)
   \item{time}{character. A valid  time period. One of "2021-2040", "2041-2060", or "2061-2080"} 
   \item{var}{character. Valid variables names are "tmin", "tmax", "tavg", "prec" and "bioc"}
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5 (minutes of a degree)}
-  \item{path}{character. Path where to download the data to}   
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}   
   \item{...}{additional arguments passed to \code{\link{download.file}}}
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude}   

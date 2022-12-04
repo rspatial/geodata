@@ -18,7 +18,7 @@ sacksCrops()
 
 \arguments{
  \item{crop}{character. Crop name. See \code{sacksCrops} for valid names}  
- \item{path}{character. Path name where the data should be downloaded to}  
+ \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}  
   \item{...}{additional arguments passed to \code{\link{download.file}}} 
 }
 

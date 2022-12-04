@@ -19,7 +19,7 @@ worldclim_tile(var, lon, lat, path, version="2.1", ...)
 \arguments{
   \item{var}{character. Valid variables names are "tmin", "tmax", "tavg", "prec", "wind", "vapr", and "bio"}
   \item{res}{numeric. Valid resolutions are 10, 5, 2.5, and 0.5 (minutes of a degree)}
-  \item{path}{character. Path where to download the data to} 
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}} 
   \item{country}{character. Country name or code} 
   \item{lon}{numeric. Longitude} 
   \item{lat}{numeric. Latitude} 

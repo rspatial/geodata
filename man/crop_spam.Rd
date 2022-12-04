@@ -18,7 +18,7 @@ crop_spam(crop="", var="area", path=".", africa=FALSE, ...)
 \arguments{
  \item{crop}{character. See \code{spamCrops} for valid names}  
  \item{var}{character. variable of interest. Must be one of "yield", "harv_area" (harvested area), "phys_area" (physical area), "prod" (production) or "val_prod" (value of production)}  
- \item{path}{character. Path name where the data should be downloaded to}  
+ \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}  
  \item{africa}{logical. retrieve the (updated) data for Africa instead of global data}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }

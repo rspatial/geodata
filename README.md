@@ -33,16 +33,17 @@ remotes::install_github("rspatial/geodata")
 |`crop_spam`                    |[MapSPAM](https://www.mapspam.info/data/) crop data (area, yield, value)     |
 |`cropland`                       |Cropland density for the world derived from different sources (ESA, GLAD, QED) |
 |`elevation_3s`, `elevation_30s`, `elevation_global`       |Elevation data                                                                  |
-|`gadm`, `world`              |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)      |
+|`gadm`, `world`   |Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org) |
 |`landcover`                    |Landcover data derived from ESA WorldCover |
 |`footprint`                    |Human footprint data from the [Last of the Wild project](https://sedac.ciesin.columbia.edu/data/collection/wildareas-v3) |
 |`osm`                          |OpenStreetMap data by country (places and roads) |
 |`population`                   |Population density [Gridded Population of the World](http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation)    |
+|`soil_af`            |Chemical and physical soil properties data for Africa for different soil depths  |
 |`soil_af_elements`             |Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa  |
+|`soil_af_water`                |Physical soil properties data for Africa for water balance computation  |
 |`soil_af_isda`                 |Soil data for Africa derived from the [iDSA data set](https://envirometrix.nl/isdasoil-open-soil-data-for-africa/)   |
-|`soil_af`                      |Chemical soil properties data for Africa for different soil depths                                     |
 |`soil_world_vsi`               |Virtually connect to the global [SoilGrids](https://www.isric.org/explore/soilgrids) data        |
-|`soil_world`                   |Global soils data from [SoilGrids](https://www.isric.org/explore/soilgrids)          |
+|`soil_world`                   |Global soils data from [SoilGrids](https://www.isric.org/explore/soilgrids) |
 |`sp_occurrence`                |Species occurrence records from the [Global Biodiversity Information Facility](https::/www.gbif.org) |
 |`travel_time`                  |Travel time to and from cities and ports by [Nelson et al.](https://www.nature.com/articles/s41597-019-0265-5)   |
 |`worldclim_global`, `worldclim_country`, `worldclim_tile` |[WorldClim](https://worldclim.org) glocal climate data     |

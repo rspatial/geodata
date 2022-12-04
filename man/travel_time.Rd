@@ -16,7 +16,7 @@ travel_time(to="city", size=1, up=FALSE, path, ...)
   \item{to}{character. "city" or "port"}
   \item{size}{positive integer indicating the size of the city or port. Can be between 1 and 9 if \code{to="city"} or between 1 and 5 if \code{to="port"}. See Details} 
   \item{up}{logical. If \code{TRUE} the travel time to a city of the size chosen \bold{or larger} is returned}  
-  \item{path}{character. Path name where the data should be downloaded to}  
+  \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 }
 
