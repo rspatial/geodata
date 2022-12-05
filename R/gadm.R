@@ -14,24 +14,38 @@
 	path <- .get_path(path, add="gadm")
 	filename <- file.path(path, f)
 
-	if (!file.exists(filename)) {
-		if (check) {
-			exists <- try(.check_gadm(filename, gversion))
-			if (!inherits(exists, "try-error")) {
-				if (!exists) {
-					message("this file does not exist")
-					return(NULL)
-				}
+	if (file.exists(filename)) {
+		r <- try(readRDS(filename), silent=TRUE)
+		if (!inherits(r, "try-error")) {
+			if (utils::packageVersion("terra") < "1.6.22") {
+				r <- vect(r)
+			} else {
+				r
+			}
+			return(r)
+		} else {
+			file.remove(filename)
+		}
+	}
+
+	if (check) {
+		exists <- try(.check_gadm(filename, gversion))
+		if (!inherits(exists, "try-error")) {
+			if (!exists) {
+				message("this file does not exist")
+				return(NULL)
 			}
 		}
-		baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
-		if (upath=="") {
-			theurl <- file.path(baseurl, basename(filename))		
-		} else {
-			theurl <- file.path(baseurl, upath, basename(filename))
-		}
-		if (!.downloadDirect(theurl, filename, ...)) return(NULL)
-	}	
+	}
+	baseurl <- paste0(dirname(.data_url()), "/gadm/gadm", gversion)
+	if (upath=="") {
+		theurl <- file.path(baseurl, basename(filename))		
+	} else {
+		theurl <- file.path(baseurl, upath, basename(filename))
+	}
+	if (!.downloadDirect(theurl, filename, ...)) return(NULL)
+	
+	
 	if (file.exists(filename)) {
 		r <- readRDS(filename)
 		if (utils::packageVersion("terra") < "1.6.22") {
@@ -40,6 +54,7 @@
 			r
 		}
 	} else {
+		message("something went wrong")
 		NULL
 	}
 }

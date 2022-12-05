@@ -12,11 +12,11 @@
 
 
 
-.check_path <- function(path) {
+.check_path <- function(path, recursive=FALSE) {
 	if (dir.exists(path)) {
 		return(TRUE)
 	}
-	test <- try(dir.create(path, recursive=FALSE), silent=TRUE)
+	test <- try(dir.create(path, showWarnings=FALSE, recursive=recursive), silent=TRUE)
 	if (inherits(test, "try-error")) {
 		stop("path cannot be created", call.=FALSE)	
 	}
@@ -38,7 +38,7 @@
 	.check_path(path)
 	if (add != "") {
 		path <- file.path(path, add)
-		.check_path(path)
+		.check_path(path, TRUE)
 	}
 	path
 }

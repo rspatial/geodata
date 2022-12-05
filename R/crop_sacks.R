@@ -20,17 +20,24 @@ sacksCrops <- function() {
 
 crop_calendar_sacks <- function(crop="", path, ...) {
 
-	path <- .get_path(path)
-	folder <- file.path(path, "cal_sacks")
-	dir.create(folder, FALSE, FALSE)
+	path <- .get_path(path, "calendar/sacks")
 
 	m <- .sacks_crops()
+	crop <- tolower(crop)
 	if (!(crop %in% m[,2])) {
 		cat("Choose one of:\n")
 		print(m[,2])
 	} else {
 		i <- which(m[,2] == crop)
 		fout <- file.path(folder, m[i,1])
+		if (file.exists(fout)) {
+			r <- try(terra::rast(fout), silent=TRUE)
+			if (inherits(r, "try-error")) {
+				file.remove(fout)
+			} else {
+				return(r)
+			}
+		}
 		if (!file.exists(fout)) {
 			baseurl <- paste0(.data_url(), "crops/sacks2/")
 			url <- paste0(baseurl, m[i,1])
@@ -44,8 +51,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 
 .old_crop_calendar_sacks <- function(crop="", path, ...) {
 
-	path <- .get_path(path)
-	folder <- file.path(path, "sacks")
+	path <- .get_path(path, "sacks")
 	dir.create(folder, FALSE, FALSE)
 
 	m <- .old_sacks_crops()
@@ -67,3 +73,19 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 	}
 }
 
+
+crop_calendar_rice <- function(path, ...) {
+	path <- .get_path(path, "calendar/rice")
+	ff <- .get_from_uri("doi:10.7910/DVN/JE6R2R", path)
+	fz <- grep("zip$", ff, value=TRUE)
+	if (length(fz) == 0) {
+		message("something went wrong")
+		return(NULL)
+	}
+	ok <- lapply(fz, unzip)
+	fs <- grep("shp$", unlist(ok), value=TRUE)
+	x <- lapply(fs, vect)
+	x <- svc(x)
+	names(x) <- gsub(".shp$", "", basename(fs))
+	x
+}

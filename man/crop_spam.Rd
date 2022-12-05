@@ -12,7 +12,7 @@ SPAM crop data
 
 \usage{
 spamCrops()
-crop_spam(crop="", var="area", path=".", africa=FALSE, ...)
+crop_spam(crop="", var="area", path, africa=FALSE, ...)
 }
 
 \arguments{
