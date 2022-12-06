@@ -40,7 +40,7 @@
 		path <- file.path(path, add)
 		.check_path(path, TRUE)
 	}
-	path
+	path.expand(path)
 }
 
 
@@ -49,7 +49,7 @@ geodata_path <- function(path) {
 		return( getOption("geodata_default_path", default = "") )
 	}
 	path <- .get_path(path, TRUE)
-	options(geodata_detault_path=path)
+	options(geodata_default_path=path)
 }
 
 
