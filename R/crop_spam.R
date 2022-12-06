@@ -54,8 +54,9 @@ crop_spam <- function(crop="", var="area", path, africa=FALSE, ...) {
 	fs <- grep(crp, ff$Name, value=TRUE)
 	ffs <- file.path(path, fs)
 	if (all(!file.exists(ffs))) {
-		files <- utils::unzip(zipf, files=fs, junkpaths=TRUE, exdir=path)
-		if (length(files) == 0) file.remove(zipf)
+		# utils::unzip(zipf, fails for yield !?
+		utils::unzip(zipf, files=fs, junkpaths=TRUE, exdir=path)
+		#if (length(files) == 0) file.remove(zipf)
 		return(NULL)
 	}
 	x <- terra::rast(ffs)
