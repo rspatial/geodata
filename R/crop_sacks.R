@@ -29,7 +29,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 		print(m[,2])
 	} else {
 		i <- which(m[,2] == crop)
-		fout <- file.path(folder, m[i,1])
+		fout <- file.path(path, m[i,1])
 		if (file.exists(fout)) {
 			r <- try(terra::rast(fout), silent=TRUE)
 			if (inherits(r, "try-error")) {
@@ -52,7 +52,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 .old_crop_calendar_sacks <- function(crop="", path, ...) {
 
 	path <- .get_path(path, "sacks")
-	dir.create(folder, FALSE, FALSE)
+	dir.create(path, FALSE, FALSE)
 
 	m <- .old_sacks_crops()
 	if (!(crop %in% m[,2])) {
@@ -60,7 +60,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 		print(m[,2])
 	} else {
 		i <- which(m[,2] == crop)
-		fout <- file.path(folder, m[i,1])
+		fout <- file.path(path, m[i,1])
 		fout2 <- gsub(".gz$", "", fout)
 		if (!file.exists(fout2)) {
 			baseurl <- paste0(.data_url(), "crops/sacks/")
