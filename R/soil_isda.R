@@ -1,14 +1,12 @@
 
 
-soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
+soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 
 
 	if (length(var) > 1) {
 		r <- lapply(var, function(v) soil_af_isda(v, depth[1], error=error, path, ...))
 		return(rast(r))
 	}
-
-	path <- .get_path(path, add="soil_af_isda")
 
 	var <- tolower(var[1])
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")
@@ -38,8 +36,16 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, ...) {
 	#stopifnot(version == 0.13)
 	
 	filename <- paste0("isda_", var, "_", depth, "_v", version,  "_30s.tif")
-	filepath <- file.path(path, filename)
 
+	if (virtual) {
+		burl <- paste0(.data_url(), "soil/isda/")
+		url <- file.path(burl, filename)
+		url <- paste0("/vsicurl/", url)
+		return(rast(url))
+	}
+
+	path <- .get_path(path, add="soil_af_isda")
+	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
 		burl <- paste0(.data_url(), "soil/isda/")
