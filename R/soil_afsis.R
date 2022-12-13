@@ -53,25 +53,27 @@ soil_af_elements <- function(var, path, ...) {
 }
 
 
-soil_af_water <- function(var, depth, path, ...) {
+soil_af_water <- function(var, depth="30cm", path, ...) {
 
+	var <- tolower(var)
+	depth <- depth[1]
+	
 	if (length(var) > 1) {
 		r <- lapply(var, function(v) soil_af_water(v, path, ...))
 		return(rast(r))
 	}
 
 	path <- .get_path(path, "soil_af")
-	stopifnot(depth %in% c("30cm", "erzd"))
-	
-	var <- tolower(var)
 	stopifnot(var %in% c("awcpf23", "pwp", "crfvol", "tetas", "erzd", "tawcpf23", "tawcpf23mm"))
 
 	if (var == "erzd") {
 		filename <- "af_erzd.tif"
 	} else if (depth == "erzd") {
 		filename <- paste0("af_erzd_", var, ".tif")
-	} else {
+	} else if (depth == "30cm") {
 		filename <- paste0("af_30cm_", var, ".tif")	
+	} else {
+		error("not a valid depth")
 	}
 	filepath <- file.path(path, filename)
 
