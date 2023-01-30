@@ -17,11 +17,6 @@
 	if (file.exists(filename)) {
 		r <- try(readRDS(filename), silent=TRUE)
 		if (!inherits(r, "try-error")) {
-			if (utils::packageVersion("terra") < "1.6.22") {
-				r <- vect(r)
-			} else {
-				r
-			}
 			return(r)
 		} else {
 			file.remove(filename)
@@ -47,9 +42,10 @@
 	
 	
 	if (file.exists(filename)) {
-		r <- readRDS(filename)
-		if (utils::packageVersion("terra") < "1.6.22") {
-			vect(r)
+		r <- try(readRDS(filename), silent=TRUE)
+		if (inherits(r, "try-error")) {
+			file.remove(filename)
+			message("something went wrong")
 		} else {
 			r
 		}
@@ -65,9 +61,14 @@ world <- function(resolution=5, level=0, path, version="latest", ...) {
 	resolution = round(resolution[1])
 	stopifnot(resolution %in% 1:5)
 	version <- as.character(version)
-	if (version == "latest") version <- "3.6"
-	stopifnot(version[1] == "3.6")
-	filename <- paste0("gadm36_adm", level, "_r", resolution, "_pk.rds")
+	if (version == "latest") version <- "4.1"
+	stopifnot(version[1] %in% c("3.6", "4.1"))
+	fversion <- gsub("\\.", "", version)
+	if (fversion == "36") {
+		filename <- paste0("gadm36_adm", level, "_r", resolution, "_pk.rds")
+	} else {
+		filename <- paste0("gadm_", fversion, "_adm", level, "_r", resolution, ".rds")	
+	}
 	.gadm_download(filename, path, version[1], "", check=FALSE, ...)
 }
 

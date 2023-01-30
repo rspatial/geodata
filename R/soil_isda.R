@@ -11,7 +11,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 	var <- tolower(var[1])
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")
 	if (!(var %in% vars)) {
-		stop(paste("unknown variable. Use one of:\n", vars))
+		stop(paste("unknown variable. Use one of:\n", paste(vars, collapse=", ")))
 	}
 	
 	if (var %in% c("clay", "silt", "sand")) {
