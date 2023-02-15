@@ -56,10 +56,10 @@
 }
 
 
-world <- function(resolution=5, level=0, path, version="latest", ...) {
+world <- function(resolution=5, level=0, path, version="3.6", ...) {
 	stopifnot(level[1] == 0)
 	resolution = round(resolution[1])
-	stopifnot(resolution %in% 1:5)
+	if (!(resolution %in% 0:5)) stop("not a valid resolution")
 	version <- as.character(version)
 	if (version == "latest") version <- "4.1"
 	stopifnot(version[1] %in% c("3.6", "4.1"))

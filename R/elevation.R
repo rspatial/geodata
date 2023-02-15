@@ -4,6 +4,34 @@
 # Version 0.1
 # March 2016
 
+elevation_1s <- function(lon, lat, path, ...) {
+
+	path <- .get_path(path)
+	
+	stopifnot(lon >= -180 & lon <= 180)
+	stopifnot(lat >= -57 & lat <= 61)
+
+	rs <- rast(res=5, ymin=-60, ymax=60 )
+	rowTile <- formatC(rowFromY(rs, lat), width=2, flag=0)
+	colTile <- formatC(colFromX(rs, lon), width=2, flag=0)
+	
+	f <- paste("srtm_", colTile, "_", rowTile, sep="")
+	tiffilename <- paste(path, "/", f, ".tif", sep="")
+
+	if (!file.exists(tiffilename)) {
+		pzip <- paste(path, "/", f, ".ZIP", sep="")
+		theurl <- paste("https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/", f, ".zip", sep="")
+		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
+	}
+	if (file.exists(tiffilename)) {
+		rs <- rast(tiffilename)
+		crs(rs) <- "+proj=longlat +datum=WGS84"
+		return(rs)
+	} else {
+		stop("file not found")
+	}
+}
+
 elevation_3s <- function(lon, lat, path, ...) {
 
 	path <- .get_path(path)

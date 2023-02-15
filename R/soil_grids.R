@@ -24,7 +24,7 @@
 	}
 	
 	var <- var[1]
-	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "phh2o", "sand", "silt", "soc", "wrb"))
+	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "wrb"))
 	if (var == "wrb") {
 		#h <- readLines("https://files.isric.org/soilgrids/latest/data/wrb/")
 		#h <- grep("vrt<", h, value=TRUE)
@@ -40,7 +40,9 @@
 	} else {
 		depth <- as.character(round(depth[1]))
 		if (var == "ocs") {
-			stopifnot(depth == "30")	
+			if (depth != "30") {
+				stop("ocs is only available for depth=30")
+			}			
 			dd <- "0-30"
 		} else {
 			dpts <- c("5", "15", "30", "60", "100", "200")
