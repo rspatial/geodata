@@ -335,3 +335,34 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 #sa <- gbif("solanum", "acaule var acaule")
 
 
+
+sp_occurrence2 <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
+
+	if (is.null(prefix)) prefix <- paste0(genus, "_", species)
+	dir.create("gbif", FALSE, FALSE)
+	r <- rast(nrow=2, ncol=2, extent=ext)
+	p <- as.polygons(r)
+	for (i in 1:nrow(p)) {
+		itr <- paste(prefix, i, sep="_")
+		fit <- file.path(path, "gbif", paste0(itr, ".rds"))
+		if (!file.exists(fit)) {
+			ep <- ext(p[i])
+			obs <- geodata::sp_occurrence(genus, species, download=FALSE, ext=ep)
+			if (obs >= 50000) {
+				d <- sp_occurrence2(genus, species, ext=ep, prefix=itr)
+			} else if (obs > 0) {
+				d <- geodata::sp_occurrence(genus, species, download=TRUE, ext=ep, args=args, 
+					geo=geo, removeZeros=removeZeros, ntries=ntries, nrecs=nrecs, 
+					fixnames=fixnames, ...)
+				saveRDS(d, fit)
+			}
+		}
+	}
+	ff  <- list.files("gbif", pattern=paste0("^", genus, "_", species), full.names=TRUE)
+	out <- lapply(ff, readRDS)
+	out <- do.call(.frbind, out)
+	unique(out)
+}
+
+
+#x = sp_occurrence2("Anas", "acuta")
