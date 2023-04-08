@@ -1,5 +1,4 @@
 
-.wcurl <- "https://geodata.ucdavis.edu/climate/worldclim/2_1/"
 
 .wccruts <- function(lon, lat, path, ...) {
 }
@@ -25,7 +24,8 @@
 	outfname <- file.path(pth, fname)
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
-		turl <- paste0(.wcurl, "day/nc/", fname)
+		turl <- .wc_url(paste0("day/nc/", fname))
+		if (is.null(turl)) return(NULL)
 		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	sds(outfname)
@@ -41,7 +41,9 @@
 	outfname <- file.path(pth, gsub("_", "21_", fname))
 	if (!file.exists(outfname)) {
 		dir.create(pth, showWarnings=FALSE)
-		turl <- paste0(.wcurl, "day/nc21/", fname)
+		turl <- .wc_url(paste0("day/nc21/", fname))
+		if (is.null(turl)) return(NULL)
+		
 		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	sds(outfname)
@@ -67,7 +69,9 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	outfname <- file.path(pth, fname)
 
 	if (!file.exists(outfname)) {
-		turl <- paste0(.wcurl, "tiles/tile/", fname)
+		turl <- .wc_url(paste0("tiles/tile/", fname))
+		if (is.null(turl)) return(NULL)
+	
 		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	rast(outfname)
@@ -90,7 +94,8 @@ worldclim_country <- function(country, var, path, version="2.1", ...) {
 	outfname <- file.path(pth, fname)
 	
 	if (!file.exists(outfname)) {
-		turl <- paste0(.wcurl, "tiles/iso/", fname)
+		turl <- .wc_url(paste0("tiles/iso/", fname))
+		if (is.null(turl)) return(NULL)
 		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
 	}
 	rast(outfname)
@@ -121,7 +126,10 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	pzip <- file.path(path, zip)
 	ff <- file.path(path, ff)
 	if (!all(file.exists(ff))) {
-		if (!.downloadDirect(paste0(.wcurl, "base/", zip), pzip, ...)) return(NULL)
+		turl <- .wc_url(paste0("base/", zip))
+		if (is.null(turl)) return(NULL)
+
+		if (!.downloadDirect(turl, pzip, ...)) return(NULL)
 		fz <- try(utils::unzip(pzip, exdir=path), silent=TRUE)
 		try(file.remove(pzip), silent=TRUE)
 		if (inherits(fz, "try-error")) {
@@ -156,7 +164,8 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	poutf <- file.path(path, outf)
 	if (!file.exists(poutf)) {
 		if (!file.exists(outf)) {
-			url <- paste0(.wcurl, "cmip6/", fres, "/", model, "/ssp", ssp, "/", outf)
+			url <- .wc_url(paste0("cmip6/", fres, "/", model, "/ssp", ssp, "/", outf))
+			if (is.null(url)) return(NULL)
 			if(!.downloadDirect(url, poutf, ...)) return(NULL)
 		}
 	}

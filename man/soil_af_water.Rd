@@ -7,7 +7,7 @@
 \description{
 Download physical soil properties data for Africa that can be used in water balance computation. The values are for a soil depth of 0 to 30 cm. The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the original 250m resolution.
 
-For other properties see \code{\link{soil_af}}, \code{\link{soil_af_nutrients}}, \code{\link{soil_af_isda}}. 
+For other properties see \code{\link{soil_af}}, \code{\link{soil_af_elements}}, \code{\link{soil_af_isda}}. 
 
 For more info, see https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
 
@@ -15,7 +15,7 @@ The data have a CC-BY 4.0 NC license
 }
 
 \usage{
-soil_af_water(var, path, ...)
+soil_af_water(var, depth = "30cm", path, ...)
 }
 
 \arguments{

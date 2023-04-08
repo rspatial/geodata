@@ -15,7 +15,7 @@ For more info see:
 }
 
 \usage{
-soil_af_isda(var, depth=20, error=FALSE, path, ...) 
+soil_af_isda(var, depth=20, error=FALSE, path, virtual=FALSE, ...) 
 }
 
 \arguments{

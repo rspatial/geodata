@@ -7,7 +7,9 @@
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "landuse/", filename)
+		url <- .data_url(paste0("landuse/", filename))
+		if (is.null(url)) return(NULL)
+		
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
@@ -31,7 +33,9 @@
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "landuse/", filename)
+		url <- .data_url(paste0("landuse/", filename))
+		if (is.null(url)) return(NULL)
+		
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
@@ -61,7 +65,9 @@
 	}
 	filepath <- file.path(path, filename)
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "cropland/", filename)
+		url <- .data_url(paste0("cropland/", filename))
+		if (is.null(url)) return(NULL)
+		
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		r <- try(rast(filepath))
 		if (inherits(r, "try-error")) {
@@ -103,7 +109,9 @@ landcover <- function(var, path, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "landuse/", filename)
+		url <- .data_url(paste0("landuse/", filename))
+		if (is.null(url)) return(NULL)
+		
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))
@@ -128,7 +136,9 @@ footprint <- function(year=2009, path, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "footprint/", filename)
+		url <- .data_url(paste0("footprint/", filename))
+		if (is.null(url)) return(NULL)
+		
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		
 		r <- try(rast(filepath))

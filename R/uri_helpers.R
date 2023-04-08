@@ -7,7 +7,7 @@
 .get_simple_URI <- function(uri, reverse=FALSE) {
   
   if (reverse) {
-    return(gsub("_", "/", sub("_", ":", x))	)
+    return(gsub("_", "/", sub("_", ":", uri))	)
   }
   
   ur <- .removeprotocol(uri)
@@ -138,7 +138,7 @@
     u <- file.path(baseu, "dataset", d$package_id[i], "resource", d$id[i], "download", d$name[i])
     #if (d$available[i] == "yes") { "active" ?
     outf <- file.path(path, d$name[i])
-    ok <- try(download.file(d$url[i], outf, mode="wb", quiet=TRUE) )
+    ok <- try(utils::download.file(d$url[i], outf, mode="wb", quiet=TRUE) )
     if (inherits(ok, "try-error")) {
       print("cannot download", d$name[i])
       done <- FALSE
@@ -166,14 +166,14 @@
   done <- TRUE
   files <- ""[0]
   outf <- file.path(path, paste0(uname, ".zip"))
-  ok <- try(download.file(file.path(uu,"download"), outf, mode="wb", quiet=TRUE) )
+  ok <- try(utils::download.file(file.path(uu,"download"), outf, mode="wb", quiet=TRUE) )
   if (inherits(ok, "try-error")) {
     print("cannot download ", uname)
     done <- FALSE
   } else {
     files <- c(files, outf)
   }
-  unzip(outf, exdir = path)
+  utils::unzip(outf, exdir = path)
   writeLines("ok", file.path(path, "ok.txt"))
   files
 }

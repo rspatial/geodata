@@ -39,7 +39,9 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 			}
 		}
 		if (!file.exists(fout)) {
-			baseurl <- paste0(.data_url(), "crops/sacks2/")
+			baseurl <- .data_url("crops/sacks2/")
+			if (is.null(baseurl)) return(NULL)
+
 			url <- paste0(baseurl, m[i,1])
 			if (!.downloadDirect(url, fout, ...)) return(NULL)
 		}
@@ -63,7 +65,9 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 		fout <- file.path(path, m[i,1])
 		fout2 <- gsub(".gz$", "", fout)
 		if (!file.exists(fout2)) {
-			baseurl <- paste0(.data_url(), "crops/sacks/")
+			baseurl <- .data_url("crops/sacks/")
+			if (is.null(baseurl)) return(NULL)
+			
 			url <- paste0(baseurl, m[i,1])
 			if (!.downloadDirect(url, fout, ...)) return(NULL)
 			R.utils::gunzip(fout)
@@ -74,7 +78,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 }
 
 
-crop_calendar_rice <- function(path, ...) {
+rice_calendar <- function(path, ...) {
 	path <- .get_path(path, "calendar/rice")
 	ff <- .get_from_uri("doi:10.7910/DVN/JE6R2R", path)
 	fz <- grep("zip$", ff, value=TRUE)
@@ -82,9 +86,15 @@ crop_calendar_rice <- function(path, ...) {
 		message("something went wrong")
 		return(NULL)
 	}
-	ok <- lapply(fz, unzip)
+	ok <- lapply(fz, function(f) utils::unzip(f, exdir=path))
 	fs <- grep("shp$", unlist(ok), value=TRUE)
-	x <- lapply(fs, vect)
+	x <- lapply(fs, function(f) { 
+			v <- vect(f)
+			nms <- names(v)
+			i <- grep("^Shape\\_", nms)
+			j <- which(nms == "OBJECTID_1")
+			v[,-c(i,j)]
+		})
 	x <- svc(x)
 	names(x) <- gsub(".shp$", "", basename(fs))
 	x

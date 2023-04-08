@@ -20,7 +20,8 @@
 	if (vsi) {
 		sg_url <- "/vsicurl/https://files.isric.org/soilgrids/latest/data/"
 	} else {
-		sg_url <- paste0(.data_url(), "soil/soilgrids/")
+		sg_url <- .data_url("soil/soilgrids/")
+		if (is.null(sg_url)) return(NULL)
 	}
 	
 	var <- var[1]
@@ -78,13 +79,15 @@ soil_world <- function(var, depth, stat="mean", name="", path, ...) {
 	stat <- stat[1]
 	
 	path <- .get_path(path, add="soil_world")
+	if (is.null(path)) return(NULL)
 	
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
+	if (is.null(u)) return(NULL)
 	u <- gsub(".vrt$", "_30s.tif", u)
 	filename <- basename(u)
 	filepath <- file.path(path, filename)
 	if (!file.exists(filepath)) {
-		txtpath <- paste0(.data_url(), "soil/soilgrids/files.txt")
+		txtpath <- .data_url("soil/soilgrids/files.txt")
 		ff <- readLines(txtpath)
 		if (!(filename %in% ff)) {
 			stop(paste("file not yet available:", filename))

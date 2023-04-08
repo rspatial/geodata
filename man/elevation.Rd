@@ -1,5 +1,6 @@
 \name{elevation}
 
+\alias{elevation_1s}
 \alias{elevation_3s}
 \alias{elevation_30s}
 \alias{elevation_global}
@@ -13,6 +14,7 @@ The 1 km (30 arc seconds) data were aggregated from SRTM 90 m resolution data an
 }
 
 \usage{
+elevation_1s(lon, lat, path, ...)
 elevation_3s(lon, lat, path, ...)
 elevation_30s(country, path, mask=TRUE, subs="", ...)
 elevation_global(res, path, ...)

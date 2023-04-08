@@ -25,7 +25,8 @@ soil_af <- function(var, depth=20, path, ...) {
 	
 	filename <- paste0("af_", var, "_", depth, "cm_30s.tif")
 	filepath <- file.path(path, filename)
-	url <- paste0(.data_url(), "soil/afsis/", filename)
+	url <- .data_url(paste0("soil/afsis/", filename))
+	if (is.null(url)) return(NULL)
 
 	.donwload_url(url, filepath, ...)
 }
@@ -48,7 +49,9 @@ soil_af_elements <- function(var, path, ...) {
 	filename <- paste0("af_", var, "_0-30cm_30s.tif")
 	filepath <- file.path(path, filename)
 
-	url <- paste0(.data_url(), "soil/afsis_nuts/", filename)
+	url <- .data_url(paste0("soil/afsis_nuts/", filename))
+	if (is.null(url)) return(NULL)
+
 	.donwload_url(url, filepath, ...)
 }
 
@@ -73,11 +76,13 @@ soil_af_water <- function(var, depth="30cm", path, ...) {
 	} else if (depth == "30cm") {
 		filename <- paste0("af_30cm_", var, ".tif")	
 	} else {
-		error("not a valid depth")
+		stop("not a valid depth")
 	}
 	filepath <- file.path(path, filename)
 
-	url <- paste0(.data_url(), "soil/gyga/", filename)
+	url <- .data_url(paste0("soil/gyga/", filename))
+	if (is.null(url)) return(NULL)
+	
 	.donwload_url(url, filepath, ...)
 }
 

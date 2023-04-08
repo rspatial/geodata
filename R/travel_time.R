@@ -24,7 +24,8 @@ travel_time <- function(to="city", size=1, up=FALSE, path, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "travel/", filename)
+		url <- .data_url(paste0("travel/", filename))
+		if (is.null(url)) return(NULL)
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 	} 
 	

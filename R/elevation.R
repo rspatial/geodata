@@ -73,7 +73,8 @@ elevation_30s <- function(country, path, mask=TRUE, subs="", ...) {
 	filename <- file.path(path, paste0(f, ".tif"))
 	if (!file.exists(filename)) {
 		pzip <- gsub("\\.tif$", ".zip", filename)
-		theurl <- paste0(.data_url(), "elv/", f, ".zip")
+		theurl <- .data_url(paste0("elv/", f, ".zip"))
+		if (is.null(theurl)) return(NULL)
 		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
 	}
 	rast(filename)
@@ -94,7 +95,8 @@ elevation_global <- function(res, path, ...) {
 	ff <- file.path(path, ff)
 	if (!file.exists(ff)) {
 		dir.create(path, showWarnings=FALSE)
-		theurl <- paste0(.wcurl, "base/", zip)
+		theurl <- .wc_url(paste0("base/", zip))
+		if (is.null(theurl)) return(NULL)
 		if (!.downloadDirect(theurl, pzip, unzip=TRUE, ...)) return(NULL)
 	}
 	rast(ff)

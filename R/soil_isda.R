@@ -38,7 +38,8 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 	filename <- paste0("isda_", var, "_", depth, "_v", version,  "_30s.tif")
 
 	if (virtual) {
-		burl <- paste0(.data_url(), "soil/isda/")
+		burl <- .data_url("soil/isda/")
+		if (is.null(burl)) return(NULL)
 		url <- file.path(burl, filename)
 		url <- paste0("/vsicurl/", url)
 		return(rast(url))
@@ -48,7 +49,8 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 	filepath <- file.path(path, filename)
 
 	if (!(file.exists(filepath))) {
-		burl <- paste0(.data_url(), "soil/isda/")
+		burl <- .data_url("soil/isda/")
+		if (is.null(burl)) return(NULL)
 		url <- file.path(burl, filename)
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 		if (file.exists(filepath) && grepl("texture", filename)) {

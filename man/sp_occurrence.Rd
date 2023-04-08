@@ -1,6 +1,7 @@
 \name{sp_occurrence}
 
 \alias{sp_occurrence}
+\alias{sp_occurrence_batch}
 \alias{sp_genus}
 
 \title{
@@ -16,7 +17,9 @@ Download data from the Global Biodiversity Information Facility (\href{https://w
 
 You can check the number of records returned by using the option \code{download=FALSE}.
 
-To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
+To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_batch}. This function saves subsets of the data in a folder called "gbif", and combines all the subsets in the end into a single file (and returns the data in a data.frame).
+
+If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
 
 Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
 }
@@ -27,6 +30,9 @@ sp_genus(genus, simple=TRUE, ...)
 
 sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE,
         download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...)
+
+sp_occurrence_batch(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, 
+	geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...)
 }
  
 \arguments{
@@ -43,13 +49,16 @@ sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALS
   \item{end}{integer. Last record to request}
   \item{fixnames}{If \code{TRUE} a few unwieldy and poorly chosen variable names are changed as follows. "decimalLatitude" to "lat", "decimalLongitude" to "lon", "stateProvince" to "adm1", "county" to "adm2", "countryCode" to "ISO2". The names in "country" are replaced with the common (short form) country name, the original values are stored as "fullCountry"}
 
+  \item{path}{character. Where should the data be downloaded to (they will be put in a subdirectory "gbif")?}
+  \item{prefix}{character. prefix of the downloaded filenames (best left NULL, the function will then use "genus_species"}
+
   \item{simple}{logical. If \code{TRUE}, a vector the accepted species names are returned. Otherwise a data.frame with much more information is returned}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 
 \value{
-data frame 
+data.frame 
 }
 
 \note{

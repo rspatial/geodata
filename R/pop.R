@@ -10,7 +10,9 @@ population <- function(year, res="5", path, ...) {
 	filepath <- file.path(path, "pop", filename)
 
 	if (!(file.exists(filepath))) {
-		url <- paste0(.data_url(), "pop/", filename)
+		url <- .data_url(paste0("pop/", filename))
+		if (is.null(url)) return(NULL)
+
 		dir.create(dirname(filepath), showWarnings=FALSE)
 		if (!.downloadDirect(url, filepath, ...)) return(NULL)
 	} 
