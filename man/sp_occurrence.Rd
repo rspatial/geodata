@@ -1,7 +1,7 @@
 \name{sp_occurrence}
 
 \alias{sp_occurrence}
-\alias{sp_occurrence_batch}
+\alias{sp_occurrence_split}
 \alias{sp_genus}
 
 \title{
@@ -17,7 +17,7 @@ Download data from the Global Biodiversity Information Facility (\href{https://w
 
 You can check the number of records returned by using the option \code{download=FALSE}.
 
-To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_batch}. This function saves subsets of the data in a folder called "gbif", and combines all the subsets in the end into a single file (and returns the data in a data.frame).
+To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_split}. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame). If the function is interrupted, it can be run again, and it will resume where it left off.
 
 If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
 

@@ -369,7 +369,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 
 
-sp_occurrence_batch <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
+sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
 
 	if (is.null(prefix)) prefix <- tolower(paste0(genus, "_", species, "_"))
 	fout <- file.path(path, "gbif", paste0(prefix, ".rds"))
