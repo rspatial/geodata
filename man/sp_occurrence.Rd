@@ -80,10 +80,15 @@ sp_occurrence("solanum", "acaule", download=FALSE)
 sp_occurrence("Batrachoseps", "" , down=FALSE)
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
 g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE)
-plot(g$lon, g$lat)
+plot(gs[, c("lon", "lat")])
 
-gs <- sp_occurrence("Batrachoseps", "luciae")
-plot(gs)
+
+## args
+a1 <- sp_occurrence("Elgaria", "multicarinata", args="recordNumber=RH-2")
+a2 <- sp_occurrence("Batrachoseps", "luciae", args=c("year=2023", "identifiedBy=Anthony Ye"))
+## year supports "range queries"
+a3 <- sp_occurrence("Batrachoseps", "luciae", args=c("year=2020,2023", "identifiedBy=KW"))
+table(a3[,c("year")])
 }
 }
 
