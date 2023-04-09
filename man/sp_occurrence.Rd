@@ -31,7 +31,7 @@ sp_genus(genus, simple=TRUE, ...)
 sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE,
         download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...)
 
-sp_occurrence_batch(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, 
+sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, 
 	geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...)
 }
  
