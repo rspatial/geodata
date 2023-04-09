@@ -15,7 +15,7 @@ bio_oracle(path, var, stat, benthic=FALSE, depth="Mean", time="Present", rcp, ..
 \arguments{
   \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}
   \item{var}{character. Variable of interest. One of 'Calcite', 'Chlorophyll', 'Cloud.cover', 'Current.Velocity', 'Diffuse.attenuation', 'Dissolved.oxygen', 'Ice.cover', 'Ice.thickness', 'Iron', 'Light.bottom', 'Nitrate', 'Par', 'pH', 'Phosphate', 'Phytoplankton', 'Primary.productivity', 'Salinity', 'Silicate', 'Temperature'}
-  \item{stat}{character. Statistic of interest. One of 'Lt.max', 'Lt.min', 'Max', 'Mean', 'Min', 'Range'}
+  \item{stat}{character. Statistic of interest. One of 'Lt.max', 'Lt.min', 'Max', 'Mean', 'Min', 'Range'. It should be "" if \code{var} is "pH"}
   \item{benthic}{logical. If \code{FALSE} surface data are returned}
   \item{depth}{character. Either "Min", "Mean", or "Max". Only relevant if \code{benthic} is \code{TRUE}}
   \item{time}{character. Either "Present", "2150" or "2100"}
