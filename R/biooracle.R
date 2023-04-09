@@ -1,49 +1,44 @@
 
-.create_table <- function() {
-	url = "https://bio-oracle.org/data/2.0/"
-	ffs = readLines(url)
+# .create_bior_table <- function() {
+	# url <- "https://bio-oracle.org/data/2.0/"
+	# ffs <- readLines(url)
 
-	ff = grep("^<li><a href=", ffs, value=T)
-	ff = strsplit(ff, "> ")
-	ff = sapply(ff, \(i) i[2])
-	ff = gsub("</a></li>", "", ff)
-	ff = grep("tif.zip$", ff, value=T)
-	ff = gsub(".tif.zip$", "", ff)
+	# ff <- grep("^<li><a href=", ffs, value=T)
+	# ff <- strsplit(ff, "> ")
+	# ff <- sapply(ff, \(i) i[2])
+	# ff <- gsub("</a></li>", "", ff)
+	# ff <- grep("tif.zip$", ff, value=T)
+	# ff <- gsub(".tif.zip$", "", ff)
 
-	ff <- gsub("Current.Velocity", "Current_Velocity", ff)
-	ff <- gsub("Cloud.cover", "Cloud_cover", ff)
-	ff <- gsub("Diffuse.attenuation", "Diffuse_attenuation", ff)
-	ff <- gsub("Dissolved.oxygen", "Dissolved_oxygen", ff)
-	ff <- gsub("Ice.cover", "Ice_cover", ff)
-	ff <- gsub("Ice.thickness", "Ice_thickness", ff)
-	ff <- gsub("Primary.productivity", "Primary_productivity", ff)
-	ff <- gsub("Light.bottom", "Light_bottom", ff)
+	# vv <- c("Current.Velocity", "Cloud.cover", "Diffuse.attenuation", "Dissolved.oxygen", "Ice.cover", "Ice.thickness", "Primary.productivity", "Light.bottom")
+	# for (v in vv) {
+		# ff <- gsub(v, gsub("\\.", "_", v), ff)
+	# }
 
+	# ff <- gsub("\\.Depth", "_Depth", ff)
 
-	ff <- gsub("\\.Depth", "_Depth", ff)
+	# maketab <- function(s, n=2) {
+		# ss <- paste0("^", s, ".")
+		# i <- grep(ss, ff)
+		# ps <- gsub(ss, "", ff[i])
+		# tps <- stringr::str_split(ps, "\\.", n=n)
+		# tps <- do.call(rbind, tps)
+		# tps[tps[,1] == tps[,2], 2] <- ""
+		# tps[,1] <- gsub("_", ".", tps[,1])
+		# tps[,2] <- gsub("_", ".", tps[,2])
+		# data.frame(group = gsub("Present.", "", s), tps)
+	# }
 
-	maketab <- function(s, n=2) {
-		ss <- paste0("^", s, ".")
-		i <- grep(ss, ff)
-		ps = gsub(ss, "", ff[i])
-		tps <- stringr::str_split(ps, "\\.", n=n)
-		tps <- do.call(rbind, tps)
-		tps[tps[,1] == tps[,2], 2] <- ""
-		tps[,1] <- gsub("_", ".", tps[,1])
-		tps[,2] <- gsub("_", ".", tps[,2])
-		data.frame(group = gsub("Present.", "", s), tps)
-	}
-
-	a = maketab("Present.Surface")
-	b = maketab("Present.Benthic", n=3)
-	b$X1 <- NULL
-	b = unique(b)
-	ab = merge(a, b, by=2:3, all=T)
-	ab$group.x <- NULL
-	ab$group.y <- !is.na(ab$group.y)
-	names(ab) <- c("var", "stat", "benthic")
-	saveRDS(ab, "c:/github/rspatial/geodata/inst/ex/bior.rds")
-}
+	# a <- maketab("Present.Surface")
+	# b <- maketab("Present.Benthic", n=3)
+	# b$X1 <- NULL
+	# b <- unique(b)
+	# ab <- merge(a, b, by=2:3, all=T)
+	# ab$group.x <- NULL
+	# ab$group.y <- !is.na(ab$group.y)
+	# names(ab) <- c("var", "stat", "benthic")
+	# saveRDS(ab, "c:/github/rspatial/geodata/inst/ex/bior.rds")
+# }
 
 
 

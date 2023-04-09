@@ -348,7 +348,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 			ep <- ext(p[i])
 			obs <- geodata::sp_occurrence(genus, species, download=FALSE, ext=ep)
 			if (obs >= 50000) {
-				message(paste0(itr, ": split")); utils::flush.console()
+				message(paste0(itr, ": split (", obs, ")")); utils::flush.console()
 				d <- .run_sp_occurrence_batch(genus, species, ext=ep, args=args, geo=geo, removeZeros=removeZeros, ntries=ntries, nrecs=nrecs, fixnames=fixnames, prefix=itr)
 			} else if (obs > 0) {
 				message(paste0(itr, ":")); utils::flush.console()
