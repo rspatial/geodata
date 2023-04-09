@@ -65,7 +65,7 @@ geodata_path <- function(path) {
 
 
 
-.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, ...) {
+.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, remove=TRUE,  ...) {
 	if (!file.exists(filename)) {
 		ok <- try(
 			suppressWarnings(
@@ -83,7 +83,7 @@ geodata_path <- function(path) {
 	}
 	if (unzip) {
 		zok <- try(utils::unzip(filename, exdir=dirname(filename)), silent=TRUE)
-		try(file.remove(filename), silent=TRUE)
+		if (remove) try(file.remove(filename), silent=TRUE)
 		if (inherits(zok, "try-error")) {
 			message("download failed")
 			return(FALSE)
