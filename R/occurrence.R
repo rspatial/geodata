@@ -342,7 +342,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	r <- rast(nrow=2, ncol=2, extent=ext)
 	p <- as.polygons(r)
 	for (i in 1:nrow(p)) {
-		itr <- paste0(prefix, i, sep=".")
+		itr <- paste0(prefix, i)
 		fit <- file.path(path, "gbif", paste0(itr, ".rds"))
 		if (!file.exists(fit)) {
 			ep <- ext(p[i])
@@ -363,7 +363,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 				message(paste0(itr, ": no records")); utils::flush.console()
 			}
 		} else {
-			message(paste0(itr, ": existed")); utils::flush.console()
+			message(paste0(itr, ": exists")); utils::flush.console()
 		}
 	}
 }
@@ -372,7 +372,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
 
-	if (is.null(prefix)) prefix <- tolower(paste0(genus, "_", species))
+	if (is.null(prefix)) prefix <- tolower(paste0(genus, "_", species, "_"))
 	fout <- file.path(path, "gbif", paste0(prefix, ".rds"))
 	if (file.exists(fout)) {
 		message("using existing file")

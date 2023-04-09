@@ -80,7 +80,7 @@ sp_occurrence("solanum", "acaule", download=FALSE)
 sp_occurrence("Batrachoseps", "" , down=FALSE)
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
 g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE)
-plot(gs[, c("lon", "lat")])
+plot(g[, c("lon", "lat")])
 
 
 ## args
