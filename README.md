@@ -26,6 +26,7 @@ remotes::install_github("rspatial/geodata")
 
 |Function                        |Description                                                                                                     |
 |:---------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
+|`bio_oracle`                 |Marine data from [Bio-Oracle](https://bio-oracle.org/) |
 |`cmip6_world`, `cmip6_tile`  |Downscaled and calibrated CMIP6 projected future climate data                            |
 |`country_codes`                |Country codes                                                                |
 |`crop_calendar_sacks`          |Crop calendar data by [Sacks et al](https://sage.nelson.wisc.edu/data-and-models/datasets/crop-calendar-dataset/)     |
