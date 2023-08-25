@@ -78,7 +78,7 @@ world <- function(resolution=5, level=0, path, version="latest", ...) {
 }
 
 
-gadm <- function(country, level=1, path, version="latest", resolution=1, ...) {
+gadm <- function(country, level=1, path = tempdir(), version="latest", resolution=1, ...) {
 
 	if (length(level) > 1) {
 		stop("level can only have a single value", call. = FALSE)
