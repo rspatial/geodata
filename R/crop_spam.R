@@ -19,34 +19,39 @@ crop_spam <- function(crop="", var="area", path, africa=FALSE, ...) {
 	i <- which(crp == crops)[1]
 	if (i > nrow(crops)) i = i - nrow(crops)
 	crp <- toupper(crops[i,2])
-	if (africa) {
-		urlbase <- "https://s3.amazonaws.com/mapspam/2017/ssa/v1.1/geotiff/"	
-	} else {
-		urlbase <- "https://s3.amazonaws.com/mapspam/2010/v1.1/geotiff/"
-	}
-	if (var == "area" || var == "harv_area") {
-		url <- paste0(urlbase, "spam2010v1r1_global_harv_area.geotiff.zip")
-	} else if (var == "phys_area") {
-		if (!africa) {
-			url <- "https://s3.amazonaws.com/mapspam/2010/v2.0/geotiff/spam2010v2r0_global_phys_area.geotiff.zip"
-		} else {
-			url <- "https://s3.amazonaws.com/mapspam/2017/ssa/v2.1/geotiff/spam2017v2r1_ssa_phys_area.geotiff.zip"
-		}
-	} else if (var == "prod") {
-		url <- paste0(urlbase, "spam2010v1r1_global_prod.geotiff.zip")
-	} else if (var == "val_prod") {
-		url <- paste0(urlbase, "spam2010v1r1_global_val_prod.geotiff.zip")
-	} else {
-		url <- paste0(urlbase, "spam2010v1r1_global_yield.geotiff.zip")
-	}
+	
+	urlbase <- "https://dataverse.harvard.edu/api/access/datafile/"
+	#4271688?format=original"
 
-	pre <- "spam2010v1r1_global_"
 	if (africa) {
-		afpre <- "spam2017v1r1_ssa_"
-		url <- gsub(pre, afpre, url)
-		pre <- afpre
+		pre <- "spam2017v2r1_ssa_"
+		if (var %in% c("area", "harv_area")) {
+			id = 4271688
+		} else if (var == "phys_area") {
+			id = 4271676
+		} else if (var == "prod") {
+			id = 4271677
+		} else if (var == "val_prod") {
+			id = 4271679
+		} else if (var == "yield") {
+			id = 4271678
+		}
+	} else {
+		pre <- "spam2010v2r0_global_"
+		if (var %in% c("area", "harv_area")) {
+			id = 3985008
+		} else if (var == "phys_area") {
+			id = 3985010
+		} else if (var == "prod") {
+			id = 3985009
+		} else if (var == "val_prod") {
+			id = 3985011
+		} else if (var == "yield") {
+			id = 3985012
+		}
 	}
-	zipf <- file.path(path, basename(url))
+	url <- paste0(urlbase, id, "?format=original") 
+	zipf <- file.path(path, paste0(pre, var, ".zip"))
 	if (!file.exists(zipf)) {
 		if (!.downloadDirect(url, zipf, ...)) return(NULL)
 	}
@@ -57,24 +62,16 @@ crop_spam <- function(crop="", var="area", path, africa=FALSE, ...) {
 		# utils::unzip(zipf, fails for yield !?
 		utils::unzip(zipf, files=fs, junkpaths=TRUE, exdir=path)
 		#if (length(files) == 0) file.remove(zipf)
-		return(NULL)
 	}
 	x <- terra::rast(ffs)
 	
 	
-	#nicenms <- c("A", "all", "I", "irrigated", "H", "rainfed-highinput", "L", "rainfed-lowinput", "S", "rainfed-subsistence", "R", "rainfed")
-	#nicenms <- matrix(nicenms, ncol=2, byrow=TRUE)
-	#nicenms <- nicenms[order(nicenms[,1]), ]
-	#if (africa) {
-	#	nicenms <- nicenms[nicenms[,1] %in% c("A", "I", "R"), ]
-	#}
+	syst <- c("A", "all", "I", "irrigated", "H", "rainfed-highinput", "L", "rainfed-lowinput", "S", "rainfed-subsistence", "R", "rainfed")
+	syst <- matrix(syst, ncol=2, byrow=TRUE)
+	nms <- names(x)
+	i <- match(syst[,1], substr(nms, nchar(nms), nchar(nms)))
+	names(x) <- paste0(crop, "_", var, "_", syst[i,2])
 
-	#n <- sort(names(x))
-	#n <- substr(n, nchar(n[1]), nchar(n[1]))
-	#i <- match(n, nicenms[,1])
-	names(x) <- gsub(pre, "", names(x), ignore.case=TRUE)
-	names(x) <- gsub("gr_", "", names(x), ignore.case=TRUE)
-	
 	terra::ext(x) <- c(-180, 180, -90, 90)
 	if (africa) {
 		x <- crop(x, ext(-26, 58, -35, 26))
