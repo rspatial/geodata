@@ -13,6 +13,7 @@
 
 \tabular{ll}{
 \bold{Function} \tab \bold{Description} \cr
+\code{\link{bio_oracle}}   \tab  Marine data from bio-oracle\cr
 \code{\link{cmip6_world}}   \tab  Downscaled and calibrated CMIP6 projected future climate data\cr
 \code{\link{cmip6_tile}}   \tab  Downscaled and calibrated CMIP6 data by tile\cr
 \code{\link{country_codes}}\tab   Country codes \cr

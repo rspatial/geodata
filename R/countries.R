@@ -1,13 +1,5 @@
 
 
-country_codes <- function() {
-	path <- system.file(package="geodata")
-	#d <- utils::read.csv(paste(path, "/ex/countries.csv", sep=""), stringsAsFactors=FALSE, encoding="UTF-8")
-	readRDS(file.path(path, "ex/countries.rds"))
-}
-
-
-
 country_codes <- function(query = NULL) {
 	path <- system.file(package="geodata")
 	res <- readRDS(file.path(path, "ex/countries.rds"))

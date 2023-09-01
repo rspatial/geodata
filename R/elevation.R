@@ -4,7 +4,7 @@
 # Version 0.1
 # March 2016
 
-elevation_1s <- function(lon, lat, path, ...) {
+.elevation_1s <- function(lon, lat, path, ...) {
 
 	path <- .get_path(path)
 	
@@ -31,6 +31,7 @@ elevation_1s <- function(lon, lat, path, ...) {
 		stop("file not found")
 	}
 }
+
 
 elevation_3s <- function(lon, lat, path, ...) {
 

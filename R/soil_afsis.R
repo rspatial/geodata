@@ -14,7 +14,7 @@ soil_af <- function(var, depth=20, path, ...) {
 	
 	knownvars <- c("clay", "sand", "silt", "coarse", "SOC", "BLKD", "poros", "AWpF2.0", "AWpF2.3", "AWpF2.5", "AWpF4.2", "BDR", "pH", "ECN", "acid-exch", "bases-exch", "CEC", "Al-extr", "Al-exch", "Ca-exch", "K-exch", "Mg-exch", "Na-exch", "Ntot")
 	if (!(var %in% tolower(knownvars))) {
-		stop(paste("var should be one of:", knownvars))
+		stop(paste("var should be one of:", paste(knownvars, collapse=", ")))
 	}
 
 	dpts <- c("5", "15", "20", "30", "50", "60", "100", "200")
