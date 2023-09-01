@@ -37,7 +37,7 @@ sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90), args=NU
  
 \arguments{
   \item{genus}{character. genus name}
-  \item{species}{character. species name. Use '*' to download the entire genus. Append '*' to the species name to get all naming variants (e.g. with and witout species author name) and sub-taxa }
+  \item{species}{character. species name. Can be left blank to get the entire genus}
   \item{ext}{Extent object to limit the geographic extent of the records. An extent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
   \item{args}{character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details}
   \item{geo}{logical. If \code{TRUE}, only records that have a georeference (longitude and latitude values) will be downloaded}
