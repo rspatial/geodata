@@ -57,7 +57,9 @@
 
 geodata_path <- function(path) {
 	if (missing(path)) {
-		return( getOption("geodata_default_path", default = "") )
+		p <- getOption("geodata_default_path", default = "")
+		if (p == "") p <- Sys.getenv("GEODATA_PATH")
+		return(p)
 	}
 	path <- .get_path(path, TRUE)
 	options(geodata_default_path=path)
