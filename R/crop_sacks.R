@@ -80,7 +80,7 @@ crop_calendar_sacks <- function(crop="", path, ...) {
 
 rice_calendar <- function(path, ...) {
 	path <- .get_path(path, "calendar/rice")
-	ff <- .get_from_uri("doi:10.7910/DVN/JE6R2R", path)
+	ff <- .data_from_uri("doi:10.7910/DVN/JE6R2R", path)
 	fz <- grep("zip$", ff, value=TRUE)
 	if (length(fz) == 0) {
 		message("something went wrong")

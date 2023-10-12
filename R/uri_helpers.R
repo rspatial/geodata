@@ -4,7 +4,7 @@
 # license GPL3
 
 
-simple_uri <- function(uri, reverse=FALSE) {
+.simple_uri <- function(uri, reverse=FALSE) {
   
 	if (reverse) {
 		return(gsub("_", "/", sub("_", ":", uri))	)
@@ -73,8 +73,7 @@ simple_uri <- function(uri, reverse=FALSE) {
 	tmpf <- tempfile()
 	
 	if (grepl("worldagroforestry", uu) || grepl("cirad.fr", uu) || grepl("cipotato", uu)) {
-		# temporary fix because WorldAgroFor https cert has expired
-		# not sure why for CIP on Ubuntu (cert expired)
+		# fix for if https cert has expired
 		utils::download.file(uu, tmpf, quiet=TRUE, method="curl", extra="-k")
 	} else {
 		utils::download.file(uu, tmpf, quiet=TRUE)
@@ -96,8 +95,7 @@ simple_uri <- function(uri, reverse=FALSE) {
 		}
 	}
 	fn <- file.path(path, paste0(uname, "_files.txt"))
-	#try(utils::write.csv(f, fn))
-	try(data.table::fwrite(f, fn))
+	try(utils::write.csv(f, fn))
 	rest <- f$restricted
 	if (!is.null(rest)) {
 		f <- f[!rest, ]
@@ -234,12 +232,12 @@ simple_uri <- function(uri, reverse=FALSE) {
 .removeprotocol <- function(x) gsub("http://|https://|www\\.", "", x)
 
 
-data_from_uri <- function(uri, path, overwrite=FALSE) {
+.data_from_uri <- function(uri, path, overwrite=FALSE) {
 	
 	uripath=TRUE
 	unzip=TRUE
 	
-	uname <- simple_uri(uri)
+	uname <- .simple_uri(uri)
 	if (uripath) path <- file.path(path, uname)
 	
 	if (!file.exists(file.path(path, "ok.txt"))) {
@@ -299,8 +297,4 @@ data_from_uri <- function(uri, path, overwrite=FALSE) {
 	}
 }
 
-
-
-# uri <- "https://doi.org/10.5061/dryad.pj76g30"
-# ff <- data_from_uri(uri, ".")
 
