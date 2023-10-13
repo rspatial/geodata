@@ -9,9 +9,15 @@ This function allows you set or get the default download path for the geodata pa
 
 The default path is ignored if you use the path variable in a function.
 
-To save the default path across sessions, you can add a line like this \code{options(geodata_default_path="c:/your/geodata/path")} to the file returned by this command  \code{file.path(R.home(), "etc/Rprofile.site")}
+To save the default path across sessions, you can add a line like this:
 
-Alternatively, you can also set a system variable "GEODATA_PATH" to the desired path. 
+\code{options( geodata_default_path = "c:/your/geodata/path")} 
+ 
+to the file returned by
+ 
+\code{file.path( R.home(), "etc/Rprofile.site")}
+
+ Alternatively, you can also set a system variable "GEODATA_PATH" to the desired path. 
 }
 
 \usage{

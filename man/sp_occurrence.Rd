@@ -28,17 +28,19 @@ Before using this function, please first check the GBIF \href{https://www.gbif.o
 \usage{
 sp_genus(genus, simple=TRUE, ...)
 
-sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE,
-        download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...)
+sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, 
+	removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, 
+	start=1, end=Inf, fixnames=TRUE, ...)
 
-sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, 
-	geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...)
+sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90),
+	args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300,
+	fixnames=TRUE, prefix=NULL, ...)
 }
  
 \arguments{
   \item{genus}{character. genus name}
   \item{species}{character. species name. Can be left blank to get the entire genus}
-  \item{ext}{Extent object to limit the geographic extent of the records. An extent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
+  \item{ext}{SpatExtent object to limit the geographic extent of the records. A SpatExtent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
   \item{args}{character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details}
   \item{geo}{logical. If \code{TRUE}, only records that have a georeference (longitude and latitude values) will be downloaded}
   \item{removeZeros}{logical. If \code{TRUE}, all records that have a latitude OR longitude of zero will be removed if \code{geo==TRUE}, or set to \code{NA} if \code{geo==FALSE}. If \code{FALSE}, only records that have a latitude AND longitude that are zero will be removed or set to \code{NA}}
@@ -79,15 +81,19 @@ sp_occurrence("solanum", "acaule", download=FALSE)
 
 sp_occurrence("Batrachoseps", "" , down=FALSE)
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
-g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE)
+g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=25)
 plot(g[, c("lon", "lat")])
 
 
 ## args
-a1 <- sp_occurrence("Elgaria", "multicarinata", args="recordNumber=RH-2")
-a2 <- sp_occurrence("Batrachoseps", "luciae", args=c("year=2023", "identifiedBy=Anthony Ye"))
+a1 <- sp_occurrence("Elgaria", "multicarinata", 
+			args="recordNumber=Robert J. Hijmans RH-2")
+a2 <- sp_occurrence("Batrachoseps", "luciae",
+			args=c("year=2023", "identifiedBy=Anthony Ye"))
+
 ## year supports "range queries"
-a3 <- sp_occurrence("Batrachoseps", "luciae", args=c("year=2020,2023", "identifiedBy=KW"))
+a3 <- sp_occurrence("Batrachoseps", "luciae", 
+			args=c("year=2020,2023", "identifiedBy=Kuoni W"))
 table(a3[,c("year")])
 }
 }

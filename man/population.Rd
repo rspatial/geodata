@@ -7,9 +7,9 @@
 \description{
 Download population density data.
 
-Source: Gridded Population of the World (GPW), v4
-Documentation: http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation
+Source: Gridded Population of the World (GPW), v4. Documentation:
 
+http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation
 }
 
 \usage{

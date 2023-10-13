@@ -25,9 +25,9 @@ SpatVector
 
 
 \details{
-tbd
+License: Open Data Commons Open Database License (ODbL). 
 
-License: Open Data Commons Open Database License (ODbL). See \url{https://www.openstreetmap.org/copyright}
+See \url{https://www.openstreetmap.org/copyright}
 }
 
 \examples{

@@ -9,7 +9,8 @@ Marine data from Bio-Oracle
 }
 
 \usage{
-bio_oracle(path, var, stat, benthic=FALSE, depth="Mean", time="Present", rcp, ...)
+bio_oracle(path, var, stat, benthic=FALSE, 
+		depth="Mean", time="Present", rcp, ...)
 }
 
 \arguments{
@@ -38,8 +39,10 @@ Assis, J., Tyberghein, L., Bosh, S., Verbruggen, H., Serrão, E.A., & De Clerck,
 
 \examples{
 \donttest{
-x <- bio_oracle(path=tempdir(), "Salinity", "Max", benthic=TRUE, depth="Mean", time="Present")
+x <- bio_oracle(path=tempdir(), "Salinity", "Max", 
+		benthic=TRUE, depth="Mean", time="Present")
 
-y <- bio_oracle(path=tempdir(), "Temperature", "Mean", benthic=FALSE, time=2100, rcp=45)
+y <- bio_oracle(path=tempdir(), "Temperature", "Mean", 
+		benthic=FALSE, time=2100, rcp=45)
 }
 }

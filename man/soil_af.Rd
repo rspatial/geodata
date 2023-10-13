@@ -47,10 +47,10 @@ SpatRaster
 \tab SOC \tab Organic carbon \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} (‰) \cr
 \tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot m^{-3}$}}{\out{kg m<sup>-3</sup>}} \cr
 \tab poros \tab Porosity (volum. fraction) based on PTF\tab - \cr
-\tab AWpF2.0 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.0 \tab - \cr
-\tab AWpF2.3 \tab Avail. soil water capacity (volum. frac.) for FC = pF 2.3 \tab - \cr
-\tab AWpF2.5 \tab Avail. soil water capacity (volum. fract.) for FC = pF 2.4 \tab - \cr
-\tab AWpF4.2 \tab Avail. soil water capacity (volum. fract.) at wilting point (pF 4.2) \tab - \cr
+\tab AWpF2.0 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.0 \tab - \cr
+\tab AWpF2.3 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.3 \tab - \cr
+\tab AWpF2.5 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.4 \tab - \cr
+\tab AWpF4.2 \tab Avail. soil wat. cap. (vol. frac.) at wilting point (pF 4.2) \tab - \cr
 \tab BDR \tab Depth to bedrock \tab cm \cr
 \tab . \tab . \tab . \cr
 \tab pH \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}})  \tab - \cr

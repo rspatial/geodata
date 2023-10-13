@@ -23,7 +23,7 @@ SpatVectorCollection
 }
 
 \references{
-Laborte, A.G.; Gutierrez, M.A.; Balanza, J.G.; Saito, K.; Zwart, S.J.; Boschetti, M.; Murty, MVR; Villano, L.; Aunario, J.K.; Reinke, R.; Koo, J.; Hijmans, R.J.; Nelson, A., 2017. RiceAtlas, a spatial database of global rice calendars and production. Scientific Data 4: 170074. https://doi.org/10.1038/sdata.2017.74
+Laborte, A.G.; Gutierrez, M.A.; Balanza, J.G.; Saito, K.; Zwart, S.J.; Boschetti, M.; Murty, MVR; Villano, L.; Aunario, J.K.; Reinke, R.; Koo, J.; Hijmans, R.J.; Nelson, A., 2017. RiceAtlas, a spatial database of global rice calendars and production. Scientific Data 4: 170074 \doi{10.1038/sdata.2017.74}
 }
 
 

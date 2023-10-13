@@ -38,9 +38,9 @@ SpatRaster
 \tabular{lllr}{
 \tab \bold{var} \tab \bold{description} \tab \bold{unit} \cr
 
-\tab awcpf23 \tab Available water capacity of the fine earth with field capacity defined at pF 2.3 \tab volumetric \% \cr
+\tab awcpf23 \tab Available water capacity of the fine earth at field capacity (pF 2.3)\tab volumetric \% \cr
 
-\tab pwp \tab  Moisture content of the fine earth at permanent wilting point, with PWP defined at pF 4.2 \tab volumetric \% \cr
+\tab pwp \tab  Moisture content of the fine earth at permanent wilting point (pF 4.2)\tab volumetric \% \cr
 
 \tab tetas \tab Moisture content of the fine earth at saturation \tab volumetric \% \cr
 

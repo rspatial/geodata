@@ -222,8 +222,12 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	poutf <- file.path(path, outf)
 	if (!file.exists(poutf)) {
 		if (!file.exists(outf)) {
-			url <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
-			if (!.downloadDirect(url, poutf, ...)) return(NULL)
+		
+			durl <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
+			durl <- .data_url(durl=durl)
+			if (is.null(durl)) return(NULL)
+			
+			if (!.downloadDirect(durl, poutf, ...)) return(NULL)
 		}
 		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
 		#try(file.remove(pzip), silent=TRUE)
@@ -253,6 +257,7 @@ cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
 	for (i in 1:length(outfname)) {
 		if (!file.exists(outfname[i])) {
 			turl <- paste0(.c6url, "tiles/", model, "/ssp", ssp, "/", fname[i])
+			turl <- .data_url(durl=turl)
 			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
 		}
 	}
