@@ -37,7 +37,7 @@
 }
 
 
-.get_path <- function(path, add="") {
+.get_path <- function(path, add) {
 	if (missing(path)) {
 		path <- geodata_path()
 	}
@@ -47,10 +47,12 @@
 	if (is.na(path)) stop("path cannot be NA", call.=FALSE)
 	if (path == "") stop("path is missing", call.=FALSE)
 	.check_path(path)
-	if (add != "") {
+	if (!(grepl("geodata$", path) || grepl("geodata/$", path) || grepl("geodata\\$", path))) {
+		path <- file.path(path, "geodata", add)
+ 	} else {
 		path <- file.path(path, add)
-		.check_path(path, TRUE)
 	}
+	.check_path(path, TRUE)
 	path.expand(path)
 }
 
@@ -61,10 +63,9 @@ geodata_path <- function(path) {
 		if (p == "") p <- Sys.getenv("GEODATA_PATH")
 		return(p)
 	}
-	path <- .get_path(path, TRUE)
+	path <- .get_path(path, "")
 	options(geodata_default_path=path)
 }
-
 
 
 .downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, remove=TRUE,  ...) {

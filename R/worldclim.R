@@ -17,7 +17,7 @@
 }
 
 .wcerad <- function(lon, lat, path, ...) {
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 	id <- .get_id(lon, lat)	
 	pth <- file.path(path, "wcdera")
 	fname <- paste0("wcdera_", id, ".nc")
@@ -33,7 +33,7 @@
 
 
 .wcerad21 <- function(lon, lat, path, ...) {
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 	id <- .get_id(lon, lat)
 
 	pth <- file.path(path, "wcdera")
@@ -56,7 +56,7 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	version <- as.character(version)
 	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 
 	r <- rast(res=30)
 	id <- cellFromXY(r, cbind(lon,lat))
@@ -86,7 +86,7 @@ worldclim_country <- function(country, var, path, version="2.1", ...) {
 	if (var == "bioc") var <- "bio"
 	iso <- .getCountryISO(country)
 
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 	pth <- file.path(path, "wc2.1_country")
 	dir.create(pth, showWarnings=FALSE)
 
@@ -110,7 +110,7 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	stopifnot(var %in% c("tavg", "tmin", "tmax", "prec", "bio", "bioc", "elev", "wind", "vapr", "srad"))
 	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 
 	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
@@ -154,7 +154,7 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 	# some combinations do not exist. Catch these here.
 	
 	if (var == "bio") var <- "bioc"
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 
 	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
@@ -214,7 +214,7 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	ssp <- as.character(ssp)
 	if (var == "bio") var <- "bioc"
 	try(.check_cmip6(res, var, ssp, model, time), silent=TRUE)
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
 	
@@ -241,7 +241,7 @@ cmip6_tile <- function(lon, lat, model, ssp, time, var, path, ...) {
 	ssp <- as.character(ssp)
 	if (var == "bio") var <- "bioc"
 	.check_cmip6(0.5, var, ssp, model, time)
-	path <- .get_path(path)
+	path <- .get_path(path, "climate")
 	path <- file.path(path, paste0("wc2.1_30s/"))
 	dir.create(path, showWarnings=FALSE)
 

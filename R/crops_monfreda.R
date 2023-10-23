@@ -9,9 +9,8 @@ data.frame(m)
 
 crop_monfreda <- function(crop="", var="area_ha", path, ...) {
 #	stopifnot(var %in% c("areaf", "areah", "yield", "prod"))
-	path <- .get_path(path)
+	folder <- .get_path(path, "monfreda")
 	
-	folder <- file.path(path, "monfreda")
 	dir.create(folder, FALSE, FALSE)
 	crp <- tolower(trimws(crop))
 	vars <- c("area_ha", "area_f", "area_q", "yield", "yield_q", "prod", "all")

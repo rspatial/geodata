@@ -2,7 +2,7 @@
 
 .cropland_africa <- function(path, ...) {
 
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	filename <- paste0("geosurvey_cropland.tif")
 	filepath <- file.path(path, filename)
 
@@ -28,7 +28,7 @@
 
 .cropland_world <- function(path, ...) {
 
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	filename <- paste0("WorldCover_cropland_30s.tif")
 	filepath <- file.path(path, filename)
 
@@ -55,7 +55,7 @@
 
 .cropland_glad <- function(path, year, ...) {
 
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	if (missing(year)) {
 		filename <- "glad_cropland.tif"
 	} else {
@@ -83,7 +83,7 @@
 
 cropland <- function(source, path, year, ...) {
 
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	source = match.arg(trimws(tolower(source)), c("qed", "worldcover", "glad"))
 	if (source == "qed") {
 		.cropland_africa(path, ...)
@@ -97,7 +97,7 @@ cropland <- function(source, path, year, ...) {
 
 landcover <- function(var, path, ...) {
 
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	
 	cats <- c("trees", "grassland", "shrubs", "cropland", "built", "bare", "snow", "water", "wetland", "mangroves", "moss")	
 	var <- tolower(var)
@@ -128,7 +128,7 @@ landcover <- function(var, path, ...) {
 
 
 footprint <- function(year=2009, path, ...) {
-	path <- .get_path(path)
+	path <- .get_path(path, "landuse")
 	
 	year <- as.character(year)
 	stopifnot(year %in% c("1993", "2009"))
