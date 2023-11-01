@@ -47,11 +47,7 @@
 	if (is.na(path)) stop("path cannot be NA", call.=FALSE)
 	if (path == "") stop("path is missing", call.=FALSE)
 	.check_path(path)
-	if (!(grepl("geodata$", path) || grepl("geodata/$", path) || grepl("geodata\\$", path))) {
-		path <- file.path(path, "geodata", add)
- 	} else {
-		path <- file.path(path, add)
-	}
+	path <- file.path(path, add)
 	.check_path(path, TRUE)
 	path.expand(path)
 }
