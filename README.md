@@ -45,7 +45,7 @@ remotes::install_github("rspatial/geodata")
 |`soil_af_isda`                 |Soil data for Africa derived from the [iDSA data set](https://envirometrix.nl/isdasoil-open-soil-data-for-africa/)   |
 |`soil_world_vsi`               |Virtually connect to the global [SoilGrids](https://www.isric.org/explore/soilgrids) data        |
 |`soil_world`                   |Global soils data from [SoilGrids](https://www.isric.org/explore/soilgrids) |
-|`sp_occurrence`                |Species occurrence records from the [Global Biodiversity Information Facility](https::/www.gbif.org) |
+|`sp_occurrence`                |Species occurrence records from the [Global Biodiversity Information Facility](https://www.gbif.org) |
 |`travel_time`                  |Travel time to and from cities and ports by [Nelson et al.](https://www.nature.com/articles/s41597-019-0265-5)   |
 |`worldclim_global`, `worldclim_country`, `worldclim_tile` |[WorldClim](https://worldclim.org) glocal climate data     |
 
