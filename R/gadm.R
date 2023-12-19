@@ -31,7 +31,8 @@
 		exists <- try(.check_gadm(filename, gversion), silent=TRUE)
 		if (!inherits(exists, "try-error")) {
 			if (!exists) {
-				message("this file does not exist")
+				message(filename,
+                                        "- this file does not exist") 
 				return(NULL)
 			}
 		}
