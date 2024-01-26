@@ -188,7 +188,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	stopifnot(start <= end)
 
 	if (end > 100000) {
-		stop("GBIF does not allow using this service for record numbers that are > 100,000")
+		stop("GBIF does not allow using this service for record numbers that are > 100,000. Try delimiting the query with arguments 'ext', 'args', or 'start' and 'end'.")
 	}
 
 	ntot <- (end-start)+1
