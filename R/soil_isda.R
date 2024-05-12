@@ -7,8 +7,8 @@ isda_vars <- function() {
 }
 
 
-soil_af_isda_highres <- function() {
-}
+#soil_af_isda_highres <- function() {
+#}
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 

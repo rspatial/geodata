@@ -19,7 +19,7 @@
 .wcerad <- function(lon, lat, path, ...) {
 	path <- .get_path(path, "climate")
 	ids <- .get_id(lon, lat)	
-	ids <- unique(cellFromXY(r, cbind(lon,lat)))
+	#ids <- unique(cellFromXY(r, cbind(lon,lat)))
 	pth <- file.path(path, "wcdera")
 	for (id in ids) {
 		fname <- paste0("wcdera_", id, ".nc")
