@@ -1,5 +1,5 @@
 
-isda_vars <- function() {
+.isda_vars <- function() {
 	old <- c("al", "bdr", "db.od", "ca", "oc", "c.tot", "cec", "clay", NA, "fe", "mg", "n.tot", "ph.h2o", "p", "k", "sand", "silt", "wpg2", "s", "texture", "zn")
 	new <- c("extr_al", "bedrock", "bulkdens", "extr_ca", "org_c", "tot_c", "cec", "clay", NA, "extr_fe", "extr_mg", "tot_N", "ph.h2o", "extr_p", "extr_k", "sand", "silt", "stone", "extr_s", "texture", "extr_zn")
 	isda <- c('aluminium_extractable', 'bedrock_depth', 'bulk_density', 'calcium_extractable', 'carbon_organic', 'carbon_total', 'cation_exchange_capacity', 'clay_content', 'fcc', 'iron_extractable', 'magnesium_extractable', 'nitrogen_total', 'ph', 'phosphorous_extractable', 'potassium_extractable', 'sand_content', 'silt_content', 'stone_content', 'sulphur_extractable', 'texture_class', 'zinc_extractable')
