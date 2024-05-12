@@ -1,4 +1,14 @@
 
+isda_vars <- function() {
+	old <- c("al", "bdr", "db.od", "ca", "oc", "c.tot", "cec", "clay", NA, "fe", "mg", "n.tot", "ph.h2o", "p", "k", "sand", "silt", "wpg2", "s", "texture", "zn")
+	new <- c("extr_al", "bedrock", "bulkdens", "extr_ca", "org_c", "tot_c", "cec", "clay", NA, "extr_fe", "extr_mg", "tot_N", "ph.h2o", "extr_p", "extr_k", "sand", "silt", "stone", "extr_s", "texture", "extr_zn")
+	isda <- c('aluminium_extractable', 'bedrock_depth', 'bulk_density', 'calcium_extractable', 'carbon_organic', 'carbon_total', 'cation_exchange_capacity', 'clay_content', 'fcc', 'iron_extractable', 'magnesium_extractable', 'nitrogen_total', 'ph', 'phosphorous_extractable', 'potassium_extractable', 'sand_content', 'silt_content', 'stone_content', 'sulphur_extractable', 'texture_class', 'zinc_extractable')
+	na.omit(data.frame(old=old, new=new, isda=isda))
+}
+
+
+soil_af_isda_highres <- function() {
+}
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 
@@ -38,7 +48,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 	filename <- paste0("isda_", var, "_", depth, "_v", version,  "_30s.tif")
 
 	if (virtual) {
-		burl <- .data_url("soil/isda/")
+		burl <- .data_url("soil/isdasoil/")
 		if (is.null(burl)) return(NULL)
 		url <- file.path(burl, filename)
 		url <- paste0("/vsicurl/", url)

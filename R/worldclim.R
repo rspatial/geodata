@@ -6,8 +6,8 @@
 
 .get_id <- function(lon, lat) {
 	r <- rast(res=5)	
-	id <- cellFromXY(r, cbind(lon,lat))[1]
-	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
+	id <- unique(cellFromXY(r, cbind(lon,lat)))
+	if (any(is.na(id))) stop("invalid coordinates (lon/lat reversed?)")
 	path <- system.file(package="geodata")
 	tiles <- readRDS(file.path(path, "ex/tiles.rds"))
 	if (!(id %in% tiles)) {
@@ -18,15 +18,18 @@
 
 .wcerad <- function(lon, lat, path, ...) {
 	path <- .get_path(path, "climate")
-	id <- .get_id(lon, lat)	
+	ids <- .get_id(lon, lat)	
+	ids <- unique(cellFromXY(r, cbind(lon,lat)))
 	pth <- file.path(path, "wcdera")
-	fname <- paste0("wcdera_", id, ".nc")
-	outfname <- file.path(pth, fname)
-	if (!file.exists(outfname)) {
-		dir.create(pth, showWarnings=FALSE)
-		turl <- .wc_url(paste0("day/nc/", fname))
-		if (is.null(turl)) return(NULL)
-		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
+	for (id in ids) {
+		fname <- paste0("wcdera_", id, ".nc")
+		outfname <- file.path(pth, fname)
+		if (!file.exists(outfname)) {
+			dir.create(pth, showWarnings=FALSE)
+			turl <- .wc_url(paste0("day/nc/", fname))
+			if (is.null(turl)) return(NULL)
+			if (!.downloadDirect(turl, outfname, ...)) return(NULL)
+		}
 	}
 	sds(outfname)
 }

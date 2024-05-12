@@ -289,12 +289,17 @@
 	protocol <- .getprotocol(u)
 	baseu <- paste0(protocol, domain)
 	if (grepl("/stash/", u)) {	
-		.download_dryad_files(u, baseu, path, uname)
+		out <- try(.download_dryad_files(u, baseu, path, uname), silent=FALSE)
 	} else if (grepl("/dataset/", u)) {	
-		.download_ckan_files(u, baseu, path, uname)
+		out <- try(.download_ckan_files(u, baseu, path, uname), silent=FALSE)
 	} else {
-		.download_dataverse_files(u, baseu, path, uname, unzip, zipf1)
+		out <- try(.download_dataverse_files(u, baseu, path, uname, unzip, zipf1), silent=FALSE)
 	}
+	if (inherits(out, "try-error")) {
+		message("download failed")
+		return()
+	}
+	out
 }
 
 
