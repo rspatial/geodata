@@ -29,6 +29,7 @@ Laborte, A.G.; Gutierrez, M.A.; Balanza, J.G.; Saito, K.; Zwart, S.J.; Boschetti
 
 \examples{
 \donttest{
+# first time api call takes a while
 rice <- rice_calendar(path=tempdir())
 cal <- rice[1]
 }

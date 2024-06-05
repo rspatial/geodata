@@ -60,6 +60,7 @@ SpatRaster
 
 \examples{
 \donttest{
+# this downloads a large file
 tetaS <- soil_af_water(var="tetas", depth="erzd", path=tempdir())
 }
 }

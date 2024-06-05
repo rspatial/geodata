@@ -65,7 +65,12 @@
 
 soil_world_vsi <- function(var, depth, stat="mean", name="") {
 	u <- .soil_grids_url(var[1], depth[1], stat=stat[1], name=name[1], vsi=TRUE)
-	rast(u)
+	x <- try(rast(u), silent=TRUE)
+	if (inherits(x, "try-error")) {
+		message("connection failed")
+		return()
+	}
+	x
 }
 
 

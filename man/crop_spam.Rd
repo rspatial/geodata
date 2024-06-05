@@ -42,6 +42,7 @@ https://www.mapspam.info/data/
 
 \examples{
 \donttest{
+# downloads a large file
 cas <- crop_spam("cassava", "area", path=tempdir(), TRUE)
 }
 }

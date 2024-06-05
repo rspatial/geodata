@@ -5,7 +5,7 @@
 \title{Travel time to a city or port}
 
 \description{
-Download travel time to a city or port data on rasters at a 30 arc-seconds (about 1 km2) resolution. 
+Download global travel time to a city or port data on rasters at a 30 arc-seconds (about 1 km2) resolution. 
 }
 
 \usage{
@@ -59,12 +59,5 @@ Description of the the \code{size} argument.
 Nelson, A., D.J. Weiss, J. van Etten, A. Cattaneo, T.S. McMenomy & J. Koo, 2019. A suite of global accessibility indicators. Scientific Data 6: 266. doi:10.1038/s41597-019-0265-5
 
 Version 3 (2019-05-15) from \url{https://figshare.com/articles/dataset/Travel_time_to_cities_and_ports_in_the_year_2015/7638134/3}
-}
-
-
-\examples{
-\donttest{
-ttime <- travel_time("city", 2, path=tempdir(), quiet=TRUE)
-}
 }
 

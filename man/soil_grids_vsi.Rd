@@ -59,7 +59,6 @@ For Africa: \code{\link{soil_af_isda}}, \code{\link{soil_af}}, \code{\link{soil_
 \examples{
 \donttest{
 ph <- soil_world_vsi(var="phh2o", depth=5)
-# perhaps this does not work anymore
-#plot(ph, maxcell=10000)
+ph
 }
 }

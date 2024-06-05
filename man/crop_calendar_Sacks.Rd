@@ -36,7 +36,5 @@ Sacks, W.J., D. Deryng, J.A. Foley, and N. Ramankutty, 2010. Crop planting dates
 
 
 \examples{
-\donttest{
 cas <- crop_calendar_sacks("cassava", path=tempdir())
-}
 }

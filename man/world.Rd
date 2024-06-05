@@ -30,8 +30,6 @@ The data are from \url{https://gadm.org}
 }
 
 \examples{
-\donttest{
 w <- world(path=tempdir())
-}
 }
 

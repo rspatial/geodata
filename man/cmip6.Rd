@@ -40,8 +40,9 @@ SpatRaster
 
 \examples{
 \donttest{
-bio10 <- cmip6_world("CNRM-CM6-1", "585", "2061-2080", 
-					var="bioc", res=10, path=tempdir())
+# download of large files takes a while
+tmin10 <- cmip6_world("CNRM-CM6-1", "585", "2061-2080", 
+					var="tmin", res=10, path=tempdir())
 }
 }
 

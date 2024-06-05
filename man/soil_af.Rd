@@ -81,6 +81,7 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 \examples{
 \donttest{
+# downloads a large file
 aph <- soil_af(var="ph", depth=5, path=tempdir())
 }
 }

@@ -49,9 +49,7 @@ These are the WorldClim monthly average climate data.
 }
 
 \examples{
-\donttest{
 lux <- worldclim_country("Luxembourg", var="tmin", path=tempdir())
-}
 }
 
 \seealso{

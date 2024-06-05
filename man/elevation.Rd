@@ -35,8 +35,6 @@ SpatRaster
 
 
 \examples{
-\dontrun{
-elevation_30s(country="FRA", path=tempdir() )
-}
+be <- elevation_30s(country="BEL", path=tempdir() )
 }
 

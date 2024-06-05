@@ -62,6 +62,7 @@ Hengl T, Heuvelink GBM, Kempen B, Leenaars JGB, Walsh MG, Shepherd KD, et al. (2
 
 \examples{
 \donttest{
+# downloads a large file
 fe <- soil_af_elements("Fe", path=tempdir(), quiet=TRUE)
 }
 }

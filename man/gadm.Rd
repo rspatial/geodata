@@ -33,8 +33,6 @@ The data are from \url{https://gadm.org}
 }
 
 \examples{
-\donttest{
-fra <- gadm(country="FRA", level=1, path=tempdir())
-}
+bel <- gadm(country="BEL", level=1, path=tempdir())
 }
 

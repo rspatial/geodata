@@ -41,10 +41,3 @@ GLAD:
 Potapov, P., S. Turubanova, M.C. Hansen, A. Tyukavina, V. Zalles, A. Khan, X.-P. Song, A. Pickens, Q. Shen, J. Cortez, 2021. Global maps of cropland extent and change show accelerated cropland expansion in the twenty-first century. Nature Food. doi:10.1038/s43016-021-00429-z
 }
 
-
-
-\examples{
-\donttest{
-#x <- cropland("WorldCover", path=tempdir())
-}
-}

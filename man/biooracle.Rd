@@ -39,10 +39,8 @@ Assis, J., Tyberghein, L., Bosh, S., Verbruggen, H., Serrão, E.A., & De Clerck,
 
 \examples{
 \donttest{
+# this is a large download
 x <- bio_oracle(path=tempdir(), "Salinity", "Max", 
 		benthic=TRUE, depth="Mean", time="Present")
-
-y <- bio_oracle(path=tempdir(), "Temperature", "Mean", 
-		benthic=FALSE, time=2100, rcp=45)
 }
 }

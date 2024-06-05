@@ -31,8 +31,6 @@ See \url{https://www.openstreetmap.org/copyright}
 }
 
 \examples{
-\donttest{
 aruba <- osm(country="Aruba", "places", path=tempdir())
-}
 }
 

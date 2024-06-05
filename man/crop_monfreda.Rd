@@ -38,9 +38,7 @@ Monfreda, C., N. Ramankutty, and J. A. Foley (2008), Farming the planet: 2. Geog
 
 
 \examples{
-\donttest{
 mcas <- crop_monfreda("cassava", path=tempdir())
 mcas
 names(mcas)
-}
 }
