@@ -40,13 +40,13 @@
 
 
 
-.wcerad22 <- function(lon, lat, path, ...) {
+.wcerad23 <- function(lon, lat, path, sds=TRUE, ...) {
 	path <- .get_path(path, "climate")
 	ids <- unique(.get_era_id(lon, lat))
 	
-	pth <- file.path(path, "wcdera")
+	pth <- file.path(path, "wcdera23")
 	fname <- paste0("wcdera_", ids, ".nc")
-	outfname <- file.path(pth, gsub("_", "21_", fname))
+	outfname <- file.path(pth, gsub("_", "23_", fname))
 	for (i in 1:length(fname)) {
 		if (!file.exists(outfname[i])) {
 			dir.create(pth, showWarnings=FALSE)
@@ -55,7 +55,7 @@
 			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
 		}
 	}
-	if (length(outfname) == 1) {
+	if (sds && (length(outfname) == 1)) {
 		sds(outfname)
 	} else {
 		outfname
