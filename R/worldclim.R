@@ -4,7 +4,7 @@
 }
 
 
-.get_id <- function(lon, lat) {
+.get_era_id <- function(lon, lat) {
 	r <- rast(res=5)	
 	id <- unique(cellFromXY(r, cbind(lon,lat)))
 	if (any(is.na(id))) stop("invalid coordinates (lon/lat reversed?)")
@@ -18,26 +18,54 @@
 
 .wcerad <- function(lon, lat, path, ...) {
 	path <- .get_path(path, "climate")
-	ids <- .get_id(lon, lat)	
-	#ids <- unique(cellFromXY(r, cbind(lon,lat)))
+	ids <- unique(.get_era_id(lon, lat))
+	
 	pth <- file.path(path, "wcdera")
-	for (id in ids) {
-		fname <- paste0("wcdera_", id, ".nc")
-		outfname <- file.path(pth, fname)
-		if (!file.exists(outfname)) {
+	fname <- paste0("wcdera_", ids, ".nc")
+	outfname <- file.path(pth, fname)
+	for (i in 1:length(fname)) {
+		if (!file.exists(outfname[i])) {
 			dir.create(pth, showWarnings=FALSE)
-			turl <- .wc_url(paste0("day/nc/", fname))
+			turl <- .wc_url(paste0("day/nc/", fname[i]))
 			if (is.null(turl)) return(NULL)
-			if (!.downloadDirect(turl, outfname, ...)) return(NULL)
+			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
 		}
 	}
-	sds(outfname)
+	if (length(outfname) == 1) {
+		sds(outfname)
+	} else {
+		outfname
+	}
+}
+
+
+
+.wcerad22 <- function(lon, lat, path, ...) {
+	path <- .get_path(path, "climate")
+	ids <- unique(.get_era_id(lon, lat))
+	
+	pth <- file.path(path, "wcdera")
+	fname <- paste0("wcdera_", ids, ".nc")
+	outfname <- file.path(pth, gsub("_", "21_", fname))
+	for (i in 1:length(fname)) {
+		if (!file.exists(outfname[i])) {
+			dir.create(pth, showWarnings=FALSE)
+			turl <- .wc_url(paste0("day/nc/", fname[i]))
+			if (is.null(turl)) return(NULL)
+			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
+		}
+	}
+	if (length(outfname) == 1) {
+		sds(outfname)
+	} else {
+		outfname
+	}
 }
 
 
 .wcerad21 <- function(lon, lat, path, ...) {
 	path <- .get_path(path, "climate")
-	id <- .get_id(lon, lat)
+	id <- .get_era_id(lon, lat)
 
 	pth <- file.path(path, "wcdera")
 	fname <- paste0("wcdera_", id, ".nc")
