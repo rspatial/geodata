@@ -2,7 +2,7 @@
 
 \alias{soil_world_vsi}
 
-\title{soil grids_vsi}
+\title{Global soil data, virtual connection}
 
 \description{
 Virtually connect to the global soilgrids data. See https://www.isric.org/explore/soilgrids for more info.

@@ -133,12 +133,14 @@ soil_af_isda_vsi <- function(var="") {
 	nms <- isda_shortname(bands$description)
 	bt <- j$`back-transformation`
 
-
 	r <- rast(urls[i], vsi=TRUE)
 	names(r) <- nms
 	units(r) <- un
-	if (!is.null(bt)) message(paste("back-transformation:", bt))
+	if (!is.null(bt)) {
+		message(paste("\nNOTE back-transformation needed:", bt, "\n"))
+	}
 	r
+
 }
 
 
