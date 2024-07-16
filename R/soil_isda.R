@@ -137,7 +137,7 @@ soil_af_isda_vsi <- function(var="") {
 	names(r) <- nms
 	units(r) <- un
 	if (!is.null(bt)) {
-		message(paste("\nNOTE back-transformation needed:", bt, "\n"))
+		message(paste("\nNOTE the back-transformation needed:", bt))
 	}
 	r
 
