@@ -113,7 +113,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 
 
 
-soil_af_isda_highres <- function(var) {
+soil_af_isda_highres <- function(var="") {
 
 	burl <- "https://isdasoil.s3.amazonaws.com/soil_data/"
 	info <- paste0(burl, "collection.json")
@@ -121,9 +121,9 @@ soil_af_isda_highres <- function(var) {
 	vars <- gsub(".json", "", basename(links$href[links$rel=="item"]))
 	urls <- paste0(burl, vars, "/", vars, ".tif")
 	vv <- gsub(".tif$", "", basename(urls))
-	i <- match(var, vv)
+	i <- match(tolower(var), tolower(vv))
 	if (is.na(i)) {
-		stop(paste("not a valid variable. Use of of:\n", paste(vv, collapse=", ")))
+		stop(paste("var not valid. Use one of:\n", paste(vv, collapse=", ")))
 	}
 	
 	js <- paste0(burl, vv[i], "/", vv[i], ".json")
