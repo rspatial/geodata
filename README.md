@@ -15,7 +15,7 @@ You can install the released version of **geodata** from [CRAN](https://CRAN.R-p
 install.packages("geodata")
 ```
 
-You can install the development version of **geodata** from [GitHub](https://github.com/) with:
+You can install the development version of **geodata** from github with:
 
 ``` r
 # install.packages("remotes")
