@@ -113,7 +113,7 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 
 
 
-soil_af_isda_highres <- function(var="") {
+soil_af_isda_vsi <- function(var="") {
 
 	burl <- "https://isdasoil.s3.amazonaws.com/soil_data/"
 	info <- paste0(burl, "collection.json")
