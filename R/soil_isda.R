@@ -1,4 +1,34 @@
 
+isda_shortname <- function(longname) {
+	nms <- gsub(" predicted ", "", tolower(longname))
+	nms <- gsub(", standard deviation", "-sd", nms)
+	nms <- gsub("mean at", "", nms)
+	nms <- gsub(" at ", ",", nms)
+	nms <- gsub(" depth", "", nms)
+	nms <- gsub(" ", "", nms)
+	nms <- gsub(",", "_", nms)
+	nms <- gsub("_extractable", "-extr", nms)
+	nms <- gsub("_organic", "-organic", nms)
+	nms <- gsub("_total", "-total", nms)
+	nms <- gsub("_depth", "", nms)
+	nms <- gsub("_class", "", nms)
+	nms <- gsub("_content", "", nms)
+	nms <- gsub("aluminium", "Al", nms)
+	nms <- gsub("magnesium", "Mg", nms)
+	nms <- gsub("calcium", "Ca", nms)
+	nms <- gsub("potassium", "K", nms)
+	nms <- gsub("carbon", "C", nms)
+	nms <- gsub("cation_exchange_capacity", "CEC", nms)
+	nms <- gsub("iron", "Fe", nms)
+	nms <- gsub("nitrogen", "N", nms)
+	nms <- gsub("phosphorous", "P", nms)
+	nms <- gsub("sulphur", "S", nms)
+	gsub("zinc", "Zn", nms)
+}
+
+
+
+
 .isda_vars <- function() {
 	old <- c("al", "bdr", "db.od", "ca", "oc", "c.tot", "cec", "clay", NA, "fe", "mg", "n.tot", "ph.h2o", "p", "k", "sand", "silt", "wpg2", "s", "texture", "zn")
 	new <- c("extr_al", "bedrock", "bulkdens", "extr_ca", "org_c", "tot_c", "cec", "clay", NA, "extr_fe", "extr_mg", "tot_N", "ph.h2o", "extr_p", "extr_k", "sand", "silt", "stone", "extr_s", "texture", "extr_zn")
@@ -7,8 +37,6 @@
 }
 
 
-#soil_af_isda_highres <- function() {
-#}
 
 soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 
@@ -17,9 +45,13 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 		r <- lapply(var, function(v) soil_af_isda(v, depth[1], error=error, path, ...))
 		return(rast(r))
 	}
-
 	var <- tolower(var[1])
+
+	vars <- .isda_vars()
+
 	vars <- c("al", "bdr", "clay", "c.tot", "ca", "db.od", "ecec.f", "fe", "k", "mg", "n.tot", "oc", "p", "ph.h2o", "sand", "silt", "s", "texture", "wpg2", "zn")
+	
+
 	if (!(var %in% vars)) {
 		stop(paste("unknown variable. Use one of:\n", paste(vars, collapse=", ")))
 	}
@@ -76,6 +108,36 @@ soil_af_isda <- function(var, depth=20, error=FALSE, path, virtual=FALSE, ...) {
 	} else {
 		r <- rast(filepath)
 	}
+	r
+}
+
+
+
+soil_af_isda_highres <- function(var) {
+
+	burl <- "https://isdasoil.s3.amazonaws.com/soil_data/"
+	info <- paste0(burl, "collection.json")
+	links <- jsonlite::fromJSON(readLines(info, warn=FALSE))$links
+	vars <- gsub(".json", "", basename(links$href[links$rel=="item"]))
+	urls <- paste0(burl, vars, "/", vars, ".tif")
+	vv <- gsub(".tif$", "", basename(urls))
+	i <- match(var, vv)
+	if (is.na(i)) {
+		stop(paste("not a valid variable. Use of of:\n", paste(vv, collapse=", ")))
+	}
+	
+	js <- paste0(burl, vv[i], "/", vv[i], ".json")
+	j <- jsonlite::fromJSON(readLines(js, warn=F))
+	bands <- j$assets$image$`eo:bands`
+	un <- j$unit
+	nms <- isda_shortname(bands$description)
+	bt <- j$`back-transformation`
+
+
+	r <- rast(urls[i], vsi=TRUE)
+	names(r) <- nms
+	units(r) <- un
+	if (!is.null(bt)) message(paste("back-transformation:", bt))
 	r
 }
 
