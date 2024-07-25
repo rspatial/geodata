@@ -25,7 +25,7 @@
 	}
 	
 	var <- var[1]
-	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "wrb"))
+	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "cec", "wrb"))
 	if (var == "wrb") {
 		#h <- readLines("https://files.isric.org/soilgrids/latest/data/wrb/")
 		#h <- grep("vrt<", h, value=TRUE)
