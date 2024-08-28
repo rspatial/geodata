@@ -19,7 +19,7 @@ bio_oracle(path, var, stat, benthic=FALSE,
   \item{stat}{character. Statistic of interest. One of 'Lt.max', 'Lt.min', 'Max', 'Mean', 'Min', 'Range'. It should be "" if \code{var} is "pH"}
   \item{benthic}{logical. If \code{FALSE} surface data are returned}
   \item{depth}{character. Either "Min", "Mean", or "Max". Only relevant if \code{benthic} is \code{TRUE}}
-  \item{time}{character. Either "Present", "2150" or "2100"}
+  \item{time}{character. Either "Present", "2050" or "2100"}
   \item{rcp}{character. Either "26", "45", "60", or "85"}
   \item{...}{additional arguments passed to \code{\link{download.file}}}  
 } 
