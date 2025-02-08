@@ -45,7 +45,7 @@ geodata_cache_size <- function() {
 
 
 clear_geodata_cache <- function(pattern="") {
-	path <- file.path(rappdirs::user_data_dir(), ".geodata")
+	path <- file.path(rappdirs::user_data_dir(), "geodata")
 	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
 	if (pattern != "") {
 		ff <- grep(pattern, ff, value=TRUE)
@@ -57,7 +57,7 @@ clear_geodata_cache <- function(pattern="") {
 	if (missing(path)) {
 		path <- geodata_path()
 		if (path == "") {
-			path <- file.path(rappdirs::user_data_dir(), ".geodata")
+			path <- file.path(rappdirs::user_data_dir(), "geodata")
 			dir.create(path, FALSE, TRUE)
 		}
 	}
