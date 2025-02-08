@@ -37,10 +37,21 @@
 }
 
 
+clear_geodata_cache <- function() {
+	path <- file.path(rappdirs::user_data_dir(), ".geodata")
+	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
+	file.remove(ff)
+} 
+
 .get_path <- function(path, add) {
 	if (missing(path)) {
 		path <- geodata_path()
+		if (path == "") {
+			path <- file.path(rappdirs::user_data_dir(), ".geodata")
+			dir.create(path, FALSE, TRUE)
+		}
 	}
+	
 	path <- path[1]
 	if (!is.character(path)) stop("path is not a character value", call.=FALSE)
 	if (is.null(path)) stop("path cannot be NULL", call.=FALSE)
@@ -57,7 +68,14 @@ geodata_path <- function(path) {
 	if (missing(path)) {
 		p <- getOption("geodata_default_path", default = "")
 		if (p == "") p <- Sys.getenv("GEODATA_PATH")
+		if (p == "") {
+			p <- file.path(rappdirs::user_data_dir(), ".geodata")
+			dir.create(p, FALSE, TRUE)
+		}
 		return(p)
+	}
+	if (is.na(path)) {
+		return(options(geodata_default_path=""))
 	}
 	path <- .get_path(path, "")
 	options(geodata_default_path=path)

@@ -5,19 +5,16 @@
 \title{Set the data path}
 
 \description{
-This function allows you set or get the default download path for the geodata package. By setting this path you can avoid downloading the same data many times over. This also guards against website service interruptions.
 
-The default path is ignored if you use the path variable in a function.
+This function allows you set or get the default download cache path for the geodata package. The default path is ignored if you set the \code{path} argument in a geodata function to another value.
 
-To save the default path across sessions, you can add a line like this:
+The "factory-fresh" default location for downloads is returned by \code{file.path(rappdirs::user_data_dir(), ".geodata")}
 
-\code{options( geodata_default_path = "c:/your/geodata/path")} 
- 
-to the file returned by
- 
-\code{file.path( R.home(), "etc/Rprofile.site")}
+You can set it to another value with this function. To save your own default path across sessions, you can add a line like this:
 
- Alternatively, you can also set a system variable "GEODATA_PATH" to the desired path. 
+\code{options( geodata_default_path = "c:/your/geodata/path")} to the file returned by \code{file.path( R.home(), "etc/Rprofile.site")}
+
+Alternatively, you can also set a system variable "GEODATA_PATH" to the desired path. 
 }
 
 \usage{
@@ -26,7 +23,7 @@ geodata_path(path)
 
 
 \arguments{
-  \item{path}{character. Path name where the data should be downloaded to. If missing, the current default path is returned} 
+  \item{path}{character. Path name where geodata should be download and cache data. If missing, the current default path is returned. Use \code{NA} to restore the original value} 
 }
 
 \value{
