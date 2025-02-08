@@ -37,9 +37,19 @@
 }
 
 
-clear_geodata_cache <- function() {
+geodata_cache_size <- function() {
 	path <- file.path(rappdirs::user_data_dir(), ".geodata")
 	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
+	round(sum(file.size(ff)) / 1024^2, 2)
+} 
+
+
+clear_geodata_cache <- function(pattern="") {
+	path <- file.path(rappdirs::user_data_dir(), ".geodata")
+	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
+	if (pattern != "") {
+		ff <- grep(pattern, ff, value=TRUE)
+	}
 	file.remove(ff)
 } 
 
