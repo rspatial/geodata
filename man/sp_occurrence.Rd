@@ -17,7 +17,7 @@ Download data from the Global Biodiversity Information Facility (\href{https://w
 
 You can check the number of records returned by using the option \code{download=FALSE}.
 
-To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_split}. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame). If the function is interrupted, it can be run again, and it will resume where it left off.
+To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_split}. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame or SpatVector). If the function is interrupted, it can be run again, and it will resume where it left off.
 
 If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
 
@@ -30,11 +30,11 @@ sp_genus(genus, simple=TRUE, ...)
 
 sp_occurrence(genus, species="", ext=NULL, args=NULL, geo=TRUE, 
 	removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, 
-	start=1, end=Inf, fixnames=TRUE, ...)
+	start=1, end=Inf, fixnames=TRUE, sv=FALSE, ...)
 
 sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90),
 	args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300,
-	fixnames=TRUE, prefix=NULL, ...)
+	fixnames=TRUE, prefix=NULL, sv=FALSE, ...)
 }
  
 \arguments{
@@ -55,12 +55,13 @@ sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90),
   \item{prefix}{character. prefix of the downloaded filenames (best left NULL, the function will then use "genus_species"}
 
   \item{simple}{logical. If \code{TRUE}, a vector the accepted species names are returned. Otherwise a data.frame with much more information is returned}  
+  \item{sv}{logical. If \code{TRUE}, a SpatVector rather than a data frame is returned.}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 }
 
 
 \value{
-data.frame 
+data.frame, or SpatVector if \code{sv=TRUE}
 }
 
 \note{
