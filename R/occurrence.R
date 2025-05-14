@@ -145,7 +145,7 @@ sp_genus <- function(genus, simple=TRUE, ...) {
 }
 
 
-sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, ...) {
+sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, removeZeros=FALSE, download=TRUE, ntries=5, nrecs=300, start=1, end=Inf, fixnames=TRUE, sv=FALSE, ...) {
 	
 	
 	if (! requireNamespace("jsonlite")) { stop("You need to install the jsonlite package to use this function") }
@@ -325,6 +325,13 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	z <- z[, sort(colnames(z))]
 	d <- as.Date(Sys.time())
 	z <- cbind(z, downloadDate=d)	
+
+        if (sv) {
+          xcoor <- ifelse(fixnames, "lon", "decimalLongitude")
+          ycoor <- ifelse(fixnames, "lat", "decimalLatitude")
+          z <- vect(z, geom=c(xcoor, ycoor), keepgeom=TRUE, crs="epsg:4326")
+        }
+
 	return(z)
 }
 
@@ -370,7 +377,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 
 
-sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
+sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, sv=FALSE, ...) {
 
 	if (is.null(prefix)) {
 		prefix <- tolower(paste0(genus, "_", species, "_"))
@@ -394,6 +401,13 @@ sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,
 	out <- do.call(.frbind, out)
 	out <- unique(out)
 	saveRDS(out, fout)
+
+	if (sv) {
+          xcoor <- ifelse(fixnames, "lon", "decimalLongitude")
+          ycoor <- ifelse(fixnames, "lat", "decimalLatitude")
+          out <- vect(out, geom=c(xcoor, ycoor), keepgeom=TRUE, crs="epsg:4326")
+        }
+
 	return(out)
 }
 
