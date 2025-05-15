@@ -187,9 +187,9 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	end <- min(end, ntot)
 	stopifnot(start <= end)
 
-	if (end > 100000) {
-		stop("GBIF does not allow using this service for record numbers that are > 100,000")
-	}
+	# if (end > 100000) {
+	# 	stop("GBIF does not allow using this service for record numbers that are > 100,000. Try delimiting the query with arguments 'ext', 'args', or 'start' and 'end'.")
+	# }
 
 	ntot <- (end-start)+1
 	message(ntot, " records found")
@@ -198,7 +198,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	}
 
 	if (ntot > 100000) {
-		stop("The number of records is larger than the maximum for download via this service (100,000)")
+		stop("The number of records is larger than the maximum for download via this service (100,000). Try delimiting the query with arguments 'ext', 'args', or 'start' and 'end'.")
 	}
 
 	nrecs <- min(max(nrecs, 1), 300)
