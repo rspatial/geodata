@@ -37,7 +37,7 @@ clear_geodata_cache <- function(pattern="") {
 } 
 
 .get_path <- function(path, add) {
-	if (missing(path)) {
+	if (missing(path) || is.null(path) || is.na(path) || (path == "")) {
 		path <- geodata_path()
 		if (path == "") {
 			path <- .rapp_path()
@@ -47,9 +47,9 @@ clear_geodata_cache <- function(pattern="") {
 	
 	path <- path[1]
 	if (!is.character(path)) stop("path is not a character value", call.=FALSE)
-	if (is.null(path)) stop("path cannot be NULL", call.=FALSE)
-	if (is.na(path)) stop("path cannot be NA", call.=FALSE)
-	if (path == "") stop("path is missing", call.=FALSE)
+#	if (is.null(path)) stop("path cannot be NULL", call.=FALSE)
+#	if (is.na(path)) stop("path cannot be NA", call.=FALSE)
+#	if (path == "") stop("path is missing", call.=FALSE)
 	.check_path(path)
 	path <- file.path(path, add)
 	.check_path(path, TRUE)
