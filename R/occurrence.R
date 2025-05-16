@@ -394,7 +394,7 @@ sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,
 	.run_sp_occurrence_batch(genus, species, path=path, ext=ext, args=args, geo=geo, removeZeros=removeZeros, ntries=ntries, nrecs=nrecs, fixnames=fixnames, prefix=prefix, ...)
 
 	message("combining")
-	ff  <- list.files("gbif", pattern=paste0("^", genus, "_", species), full.names=TRUE)
+	ff <- list.files("gbif", pattern=paste0("^", genus, "_", species), full.names=TRUE, ignore.case=TRUE)
 	out <- lapply(ff, readRDS)
 	i <- sapply(out, is.null)
 	if (any(i)) out <- out[[!i]]
