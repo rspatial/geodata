@@ -1,12 +1,33 @@
 
+wc_cruts_month <- function(var, path, time, ...) {
 
-.wccruts <- function(lon, lat, path, ...) {
+	stopifnot(res %in% c("2.5", "5", "10"))
+	stopifnot(var %in% c("tmin", "tmax", "prec"))
+
+	start <- seq(1950, 2010, 10)
+	end <- start + 9
+	end[length(end)] <- 2024
+	tm <- apply(cbind(start, end), 1, function(x) paste(x, collapse="-"))
+	if (!time %in% tm) {
+		stop(paste("time should be one of:", paste(tm, collapse=", ")))
+	}
+
+	path <- .get_path(path, "climate/hist")
+	fname <- paste0("wc2.1_cruts4.09_", res, "_", var, "_", time, ".zip")
+	turl <- .wc_url(paste0("hist/cts4.09/", fname))
+	outfname <- file.path(path, fname)
+	pat <- paste0("wc2.1_cruts4.09_", res, "_", var, "_", substr(time, 1, 3), ".*.tif$")
+	ff <- list.files(path=path, pattern=pat, full.names=TRUE)
+	if (length(ff) == 0) {
+		if (!.downloadDirect(turl, outfname, unzip=TRUE, ...)) return(NULL)
+		ff <- list.files(path=path, pattern=pat, full.names=TRUE)
+	}
+	rast(sort(ff))
 }
 
 
-.get_era_id <- function(lon, lat) {
-	r <- rast(res=5)	
-	id <- unique(cellFromXY(r, cbind(lon,lat)))
+.did_lonlat <- function(lon, lat) {
+	id <- unique(cellFromXY(rast(res=5), cbind(lon,lat)))
 	if (any(is.na(id))) stop("invalid coordinates (lon/lat reversed?)")
 	path <- system.file(package="geodata")
 	tiles <- readRDS(file.path(path, "ex/tiles.rds"))
@@ -16,42 +37,36 @@
 	id
 }
 
-.wcerad <- function(lon, lat, path, ...) {
-	path <- .get_path(path, "climate")
-	ids <- unique(.get_era_id(lon, lat))
-	
-	pth <- file.path(path, "wcdera")
-	fname <- paste0("wcdera_", ids, ".nc")
-	outfname <- file.path(pth, fname)
-	for (i in 1:length(fname)) {
-		if (!file.exists(outfname[i])) {
-			dir.create(pth, showWarnings=FALSE)
-			turl <- .wc_url(paste0("day/nc/", fname[i]))
-			if (is.null(turl)) return(NULL)
-			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
-		}
+.did_extent <- function(e) {
+	ids <- cells(rast(res=5), e)
+	if (length(ids) == 0) {
+		stop("area is not on earth?")		
 	}
-	if (length(outfname) == 1) {
-		sds(outfname)
-	} else {
-		outfname
+	path <- system.file(package="geodata")
+	tiles <- readRDS(file.path(path, "ex/tiles.rds"))
+	ids <- ids[ids %in% tiles]
+	if (length(ids) == 0) {
+		stop("there is no weather data for this location (not on land?)")
 	}
+	ids
 }
 
 
+worldclim_day <- function(x, path, sds=FALSE, ...) {
 
-.wcerad23 <- function(lon, lat, path, sds=TRUE, ...) {
 	path <- .get_path(path, "climate")
-	ids <- unique(.get_era_id(lon, lat))
-	
-	pth <- file.path(path, "wcdera23")
-	fname <- paste0("wcdera_", ids, ".nc")
-	outfname <- file.path(pth, gsub("_", "23_", fname))
+	if (NCOL(x) == 2) {
+		ids <- unique(.did_lonlat(x[,1], x[,2]))
+	} else {
+		ids <- unique(.did_extent(ext(x)))
+	}
+	pth <- file.path(path, "day24")
+	dir.create(pth, showWarnings=FALSE)
+	fname <- paste0("wcd_", ids, ".nc")
+	outfname <- file.path(pth, gsub("_", "24_", fname))
 	for (i in 1:length(fname)) {
 		if (!file.exists(outfname[i])) {
-			dir.create(pth, showWarnings=FALSE)
-			turl <- .wc_url(paste0("day/nc/", fname[i]))
-			if (is.null(turl)) return(NULL)
+			turl <- .wc_url(paste0("day/2024/", fname[i]))
 			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
 		}
 	}
@@ -62,23 +77,6 @@
 	}
 }
 
-
-.wcerad21 <- function(lon, lat, path, ...) {
-	path <- .get_path(path, "climate")
-	id <- .get_era_id(lon, lat)
-
-	pth <- file.path(path, "wcdera")
-	fname <- paste0("wcdera_", id, ".nc")
-	outfname <- file.path(pth, gsub("_", "21_", fname))
-	if (!file.exists(outfname)) {
-		dir.create(pth, showWarnings=FALSE)
-		turl <- .wc_url(paste0("day/nc21/", fname))
-		if (is.null(turl)) return(NULL)
-		
-		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
-	}
-	sds(outfname)
-}
 
 
 
@@ -96,7 +94,7 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	pth <- file.path(path, "wc2.1_tiles")
 	dir.create(pth, showWarnings=FALSE)
 
-	fname <- paste0("tile_", id, "_wc2.1_30s_", var, ".tif")
+	fname <- paste0("tile_", id, "_wc2.1_30s_", 	var, ".tif")
 	outfname <- file.path(pth, fname)
 
 	if (!file.exists(outfname)) {
