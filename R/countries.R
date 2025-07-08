@@ -15,6 +15,8 @@ country_codes <- function(query = NULL) {
 
 .getCountryISO <- function(country) {
 
+	if (length(country) > 1) warning("'country' has >1 elements, only the first element will be used")
+
 	country <- toupper(trimws(country[1]))
 	cs <- country_codes()
 	cs <- sapply(cs, toupper)
