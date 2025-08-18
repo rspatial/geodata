@@ -8,7 +8,7 @@ get_extents <- function(e) {
 
 powerWeather <- function(year, var, ext, path) {
 
-	path <- .get_path(path, "climate/power")
+	path <- .get_path(path, "weather/power")
 
 	x <- paste(round(as.vector(ext),3), collapse="x")
 	if (length(year) == 1) {
@@ -19,17 +19,16 @@ powerWeather <- function(year, var, ext, path) {
 	}
 	tmppath <- file.path(tempdir(), paste0("nasa_", x))
 	dir.create(tmppath, FALSE, FALSE)
-	cat("tiles: ")
 	if (!file.exists(f)) {
 		print(f); flush.console()
 		ee <- get_extents(ext(ext))
-		tiles <- expand.grid(year=year, ext=1:length(ee)) 
-		
+		tiles <- expand.grid(year=year, ext=1:length(ee)) 		
 		if (nrow(tiles) > 1) {
 			fsub <- file.path(tmppath, paste0(var, "-year_", tiles[,1], "-ext_", tiles[,2], ".nc"))
 		} else {
 			fsub <- f
 		}
+		cat("tiles: ")
 		for (i in 1:nrow(tiles)) {
 			cat(i, " "); flush.console(); if (i%%25 == 0) cat("\n")
 			if (!file.exists(fsub[i])) {
@@ -59,6 +58,8 @@ powerWeather <- function(year, var, ext, path) {
 		} else {
 			r <- rast(f)
 		}
+	} else {
+		r <- rast(f)	
 	}
 	r
 }
