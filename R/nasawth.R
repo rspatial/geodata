@@ -63,7 +63,3 @@ powerWeather <- function(year, var, ext, path) {
 	r
 }
 
-
-outpath3 <- "data/raw/NASA_test"
-dir.create(outpath3, F, T)
-fc2 <- powerWeather(2000:2002, "T2M_MIN", terra::ext(91.5, 102,  8, 26), outpath3)

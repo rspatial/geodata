@@ -1,8 +1,8 @@
 Package: geodata
 Type: Package
-Title: Download Geographic Data 
-Version: 0.6-3
-Date: 2025-02-08
+Title: Access Geographic Data 
+Version: 0.6-4
+Date: 2025-08-18
 Depends: R (>= 3.5.0), terra (>= 1.6.41)
 Imports: rappdirs
 Suggests: jsonlite, R.utils, httr, archive
