@@ -1,5 +1,5 @@
 
-wc_cruts_month <- function(var, path, time, ...) {
+wcts_month <- function(var, path, time, ...) {
 
 	stopifnot(res %in% c("2.5", "5", "10"))
 	stopifnot(var %in% c("tmin", "tmax", "prec"))
@@ -52,7 +52,7 @@ wc_cruts_month <- function(var, path, time, ...) {
 }
 
 
-worldclim_day <- function(x, path, sds=FALSE, ...) {
+.worldclim_day <- function(x, path, sds=FALSE, ...) {
 
 	path <- .get_path(path, "climate")
 	if (NCOL(x) == 2) {
