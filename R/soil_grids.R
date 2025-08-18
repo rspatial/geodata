@@ -39,7 +39,7 @@
 		}
 		u <- file.path(sg_url, var, paste0(name, ".vrt"))
 	} else {
-		depth <- as.character(round(depth[1]))
+		depth <- as.character(round(as.numeric(depth[1])))
 		if (var == "ocs") {
 			if (depth != "30") {
 				stop("ocs is only available for depth=30")
@@ -74,21 +74,28 @@ soil_world_vsi <- function(var, depth, stat="mean", name="") {
 }
 
 
-soil_world <- function(var, depth, stat="mean", name="", path, ...) {
+soil_world <- function(var, depth, stat="mean", name="", path, vsi=FALSE, ...) {
 
-	if (length(var) > 1) {
-		r <- lapply(var, function(v) soil_world(v, depth, stat=stat, name=name, path, ...))
+	b <- expand.grid(name=name, stat=stat, depth=depth, var=var)
+	if (nrow(b) > 1) {
+		b <- data.frame(lapply(b, as.character))
+		r <- lapply(1:nrow(b), function(i) soil_world(b$var[i], b$depth[i], stat=b$stat[i], name=b$name[i], path, vsi=vsi))
 		return(rast(r))
 	}
 	depth <- depth[1]
 	stat <- stat[1]
-	
-	path <- .get_path(path, add="soil_world")
-	if (is.null(path)) return(NULL)
-	
+		
 	u <- .soil_grids_url(var, depth, stat=stat, name=name, vsi=FALSE)
 	if (is.null(u)) return(NULL)
 	u <- gsub(".vrt$", "_30s.tif", u)
+
+	if (vsi) {
+		return(rast(u, vsi=TRUE))
+	}
+
+	path <- .get_path(path, add="soil_world")
+	if (is.null(path)) return(NULL)
+
 	filename <- basename(u)
 	filepath <- file.path(path, filename)
 	if (!file.exists(filepath)) {
