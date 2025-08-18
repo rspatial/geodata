@@ -11,6 +11,8 @@ powerWeather <- function(year, var, ext, path) {
 	path <- .get_path(path, "weather/power")
 
 	x <- paste(round(as.vector(ext),3), collapse="x")
+	this_year <- format(Sys.time(), "%Y")
+	stopifnot(all((year > 1980) & (year < this_year)))
 	if (length(year) == 1) {
 		f <- file.path(path, paste0(var, "-", year, "-", x, ".nc"))
 	} else {
