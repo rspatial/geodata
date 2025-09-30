@@ -18,7 +18,7 @@
 	file.path(rappdirs::user_data_dir(), "geodata")
 }
 
-geodata_cache_size <- function() {
+.geodata_cache_size <- function() {
 	path <- .rapp_path()
 	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
 	round(sum(file.size(ff)) / 1024^2, 1)
@@ -26,7 +26,7 @@ geodata_cache_size <- function() {
 
 
 
-clear_geodata_cache <- function(pattern="") {
+.clear_geodata_cache <- function(pattern="") {
 	path <- .rapp_path()
 	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
 	if (length(ff) == 0) return()

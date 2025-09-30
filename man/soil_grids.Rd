@@ -13,7 +13,7 @@ data license: CC-BY 4.0
 }
 
 \usage{
-soil_world(var, depth, stat="mean", name="", path, ...)
+soil_world(var, depth, stat="mean", name="", path, vsi=FALSE, ...)
 }
 
 \arguments{
@@ -22,6 +22,7 @@ soil_world(var, depth, stat="mean", name="", path, ...)
   \item{stat}{character. One of "mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95". Ignored if \code{var="wrb"}}
   \item{name}{character. One of "Acrisols", "Albeluvisols", "Alisols", "Andosols", "Arenosols", "Calcisols", "Cambisols", "Chernozems", "Cryosols", "Durisols", "Ferralsols", "Fluvisols", "Gleysols", "Gypsisols", "Histosols", "Kastanozems", "Leptosols", "Lixisols", "Luvisols", "Nitisols", "Phaeozems", "Planosols", "Plinthosols", "Podzols", "Regosols", "Solonchaks", "Solonetz", "Stagnosols", "Umbrisols", "Vertisols". Only used when \code{var="wrb"}}  
   \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}  
+  \item{vsi}{logical. If \code{TRUE}, use a virtual connection in stead of a download}  
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 
 }

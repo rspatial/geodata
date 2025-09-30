@@ -1,5 +1,5 @@
 
-isda_shortname <- function(longname) {
+.isda_shortname <- function(longname) {
 	nms <- gsub(" predicted ", "", tolower(longname))
 	nms <- gsub(", standard deviation", "-sd", nms)
 	nms <- gsub("mean at", "", nms)
@@ -130,7 +130,7 @@ soil_af_isda_vsi <- function(var="") {
 	j <- jsonlite::fromJSON(readLines(js, warn=F))
 	bands <- j$assets$image$`eo:bands`
 	un <- j$unit
-	nms <- isda_shortname(bands$description)
+	nms <- .isda_shortname(bands$description)
 	bt <- j$`back-transformation`
 
 	r <- rast(urls[i], vsi=TRUE)
