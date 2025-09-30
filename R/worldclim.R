@@ -1,5 +1,5 @@
 
-wcts_month <- function(var, path, time, ...) {
+.wcts_month <- function(var, path, time, ...) {
 
 	stopifnot(res %in% c("2.5", "5", "10"))
 	stopifnot(var %in% c("tmin", "tmax", "prec"))
@@ -87,14 +87,14 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	if (var == "bioc") var <- "bio"
 	path <- .get_path(path, "climate")
 
-	r <- rast(res=30)
-	id <- cellFromXY(r, cbind(lon,lat))
+	r <- terra::rast(res=30)
+	id <- terra::cellFromXY(r, cbind(lon,lat))
 	if (is.na(id)) stop("invalid coordinates (lon/lat reversed?)")
 
-	pth <- file.path(path, "wc2.1_tiles")
+	pth <- file.path(path, "tiles_2.1")
 	dir.create(pth, showWarnings=FALSE)
 
-	fname <- paste0("tile_", id, "_wc2.1_30s_", 	var, ".tif")
+	fname <- paste0("tile_", id, "_wc2.1_30s_",	var, ".tif")
 	outfname <- file.path(pth, fname)
 
 	if (!file.exists(outfname)) {
@@ -113,7 +113,7 @@ worldclim_country <- function(country, var, path, version="2.1", ...) {
 	version <- as.character(version)
 	stopifnot(version %in% c("2.1"))
 	if (var == "bioc") var <- "bio"
-	iso <- .getCountryISO(country)
+	iso <- unique(.getCountryISO(country))
 
 	path <- .get_path(path, "climate")
 	pth <- file.path(path, "wc2.1_country")
@@ -122,12 +122,18 @@ worldclim_country <- function(country, var, path, version="2.1", ...) {
 	fname <- paste0(iso, "_wc2.1_30s_", var, ".tif")
 	outfname <- file.path(pth, fname)
 	
-	if (!file.exists(outfname)) {
-		turl <- .wc_url(paste0("tiles/iso/", fname))
-		if (is.null(turl)) return(NULL)
-		if (!.downloadDirect(turl, outfname, ...)) return(NULL)
+	for (i in 1:length(fname)) {
+		if (!file.exists(outfname[i])) {
+			turl <- .wc_url(paste0("tiles/iso/", fname[i]))
+			if (is.null(turl)) return(NULL)
+			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
+		}
 	}
-	rast(outfname)
+	if (length(outfname) == 1) {
+		rast(outfname)
+	} else {
+		sprc(outfname)
+	}
 }
 
 

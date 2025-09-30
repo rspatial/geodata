@@ -15,40 +15,41 @@ country_codes <- function(query = NULL) {
 
 .getCountryISO <- function(country) {
 
-	if (length(country) > 1) warning("'country' has >1 elements, only the first element will be used")
-
-	country <- toupper(trimws(country[1]))
+	country <- toupper(trimws(country))
 	cs <- country_codes()
 	cs <- sapply(cs, toupper)
 	cs <- data.frame(cs, stringsAsFactors=FALSE)
 	nc <- nchar(country)
+	
+	out <- rep(NA, length(nc))
 
-	if (nc == 3) {
-		if (country %in% cs$ISO3) {
-			return(country)
-		} else {
-			stop('unknown country')
+	iso3 <- nc == 3	
+	if (any(iso3)) {
+		j <- country %in% cs$ISO3
+		out[j] <- country[j]
+	} 
+	if (!any(is.na(out))) return(out)
+
+	iso2 <- nc == 2
+	if (any(iso2)) {
+		j <- country %in% cs$ISO2
+		if (any(j)) {
+			j <- which(j)
+			i <- match(country[j], cs$ISO2)
+			out[j] <- cs$ISO3[i]
 		}
-	} else if (nc == 2) {
-		if (country %in% cs$ISO2) {
-			i <- which(country==cs$ISO2)
-			return( cs$ISO3[i] )
-		} else {
-			stop('unknown country')
-		}
-	} else if (country %in% cs[,1]) {
-		i <- which(country==cs[,1])
-		return( cs$ISO3[i] )
-	} else if (country %in% cs[,4]) {
-		i <- which(country==cs[,4])
-		return( cs$ISO3[i] )
-	} else if (country %in% cs[,5]) {
-		i <- which(country==cs[,5])
-		return( cs$ISO3[i] )
-	} else {
-		stop('provide a valid name or 3 letter ISO country code; you can get a list with "country_codes()"')
 	}
+	if (!any(is.na(out))) return(out)
+
+	for (nc in c(1, 4, 5, 6)) {
+		j <- (country %in% cs[,nc])
+		if (any(j)) {
+			j <- which(j)
+			i <- match(country[j], cs[,nc])
+			out[j] <- cs$ISO3[i]
+		}
+		if (!any(is.na(out))) return(out)
+	}
+	stop(paste("unknown country:", paste(country[is.na(out)], collapse=", ")), '\n  Provide a valid name or 3 letter ISO country code; see "?country_codes()"')
 }
-
-
 
