@@ -78,6 +78,16 @@
 }
 
 
+.good.file.exists <- function(x, raster=TRUE) {
+	if (file.exists(x)) {
+		if (isTRUE(file.info(x)$size > 0)) {
+			return(TRUE)
+		} else {
+			file.remove(x)
+		}
+	}
+	FALSE
+}
 
 
 worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
@@ -97,7 +107,7 @@ worldclim_tile <- function(var, lon, lat, path, version="2.1", ...) {
 	fname <- paste0("tile_", id, "_wc2.1_30s_",	var, ".tif")
 	outfname <- file.path(pth, fname)
 
-	if (!file.exists(outfname)) {
+	if (!.good.file.exists(outfname)) {
 		turl <- .wc_url(paste0("tiles/tile/", fname))
 		if (is.null(turl)) return(NULL)
 	
