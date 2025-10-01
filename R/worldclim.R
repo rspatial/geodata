@@ -254,11 +254,15 @@ worldclim_global <- function(var, res, path, version="2.1", ...) {
 
 cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 
-	res <- as.character(res)
-	fres <- ifelse(res==0.5, "30s", paste0(res, "m"))
-	ssp <- as.character(ssp)
+	model = model[1]
+	ssp <- as.character(ssp[1])
+	time <- time[1]
+	var <- var[1]
 	if (var == "bio") var <- "bioc"
-	try(.check_cmip6(res, var, ssp, model, time), silent=TRUE)
+	res <- as.character(res[1])
+	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
+
+	.check_cmip6(res, var, ssp, model, time)
 	path <- .get_path(path, "climate")
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)

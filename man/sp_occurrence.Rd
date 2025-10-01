@@ -75,24 +75,22 @@ Under the terms of the GBIF data user agreement, users who download data agree t
 }
 
 \examples{
-sp_occurrence("solanum", download=FALSE)
 sp_occurrence("solanum", "acaule", download=FALSE)
 
-sp_occurrence("Batrachoseps", "" , down=FALSE)
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
-g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=25)
+g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=5)
 #plot(g[, c("lon", "lat")])
 
 
 ## args
-a1 <- sp_occurrence("Elgaria", "multicarinata", 
-			args="recordNumber=Robert J. Hijmans RH-2")
-a2 <- sp_occurrence("Batrachoseps", "luciae",
-			args=c("year=2023", "identifiedBy=Anthony Ye"))
+#a1 <- sp_occurrence("Elgaria", "multicarinata", 
+#			args="recordNumber=Robert J. Hijmans RH-2")
+#a2 <- sp_occurrence("Batrachoseps", "luciae",
+#			args=c("year=2023", "identifiedBy=Anthony Ye"))
 
 ## year supports "range queries"
-a3 <- sp_occurrence("Batrachoseps", "luciae", 
-			args=c("year=2020,2023", "identifiedBy=Kuoni W"))
+#a3 <- sp_occurrence("Batrachoseps", "luciae", 
+#			args=c("year=2020,2023", "identifiedBy=Kuoni W"))
 #table(a3[,c("year")])
 }
 
