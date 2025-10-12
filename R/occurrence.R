@@ -197,8 +197,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		return(NULL)
 	}
 
-	if (ntot > 100000) {
-		stop("The number of records is larger than the maximum for download via this service (100,000). Try delimiting the query with arguments 'ext', 'args', or 'start' and 'end'.")
+	if (end > 100000) {
+		stop("The record number is larger than the maximum allowed via this service (100,000). Try delimiting the query with arguments 'ext' or 'args'")
 	}
 
 	nrecs <- min(max(nrecs, 1), 300)

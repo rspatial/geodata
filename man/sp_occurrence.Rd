@@ -13,11 +13,11 @@ Download data from the Global Biodiversity Information Facility (\href{https://w
 
 \code{sp_genus} returns a data.frame with all the species names associated with a genus. 
 
-\code{sp_occurrence} downloads occurrence records for a single species. Note that the maximum number of records that can be downloaded for a single search is 100,000. 
+\code{sp_occurrence} downloads occurrence records for a single species. 
 
 You can check the number of records returned by using the option \code{download=FALSE}.
 
-To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_split}. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame or SpatVector). If the function is interrupted, it can be run again, and it will resume where it left off.
+Note that the you can only download up to record number 100,000. To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in \code{sp_occurrence_split}. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame or SpatVector). If the function is interrupted, it can be run again, and it will resume where it left off.
 
 If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
 
