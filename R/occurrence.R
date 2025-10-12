@@ -183,7 +183,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 		message("no records found")
 		return(NULL)
 	}
-	start <- max(1, start)
+	origstart <- start <- max(1, start)
 	end <- min(end, ntot)
 	stopifnot(start <= end)
 
@@ -220,7 +220,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 			np <- 1
 			message("")
 		}
-		message(paste(format(start-1, scientific=FALSE), "-", sep=""), appendLF = FALSE) 
+		message(paste(format(start, scientific=FALSE), "-", sep=""), appendLF = FALSE) 
 		utils::flush.console()
 		tries <- 0
 		np <- np + 1
@@ -263,7 +263,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	}
 	message(end) 
 
-	message(min(end, x$count), " records downloaded")
+	message(min(end, x$count-origstart+1), " records downloaded")
 
 	if (length(g) == 0) {
 		return(NULL)
