@@ -10,7 +10,7 @@ The spatial resolution is 30 arc-seconds (about 1 km2), aggregated from the orig
 
 The data have an Open Data Commons Open Database License (ODbL)
 
-For more information, see https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
+For more information, see https://web.archive.org/web/20250421195225/https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
 }
 
 \usage{

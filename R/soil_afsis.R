@@ -2,17 +2,19 @@
 
 soil_af <- function(var, depth=20, path, ...) {
 
-	if (length(var) > 1) {
-		r <- lapply(var, function(v) soil_af(v, depth, path, ...))
+	g <- expand.grid(var, depth)
+	if (nrow(g) > 1) {
+		r <- lapply(1:nrow(g), function(v) soil_af(g[i,1], g[i,2], path, ...))
 		return(rast(r))
 	}
 
 	path <- .get_path(path, add="soil_af")
 
-	depth <- depth[1]
+	vardepth <- depth <- depth[1]
 	var <- tolower(var)
 	
-	knownvars <- c("clay", "sand", "silt", "coarse", "SOC", "BLKD", "poros", "AWpF2.0", "AWpF2.3", "AWpF2.5", "AWpF4.2", "BDR", "pH", "ECN", "acid-exch", "bases-exch", "CEC", "Al-extr", "Al-exch", "Ca-exch", "K-exch", "Mg-exch", "Na-exch", "Ntot")
+	# "poros", "AWpF2.0", "AWpF2.3", "AWpF2.5", "AWpF4.2", 
+	knownvars <- c("acid-exch", "Al-extr", "Al-exch", "bases-exch", "BDR", "BLKD", "Ca-exch", "CEC", "clay", "coarse", "drain", "ECN", "K-exch", "Mg-exch", "Na-exch", "Ntot", "pH", "sand", "silt", "SOC", "texture")
 	if (!(var %in% tolower(knownvars))) {
 		stop(paste("var should be one of:", paste(knownvars, collapse=", ")))
 	}
@@ -21,9 +23,28 @@ soil_af <- function(var, depth=20, path, ...) {
 	if (!(depth %in% dpts)) {
 		stop(paste("depth must be one of:", paste(dpts, collapse=", ")))
 	}
+	
 	depth <- c("0-5", "5-15", "0-20", "15-30", "20-50", "30-60", "60-100", "100-200")[depth == dpts]
 	
+##	var %in% c("acid-exch", "bases-exch", "CEC", "BLKD", "clay", "sand", "silt", "SOC", "texture", "coarse", "ecn") 
+	
+	
 	filename <- paste0("af_", var, "_", depth, "cm_30s.tif")
+
+	txtpath <- .data_url("soil/afsis/files.txt")
+	ff <- readLines(txtpath, warn=FALSE)
+	if (!(filename %in% ff)) {
+		g <- grep(var, ff, value=TRUE)
+		if (length(g) == 0) {
+			stop(paste("variable", var, "is not available"))
+		}
+		g <- gsub(paste0("af_", var, "_|cm_30s.tif"), "", g)
+		g <- sapply(strsplit(g, "-"), function(x) x[2])
+		g <- paste(sort(as.integer(g)), collapse=", ")
+		stop(paste("depth:", vardepth, "is not available. Choose one of:", g))
+	}
+
+
 	filepath <- file.path(path, filename)
 	url <- .data_url(paste0("soil/afsis/", filename))
 	if (is.null(url)) return(NULL)

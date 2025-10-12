@@ -1,7 +1,7 @@
 
 .check_gadm <- function(filename, gversion) {
 	f <- paste0("https://geodata.ucdavis.edu/gadm/gadm", gversion, ".txt")
-	ff <- readLines(f)
+	ff <- readLines(f, warn=FALSE)
 	if (!(gsub("_low", "", basename(filename)) %in% ff)) {
 		return(FALSE)
 	}

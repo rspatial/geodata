@@ -19,7 +19,7 @@ soil_af_isda(var, depth=20, error=FALSE, path, virtual=FALSE, ...)
 }
 
 \arguments{
-  \item{var}{character. The variables name, one of: "Al", "bdr", "clay", "C.tot", "CEC", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH.H2O", "sand", "silt", "S", "texture", "wpg2", "Zn".see Details}
+  \item{var}{character. Name of the soil variable. Should be one of: "Al", "bdr", "clay", "C.tot", "CEC", "Ca", "db.od", "eCEC.f", "Fe", "K", "Mg", "N.tot", "oc", "P", "pH.H2O", "sand", "silt", "S", "texture", "wpg2", "Zn". See the Details section below}
   \item{depth}{numeric. One of 20 (for 0-20 cm) and 50 (for 20-50 cm). Ignored if \code{var="bdr"} for which the depth is always 0-200 cm}
   \item{error}{logical. If \code{TRUE} the error estimates are returned} 
   \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}
@@ -46,7 +46,7 @@ SpatRaster
 \tab Mg \tab extractable magnesium \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 \tab N.tot \tab total organic nitrogen \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
 \tab OC \tab Organic Carbon \tab  \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} \cr
-\tab P \tab Phosphorus content \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
+\tab P \tab extractable phosphorus \tab \ifelse{latex}{\out{$mg\cdot kg^{-1}$}}{\out{mg kg<sup>-1</sup>}} \cr
 \tab pH.H2O \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}}) \tab - \cr
 \tab sand \tab Sand content \tab \% \cr
 \tab silt \tab Silt content \tab \% \cr

@@ -127,7 +127,7 @@ soil_af_isda_vsi <- function(var="") {
 	}
 	
 	js <- paste0(burl, vv[i], "/", vv[i], ".json")
-	j <- jsonlite::fromJSON(readLines(js, warn=F))
+	j <- jsonlite::fromJSON(readLines(js, warn=FALSE))
 	bands <- j$assets$image$`eo:bands`
 	un <- j$unit
 	nms <- .isda_shortname(bands$description)

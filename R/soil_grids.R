@@ -25,7 +25,7 @@
 	}
 	
 	var <- var[1]
-	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "phh2o", "sand", "silt", "soc", "cec", "wrb"))
+	stopifnot(var %in% c("bdod", "cfvo", "clay", "nitrogen", "ocd", "ocs", "ph", "phh2o", "sand", "silt", "soc", "cec", "wrb"))
 	if (var == "wrb") {
 		#h <- readLines("https://files.isric.org/soilgrids/latest/data/wrb/")
 		#h <- grep("vrt<", h, value=TRUE)
@@ -39,6 +39,9 @@
 		}
 		u <- file.path(sg_url, var, paste0(name, ".vrt"))
 	} else {
+		if (var == "ph") {
+			var <- "phh2o"
+		} 
 		depth <- as.character(round(as.numeric(depth[1])))
 		if (var == "ocs") {
 			if (depth != "30") {
@@ -98,9 +101,9 @@ soil_world <- function(var, depth, stat="mean", name="", path, vsi=FALSE, ...) {
 
 	filename <- basename(u)
 	filepath <- file.path(path, filename)
-	if (!file.exists(filepath)) {
+	if (!file.exists(filepath) || isTRUE(list(...)$overwrite)) {
 		txtpath <- .data_url("soil/soilgrids/files.txt")
-		ff <- readLines(txtpath)
+		ff <- readLines(txtpath, warn=FALSE)
 		if (!(filename %in% ff)) {
 			stop(paste("file not yet available:", filename))
 		}

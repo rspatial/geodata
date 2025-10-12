@@ -10,6 +10,8 @@ Download global soils data. The data are derived from the SoilGRIDS database. Th
 See https://www.isric.org/explore/soilgrids for more info.
 
 data license: CC-BY 4.0
+
+Note that currently only the "mean" values for up to 60cm depth are available.
 }
 
 \usage{
@@ -22,7 +24,7 @@ soil_world(var, depth, stat="mean", name="", path, vsi=FALSE, ...)
   \item{stat}{character. One of "mean", "uncertainty", "Q0.05", "Q0.5", "Q0.95". Ignored if \code{var="wrb"}}
   \item{name}{character. One of "Acrisols", "Albeluvisols", "Alisols", "Andosols", "Arenosols", "Calcisols", "Cambisols", "Chernozems", "Cryosols", "Durisols", "Ferralsols", "Fluvisols", "Gleysols", "Gypsisols", "Histosols", "Kastanozems", "Leptosols", "Lixisols", "Luvisols", "Nitisols", "Phaeozems", "Planosols", "Plinthosols", "Podzols", "Regosols", "Solonchaks", "Solonetz", "Stagnosols", "Umbrisols", "Vertisols". Only used when \code{var="wrb"}}  
   \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}  
-  \item{vsi}{logical. If \code{TRUE}, use a virtual connection in stead of a download}  
+  \item{vsi}{logical. If \code{TRUE}, a virtual connection to the file is used in stead of a download. This allows downloading a small area only by subsequently using \code{\link[terra]{crop}} or \code{\link[terra]{window}}}
   \item{...}{additional arguments passed to \code{\link{download.file}}}
 
 }

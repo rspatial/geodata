@@ -10,7 +10,7 @@ Download chemical soil properties data for Africa for different soil depths. The
 There are more recent estimations for some of the properties available in other data sets. See \code{\link{soil_af_isda}} and \code{\link{soil_world}}. 
 
 
-For more info, see https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
+For more info, see https://web.archive.org/web/20250421195225/https://www.isric.org/projects/soil-property-maps-africa-250-m-resolution
 
 
 The data have a CC-BY 4.0 NC license
@@ -22,8 +22,7 @@ soil_af(var, depth, path, ...)
 
 
 \arguments{
-  \item{var}{character. Variables name such as "pH" or "clay". See Details}
-  
+  \item{var}{character. Variables name (see Details below). One of: "acid-exch", "Al-extr", "Al-exch", "bases-exch", "BDR", "BLKD", "Ca-exch", "CEC", "clay", "coarse", "drain", "ECN", "K-exch", "Mg-exch", "Na-exch", "Ntot", "pH", "sand", "silt", "SOC"}  
   \item{depth}{numeric. One of \code{5, 15, 30, 60, 100, 200}. This is shorthand for the following depth ranges: 0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm. Or one of \code{20, 50} for 0-20 or 20-50 cm}
   
   \item{path}{character. Path for storing the downloaded data. See \code{\link{geodata_path}}}
@@ -46,11 +45,6 @@ SpatRaster
 \tab coarse \tab Coarse fragments volumetric \tab \% \cr
 \tab SOC \tab Organic carbon \tab \ifelse{latex}{\out{$g\cdot kg^{-1}$}}{\out{g kg<sup>-1</sup>}} (‰) \cr
 \tab BLKD \tab Bulk density (fine earth) \tab \ifelse{latex}{\out{$kg\cdot m^{-3}$}}{\out{kg m<sup>-3</sup>}} \cr
-\tab poros \tab Porosity (volum. fraction) based on PTF\tab - \cr
-\tab AWpF2.0 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.0 \tab - \cr
-\tab AWpF2.3 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.3 \tab - \cr
-\tab AWpF2.5 \tab Avail. soil water capacity (vol. frac.) for FC = pF 2.4 \tab - \cr
-\tab AWpF4.2 \tab Avail. soil wat. cap. (vol. frac.) at wilting point (pF 4.2) \tab - \cr
 \tab BDR \tab Depth to bedrock \tab cm \cr
 \tab . \tab . \tab . \cr
 \tab pH \tab pH (\ifelse{latex}{\out{$H_{2}O$}}{\out{H<sub>2</sub>O}})  \tab - \cr
