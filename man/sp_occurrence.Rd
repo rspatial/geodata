@@ -13,7 +13,7 @@ Download data from the Global Biodiversity Information Facility (\href{https://w
 
 \code{sp_genus} returns a data.frame with all the species names associated with a genus. 
 
-\code{sp_occurrence} downloads species occurrence records. You can download data for a single species or for an entire genus by using \code{species=""}. Note that the maximum number of records that can be downloaded for a single search is 100,000. 
+\code{sp_occurrence} downloads occurrence records for a single species. Note that the maximum number of records that can be downloaded for a single search is 100,000. 
 
 You can check the number of records returned by using the option \code{download=FALSE}.
 
@@ -39,7 +39,7 @@ sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90),
  
 \arguments{
   \item{genus}{character. genus name}
-  \item{species}{character. species name. Can be left blank to get the entire genus}
+  \item{species}{character. species name}
   \item{ext}{SpatExtent object to limit the geographic extent of the records. A SpatExtent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
   \item{args}{character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details}
   \item{geo}{logical. If \code{TRUE}, only records that have a georeference (longitude and latitude values) will be downloaded}
