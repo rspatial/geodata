@@ -1,0 +1,120 @@
+# geodata
+
+**geodata** is an R package for downloading geographic data. This
+package facilitates access to climate, elevation, soil, crop, species
+occurrence, and administrative boundary data, and is a successor of the
+`getData()` function from the **raster** package.
+
+## Installation
+
+You can install the released version of **geodata** from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("geodata")
+```
+
+You can install the development version of **geodata** from github with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("rspatial/geodata")
+```
+
+## Data
+
+| Function                                                  | Description                                                                                                                 |
+|:----------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+| `bio_oracle`                                              | Marine data from [Bio-Oracle](https://bio-oracle.org/)                                                                      |
+| `cmip6_world`, `cmip6_tile`                               | Downscaled and calibrated CMIP6 projected future climate data                                                               |
+| `country_codes`                                           | Country codes                                                                                                               |
+| `crop_calendar_sacks`                                     | Crop calendar data by [Sacks et al](https://sage.nelson.wisc.edu/data-and-models/datasets/crop-calendar-dataset/)           |
+| `crop_monfreda`                                           | Crop area and yield data for 175 crops by [Monfreda et al.](http:://www.earthstat.org/harvested-area-yield-175-crops/)      |
+| `crop_spam`                                               | [MapSPAM](https://www.mapspam.info/data/) crop data (area, yield, value)                                                    |
+| `cropland`                                                | Cropland density for the world derived from different sources (ESA, GLAD, QED)                                              |
+| `elevation_3s`, `elevation_30s`, `elevation_global`       | Elevation data                                                                                                              |
+| `gadm`, `world`                                           | Administrative boundaries for any country, or the entire world from [GADM](https://gadm.org)                                |
+| `landcover`                                               | Landcover data derived from ESA WorldCover                                                                                  |
+| `footprint`                                               | Human footprint data from the [Last of the Wild project](https://sedac.ciesin.columbia.edu/data/collection/wildareas-v3)    |
+| `osm`                                                     | OpenStreetMap data by country (places and roads)                                                                            |
+| `population`                                              | Population density [Gridded Population of the World](http://sedac.ciesin.columbia.edu/data/collection/gpw-v4/documentation) |
+| `soil_af`                                                 | Chemical and physical soil properties data for Africa for different soil depths                                             |
+| `soil_af_elements`                                        | Connect to or download chemical soil element concentration (for the 0-30 cm topsoil) data for Africa                        |
+| `soil_af_water`                                           | Physical soil properties data for Africa for water balance computation                                                      |
+| `soil_af_isda`                                            | Soil data for Africa derived from the [iDSA data set](https://envirometrix.nl/isdasoil-open-soil-data-for-africa/)          |
+| `soil_world_vsi`                                          | Virtually connect to the global [SoilGrids](https://www.isric.org/explore/soilgrids) data                                   |
+| `soil_world`                                              | Global soils data from [SoilGrids](https://www.isric.org/explore/soilgrids)                                                 |
+| `sp_occurrence`                                           | Species occurrence records from the [Global Biodiversity Information Facility](https::/www.gbif.org)                        |
+| `travel_time`                                             | Travel time to and from cities and ports by [Nelson et al.](https://www.nature.com/articles/s41597-019-0265-5)              |
+| `worldclim_global`, `worldclim_country`, `worldclim_tile` | [WorldClim](https://worldclim.org) glocal climate data                                                                      |
+
+# Package index
+
+## All functions
+
+- [`bio_oracle()`](https://rspatial.github.io/geodata/reference/biooracle.md)
+  : Marine data
+- [`cmip6_world()`](https://rspatial.github.io/geodata/reference/cmip6.md)
+  [`cmip6_tile()`](https://rspatial.github.io/geodata/reference/cmip6.md)
+  : CMIP6 climate model data
+- [`country_codes()`](https://rspatial.github.io/geodata/reference/countries.md)
+  : Get country codes
+- [`crop_calendar_sacks()`](https://rspatial.github.io/geodata/reference/crop_calendar_Sacks.md)
+  [`sacksCrops()`](https://rspatial.github.io/geodata/reference/crop_calendar_Sacks.md)
+  : Sacks crop calendar data
+- [`rice_calendar()`](https://rspatial.github.io/geodata/reference/crop_calendar_rice.md)
+  : crop calendar for rice
+- [`monfredaCrops()`](https://rspatial.github.io/geodata/reference/crop_monfreda.md)
+  [`crop_monfreda()`](https://rspatial.github.io/geodata/reference/crop_monfreda.md)
+  : Monfreda crop data
+- [`spamCrops()`](https://rspatial.github.io/geodata/reference/crop_spam.md)
+  [`crop_spam()`](https://rspatial.github.io/geodata/reference/crop_spam.md)
+  : SPAM crop data
+- [`cropland()`](https://rspatial.github.io/geodata/reference/cropland.md)
+  : Cropland distribution data
+- [`elevation_3s()`](https://rspatial.github.io/geodata/reference/elevation.md)
+  [`elevation_30s()`](https://rspatial.github.io/geodata/reference/elevation.md)
+  [`elevation_global()`](https://rspatial.github.io/geodata/reference/elevation.md)
+  : Elevation
+- [`footprint()`](https://rspatial.github.io/geodata/reference/footprint.md)
+  : Human footprint
+- [`gadm()`](https://rspatial.github.io/geodata/reference/gadm.md) :
+  Administrative boundaries
+- [`geodata-package`](https://rspatial.github.io/geodata/reference/geodata-package.md)
+  [`geodata`](https://rspatial.github.io/geodata/reference/geodata-package.md)
+  : Access Geographic Data
+- [`geodata_path()`](https://rspatial.github.io/geodata/reference/geodata_path.md)
+  : Set the data path
+- [`landcover()`](https://rspatial.github.io/geodata/reference/landcover.md)
+  : Landcover data
+- [`osm()`](https://rspatial.github.io/geodata/reference/osm.md) :
+  OpenStreetMap data
+- [`population()`](https://rspatial.github.io/geodata/reference/population.md)
+  : population density
+- [`soil_af()`](https://rspatial.github.io/geodata/reference/soil_af.md)
+  : Soil data for Africa
+- [`soil_af_elements()`](https://rspatial.github.io/geodata/reference/soil_af_elements.md)
+  : Soil elements data for Africa
+- [`soil_af_isda()`](https://rspatial.github.io/geodata/reference/soil_af_isda.md)
+  : iSDA soil data for Africa
+- [`soil_af_isda_vsi()`](https://rspatial.github.io/geodata/reference/soil_af_isda_vsi.md)
+  : iSDA soil data for Africa, virtual connection
+- [`soil_af_water()`](https://rspatial.github.io/geodata/reference/soil_af_water.md)
+  : Soil data for water balance computation (Africa only)
+- [`soil_world()`](https://rspatial.github.io/geodata/reference/soil_grids.md)
+  : Global soil data
+- [`soil_world_vsi()`](https://rspatial.github.io/geodata/reference/soil_grids_vsi.md)
+  : Global soil data, virtual connection
+- [`sp_genus()`](https://rspatial.github.io/geodata/reference/sp_occurrence.md)
+  [`sp_occurrence()`](https://rspatial.github.io/geodata/reference/sp_occurrence.md)
+  [`sp_occurrence_split()`](https://rspatial.github.io/geodata/reference/sp_occurrence.md)
+  : Download species occurrence data from GBIF
+- [`travel_time()`](https://rspatial.github.io/geodata/reference/travel_time.md)
+  : Travel time to a city or port
+- [`world()`](https://rspatial.github.io/geodata/reference/world.md) :
+  Administrative boundaries
+- [`worldclim_global()`](https://rspatial.github.io/geodata/reference/worldclim.md)
+  [`worldclim_country()`](https://rspatial.github.io/geodata/reference/worldclim.md)
+  [`worldclim_tile()`](https://rspatial.github.io/geodata/reference/worldclim.md)
+  : WorldClim climate data
+
