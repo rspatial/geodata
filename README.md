@@ -2,6 +2,7 @@
 # geodata
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/geodata)](https://cran.r-project.org/package=geodata)
 <!-- badges: end -->
 
 **geodata** is an R package for downloading geographic data.
