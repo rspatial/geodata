@@ -104,5 +104,6 @@ Reports 11: 6130.
 # \donttest{
 # downloads a large file
 afph <- soil_af_isda("ph.h2o", path=tempdir(), quiet=TRUE)
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
 # }
 ```

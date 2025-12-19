@@ -57,4 +57,5 @@ The data are from <https://gadm.org>
 
 ``` r
 bel <- gadm(country="BEL", level=1, path=tempdir())
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
 ```

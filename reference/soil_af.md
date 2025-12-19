@@ -95,5 +95,7 @@ Random Forests Significantly Improve Current Predictions. PLoS ONE
 # \donttest{
 # downloads a large file
 aph <- soil_af(var="ph", depth=5, path=tempdir())
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Error in readLines(txtpath, warn = FALSE): 'con' is not a connection
 # }
 ```

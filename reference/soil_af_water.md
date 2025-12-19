@@ -70,5 +70,6 @@ SpatRaster
 # \donttest{
 # this downloads a large file
 tetaS <- soil_af_water(var="tetas", depth="erzd", path=tempdir())
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
 # }
 ```

@@ -157,10 +157,10 @@ you need to keep the "datasetKey" variable in your dataset.
 
 ``` r
 sp_occurrence("solanum", "acaule", download=FALSE)
-#> [1] 5058
+#> [1] 5059
 
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
-#> [1] 2376
+#> [1] 2383
 g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=5)
 #> 5 records found
 #> 1-

@@ -51,5 +51,6 @@ doi:10.7927/H49C6VHW. Accessed 6 July 2021.
 # \donttest{
 # download may take > 5s
 pop <- population(2020, 10, path=tempdir())
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
 # }
 ```

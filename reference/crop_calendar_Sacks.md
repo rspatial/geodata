@@ -47,5 +47,6 @@ Biogeography 19: 607-620. doi:10.1111/j.1466-8238.2010.00551.x.
 # \donttest{
 # download may take > 5s
 cas <- crop_calendar_sacks("cassava", path=tempdir())
+#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
 # }
 ```
