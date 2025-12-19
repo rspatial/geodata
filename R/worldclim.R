@@ -262,25 +262,18 @@ cmip6_world <- function(model, ssp, time, var, res, path, ...) {
 	res <- as.character(res[1])
 	fres <- ifelse(res=="0.5", "30s", paste0(res, "m"))
 
-	.check_cmip6(res, var, ssp, model, time)
 	path <- .get_path(path, "climate")
 	path <- file.path(path, paste0("wc2.1_", fres, "/"))
 	dir.create(path, showWarnings=FALSE)
-	
 	outf <- paste0("wc2.1_", fres, "_", var, "_", model, "_ssp", ssp, "_", time, ".tif")
 	poutf <- file.path(path, outf)
+	
 	if (!file.exists(poutf)) {
-		if (!file.exists(outf)) {
-		
-			durl <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
-			durl <- .data_url(durl=durl)
-			if (is.null(durl)) return(NULL)
-			
-			if (!.downloadDirect(durl, poutf, ...)) return(NULL)
-		}
-		#fz <- try(utils::unzip(pzip, exdir=path, junkpaths=TRUE), silent=TRUE)
-		#try(file.remove(pzip), silent=TRUE)
-		#if (inherits(fz, "try-error")) { stop("unzip failed") }
+		.check_cmip6(res, var, ssp, model, time)
+		durl <- paste0(.c6url, fres, "/", model, "/ssp", ssp, "/", outf)
+		durl <- .data_url(durl=durl)
+		if (is.null(durl)) return(NULL)
+		if (!.downloadDirect(durl, poutf, ...)) return(NULL)
 	}
 	rast(poutf)
 }
