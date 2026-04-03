@@ -16,11 +16,10 @@ You can install the released version of **geodata** from [CRAN](https://CRAN.R-p
 install.packages("geodata")
 ```
 
-You can install the development version of **geodata** from github with:
+You can install the development version of **geodata** from with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("rspatial/geodata")
+install.packages('geodata', repos='https://rspatial.r-universe.dev')
 ```
 
 ## Data 
