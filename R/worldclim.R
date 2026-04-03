@@ -90,7 +90,7 @@
 
 .day_points <- function(xy, vars=c("tmin", "tmax", "prec", "srad", "vapr", "wind"), dates=NULL, path) {
 	
-	if (inherits(xy), "SpatVector") {
+	if (inherits(xy, "SpatVector")) {
 		stopifnot(gemotype(xy) == "points")
 		xy <- terra::crds(xy)
 	}
