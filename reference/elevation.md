@@ -62,5 +62,5 @@ SpatRaster
 
 ``` r
 be <- elevation_30s(country="BEL", path=tempdir() )
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/elevation/BEL_elv_msk.zip
 ```

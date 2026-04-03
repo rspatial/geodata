@@ -74,6 +74,6 @@ Random Forests Significantly Improve Current Predictions. PLoS ONE
 # \donttest{
 # downloads a large file
 fe <- soil_af_elements("Fe", path=tempdir(), quiet=TRUE)
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/soil_af/af_fe_0-30cm_30s.tif
 # }
 ```

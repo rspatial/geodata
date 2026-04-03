@@ -157,13 +157,17 @@ you need to keep the "datasetKey" variable in your dataset.
 
 ``` r
 sp_occurrence("solanum", "acaule", download=FALSE)
-#> [1] 5059
+#> Cached as: /tmp/Rtmp0MapG8/file20a07f25f988.json
+#> [1] 5069
 
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
-#> [1] 2383
+#> Cached as: /tmp/Rtmp0MapG8/file20a05f506dd3.json
+#> [1] 2405
 g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=5)
+#> Cached as: /tmp/Rtmp0MapG8/file20a0439f4b63.json
 #> 5 records found
 #> 1-
+#> Cached as: /tmp/Rtmp0MapG8/file20a0439f4b63.json
 #> 5
 #> 5 records downloaded
 #plot(g[, c("lon", "lat")])

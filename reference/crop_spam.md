@@ -66,5 +66,6 @@ https://www.mapspam.info/data/
 # \donttest{
 # downloads a large file
 cas <- crop_spam("cassava", "area", path=tempdir(), TRUE)
+#> Cached as: /tmp/Rtmp0MapG8/spam/spam2017v2r1_ssa_area.zip
 # }
 ```

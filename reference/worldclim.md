@@ -77,5 +77,5 @@ These are the WorldClim monthly average climate data.
 
 ``` r
 lux <- worldclim_country("Luxembourg", var="tmin", path=tempdir())
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/climate/wc2.1_country/LUX_wc2.1_30s_tmin.tif
 ```

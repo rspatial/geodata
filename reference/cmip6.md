@@ -78,6 +78,6 @@ tiles
 # download of large files takes a while
 tmin10 <- cmip6_world("CNRM-CM6-1", "585", "2061-2080", 
           var="tmin", res=10, path=tempdir())
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/climate/wc2.1_10m//wc2.1_10m_tmin_CNRM-CM6-1_ssp585_2061-2080.tif
 # }
 ```

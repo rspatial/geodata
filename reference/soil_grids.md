@@ -107,6 +107,6 @@ For Africa:
 # \donttest{
 # this downloads a large file 
 gph <- soil_world(var="phh2o", depth=5, path=tempdir())
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/soil_world/phh2o_0-5cm_mean_30s.tif
 # }
 ```

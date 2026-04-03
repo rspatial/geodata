@@ -47,5 +47,5 @@ See <https://www.openstreetmap.org/copyright>
 
 ``` r
 aruba <- osm(country="Aruba", "places", path=tempdir())
-#> The geodata server is temporary out of service for maintenance. It should be back on 20 December. 
+#> Cached as: /tmp/Rtmp0MapG8/osm/ABW_places.gpkg
 ```

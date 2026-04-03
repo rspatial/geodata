@@ -72,5 +72,6 @@ bioclimatic modelling. Global Ecology and Biogeography 27: 277-284.
 # this is a large download
 x <- bio_oracle(path=tempdir(), "Salinity", "Max", 
     benthic=TRUE, depth="Mean", time="Present")
+#> Cached as: /tmp/Rtmp0MapG8/bio-oracle/Present.Benthic.Mean.Depth.Salinity.Max.tif.zip
 # }
 ```

@@ -141,13 +141,17 @@ Before using this function, please first check the GBIF data use agreement and s
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"solanum"</span>, <span class="st">"acaule"</span>, download<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5059</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmp0MapG8/file20a07f25f988.json</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5069</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, down<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2383</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmp0MapG8/file20a05f506dd3.json</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2405</span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, geo<span class="op">=</span><span class="cn">TRUE</span>, end<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmp0MapG8/file20a0439f4b63.json</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records found</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmp0MapG8/file20a0439f4b63.json</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records downloaded</span>
 <span class="r-in"><span><span class="co">#plot(g[, c("lon", "lat")])</span></span></span>
