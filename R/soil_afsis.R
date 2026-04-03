@@ -4,7 +4,7 @@ soil_af <- function(var, depth=20, path, ...) {
 
 	g <- expand.grid(var, depth)
 	if (nrow(g) > 1) {
-		r <- lapply(1:nrow(g), function(v) soil_af(g[i,1], g[i,2], path, ...))
+		r <- lapply(1:nrow(g), function(i) soil_af(g[i,1], g[i,2], path, ...))
 		return(rast(r))
 	}
 

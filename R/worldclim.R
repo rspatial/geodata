@@ -72,8 +72,8 @@
 	outfname <- file.path(pth, gsub("_", "24_", fname))
 	for (i in 1:length(fname)) {
 		if (!file.exists(outfname[i])) {
-			turl <- geodata:::.wc_url(paste0("day/2024/", fname[i]))
-			if (!geodata:::.downloadDirect(turl, outfname[i])) return(NULL)
+			turl <- .wc_url(paste0("day/2024/", fname[i]))
+			if (!.downloadDirect(turl, outfname[i])) return(NULL)
 		}
 	}
 	if (sds) {
@@ -91,7 +91,7 @@
 .day_points <- function(xy, vars=c("tmin", "tmax", "prec", "srad", "vapr", "wind"), dates=NULL, path) {
 	
 	if (inherits(xy, "SpatVector")) {
-		stopifnot(gemotype(xy) == "points")
+		stopifnot(geomtype(xy) == "points")
 		xy <- terra::crds(xy)
 	}
 	

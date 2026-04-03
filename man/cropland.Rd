@@ -11,7 +11,7 @@ Cropland distribution data at a 30-seconds spatial resolution from three sources
 
 \code{glad} is derived from the "Global cropland expansion in the 21st century" (Potatov et al) data available \href{https://glad.umd.edu/dataset/croplands}{here}. Values were aggregated and resampled. They represent the fraction cropland in each cell. There are five layers representing the following years: 2003, 2007, 2011, 2015, and 2019.
 
-\code{QED} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point \href{https://geosurvey.qed.ai}{Geosurvey} conducted in 2015. License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
+\code{QED} has cropland distribution data for Africa. The values are probabilities of cropland presence estimated with a neural network that was trained on an initial 1-million point survey conducted in 2015. License: CC-BY-SA 4.0; \url{https://about.maps.qed.ai/}
 }
 
 \usage{
