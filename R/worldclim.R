@@ -26,13 +26,19 @@
 }
 
 
-.did_lonlat <- function(lon, lat) {
-	id <- unique(cellFromXY(rast(res=5), cbind(lon,lat)))
+.did_lonlat <- function(x) {
+	id <- unique(cellFromXY(rast(res=5), x))
 	if (any(is.na(id))) stop("invalid coordinates (lon/lat reversed?)")
 	path <- system.file(package="geodata")
 	tiles <- readRDS(file.path(path, "ex/tiles.rds"))
-	if (!(id %in% tiles)) {
-		stop("there is no weather data for this location (not on land?)")
+	test <- id %in% tiles
+	if (!(all(test))) {
+		id <- id[test]
+		if (length(id) == 0) {
+			stop("there is no weather data for this location (not on land?)")
+		} else {
+			warning("there is no weather data for one or more locations (not on land?)")
+		}
 	}
 	id
 }
@@ -56,7 +62,7 @@
 
 	path <- .get_path(path, "climate")
 	if (NCOL(x) == 2) {
-		ids <- unique(.did_lonlat(x[,1], x[,2]))
+		ids <- unique(.did_lonlat(x))
 	} else {
 		ids <- unique(.did_extent(ext(x)))
 	}
@@ -66,17 +72,69 @@
 	outfname <- file.path(pth, gsub("_", "24_", fname))
 	for (i in 1:length(fname)) {
 		if (!file.exists(outfname[i])) {
-			turl <- .wc_url(paste0("day/2024/", fname[i]))
-			if (!.downloadDirect(turl, outfname[i], ...)) return(NULL)
+			turl <- geodata:::.wc_url(paste0("day/2024/", fname[i]))
+			if (!geodata:::.downloadDirect(turl, outfname[i])) return(NULL)
 		}
 	}
-	if (sds && (length(outfname) == 1)) {
-		sds(outfname)
+	if (sds) {
+		if (length(outfname) == 1) {
+			sds(outfname)
+		} else {
+			lapply(outfname, sds)
+		}
 	} else {
 		outfname
 	}
 }
 
+
+.day_points <- function(xy, vars=c("tmin", "tmax", "prec", "srad", "vapr", "wind"), dates=NULL, path) {
+	
+	if (inherits(xy), "SpatVector") {
+		stopifnot(gemotype(xy) == "points")
+		xy <- terra::crds(xy)
+	}
+	
+	ff <- .worldclim_day(xy, path, sds=FALSE)
+	fid <- as.numeric(gsub("wcd24_|.nc", "", basename(ff)))
+	ids <- cellFromXY(rast(res=5), xy)
+	m <- match(ids, fid)
+	
+	if (!is.null(dates)) {
+		datlyr <- na.omit(match(dates, seq(as.Date("1979-01-01"), as.Date("2024-12-31"))))
+		if (length(datlyr) == 0) {
+			stop("no valid dates")
+		} else if (length(datlyr) != length(dates)) {
+			warning("not all dates are in the valid range")
+		}
+		datlyr <- sort(unique(datlyr))
+	}
+	
+	out <- lapply(1:length(fid), function(i) {
+		v <- lapply(vars, function(v) {
+		r <- rast(ff[i], v, md=TRUE)
+			if (!is.null(dates)) {
+				r <- r[[datlyr]]
+			}
+			j <- which(m==i)
+			e <- extract(r, xy[j, ,drop=FALSE])
+			names(e) <- as.character(time(r))
+			data.frame(ID=j, var=v, e, check.names = FALSE)
+		})
+		do.call(rbind, v)
+	})
+
+	out <- do.call(rbind, out)
+	out <- split(out, out$ID)
+	out <- lapply(out, function(x) {
+			y <- t(x[,-c(1:2)])
+			colnames(y) <- x$var
+			y <- data.frame(ID=x$ID[1], date=as.Date(rownames(y)), y) 
+			rownames(y) <- NULL
+			y
+		})
+	do.call(rbind, out)
+}
 
 .good.file.exists <- function(x, raster=TRUE) {
 	if (file.exists(x)) {

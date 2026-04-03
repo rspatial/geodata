@@ -48,6 +48,7 @@
 			return(FALSE)
 		}
 	}
+	message(paste0("Cached as: ", filename))
 	TRUE	
 }	
 
@@ -66,6 +67,7 @@
 		}
 	} else {
 		r <- rast(filepath)
+		message(paste0("Cached as: ", dirname(filepath)))
 	}
 	r
 }

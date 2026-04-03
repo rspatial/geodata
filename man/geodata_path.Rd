@@ -8,22 +8,19 @@
 
 This function allows you set or get the default download cache path for the geodata package. The default path is ignored if you set the \code{path} argument in a geodata function to another value.
 
-The "factory-fresh" default location for downloads is returned by \code{file.path(rappdirs::user_data_dir(), ".geodata")}
-
-You can set it to another value with this function. To save your own default path across sessions, you can add a line like this:
-
-\code{options( geodata_default_path = "c:/your/geodata/path")} to the file returned by \code{file.path( R.home(), "etc/Rprofile.site")}
+A special value is "user_data_dir". This sets it to the location returned by \code{file.path(rappdirs::user_data_dir(), "geodata")}
 
 Alternatively, you can also set a system variable "GEODATA_PATH" to the desired path. 
 }
 
 \usage{
-geodata_path(path)
+geodata_path(path, persistent=TRUE)
 }
 
 
 \arguments{
   \item{path}{character. Path name where geodata should be download and cache data. If missing, the current default path is returned. Use \code{NA} to restore the original value} 
+  \item{persistent}{logical. Should the path be persistent (automatically used in future R sessions)?}
 }
 
 \value{

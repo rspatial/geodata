@@ -19,15 +19,22 @@
 }
 
 .geodata_cache_size <- function() {
-	path <- .rapp_path()
-	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
-	round(sum(file.size(ff)) / 1024^2, 1)
+	#path <- .rapp_path()
+	path <- geodata_path()
+	if (path != "") {
+		ff <- list.files(path, recursive=TRUE, full.names=TRUE)
+		round(sum(file.size(ff)) / 1024^2, 1)
+	} else {
+		NA
+	}
 } 
 
 
 
 .clear_geodata_cache <- function(pattern="") {
-	path <- .rapp_path()
+	#path <- .rapp_path()
+	path <- geodata_path()
+	
 	ff <- list.files(path, recursive=TRUE, full.names=TRUE)
 	if (length(ff) == 0) return()
 	if (pattern != "") {
@@ -36,12 +43,15 @@
 	file.remove(ff)
 } 
 
+
+
 .get_path <- function(path, add) {
 	if (missing(path) || is.null(path) || is.na(path) || (path == "")) {
 		path <- geodata_path()
 		if (path == "") {
-			path <- .rapp_path()
-			dir.create(path, FALSE, TRUE)
+			stop("you need to provide a path, or set a default path with 'geodata_path()'")
+			#path <- .rapp_path()
+			#dir.create(path, FALSE, TRUE)
 		}
 	}
 	
@@ -57,20 +67,33 @@
 }
 
 
-geodata_path <- function(path) {
+geodata_path <- function(path, persistent=TRUE) {
+	fpers <- file.path(rappdirs::user_data_dir(), ".geodata_path")
+
 	if (missing(path)) {
 		p <- getOption("geodata_default_path", default = "")
 		if (p == "") p <- Sys.getenv("GEODATA_PATH")
-		if (p == "") {
-			p <- .rapp_path()
-			dir.create(p, FALSE, TRUE)
+		if (file.exists(fpers)) {
+			p <- trimws(readLines(fpers)[1])
 		}
+		#if (p == "") {
+		#	p <- .rapp_path()
+		#	dir.create(p, FALSE, TRUE)
+		#}
 		return(p)
 	}
 	if (is.na(path)) {
 		return(options(geodata_default_path=""))
 	}
-	path <- .get_path(path, "")
+	if (path == "user_data_dir") {
+		path <- file.path(rappdirs::user_data_dir(), "geodata")
+	} else {
+		path <- .get_path(path, "")
+	}
 	options(geodata_default_path=path)
+	if (persistent) {
+		f <- file.path(rappdirs::user_data_dir(), ".geodata_path")
+		writeLines(path, f)
+	}
 }
 
