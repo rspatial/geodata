@@ -9,7 +9,7 @@ Download species occurrence data from GBIF
 }
 
 \description{
-Download data from the Global Biodiversity Information Facility (\href{https://www.gbif.org}{GBIF}) data portal.
+Download data from the Global Biodiversity Information Facility (\href{https://gbif.org}{GBIF}) data portal.
 
 \code{sp_genus} returns a data.frame with all the species names associated with a genus. 
 
@@ -21,7 +21,7 @@ Note that the you can only download up to record number 100,000. To avoid gettin
 
 If you want to download data for an entire genus, first run \code{sp_genus} and then download data for the returned species names one by one. 
 
-Before using this function, please first check the GBIF \href{https://www.gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
+Before using this function, please first check the GBIF \href{https://gbif.org/terms/licences}{data use agreement} and see the note below about how to cite these data. 
 }
 
 
@@ -41,7 +41,7 @@ sp_occurrence_split(genus, species="", path=".", ext=c(-180,180,-90,90),
   \item{genus}{character. genus name}
   \item{species}{character. species name}
   \item{ext}{SpatExtent object to limit the geographic extent of the records. A SpatExtent can be created using functions like \code{\link[terra]{ext}} and \code{\link[terra]{draw}}}
-  \item{args}{character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details}
+  \item{args}{character. Additional arguments to refine the query. See query parameters in http://gbif.org/developer/occurrence for more details}
   \item{geo}{logical. If \code{TRUE}, only records that have a georeference (longitude and latitude values) will be downloaded}
   \item{removeZeros}{logical. If \code{TRUE}, all records that have a latitude OR longitude of zero will be removed if \code{geo==TRUE}, or set to \code{NA} if \code{geo==FALSE}. If \code{FALSE}, only records that have a latitude AND longitude that are zero will be removed or set to \code{NA}}
   \item{download}{logical. If \code{TRUE}, records will be downloaded, else only the number of records will be shown}
@@ -65,35 +65,37 @@ data.frame, or SpatVector if \code{sv=TRUE}
 }
 
 \note{
-Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Citation rewards data-publishing institutions and individuals and provides support for sharing open data [\href{https://docs.ropensci.org/rgbif/articles/gbif_citations.html}{1}][\href{https://www.gbif.org/citation-guidelines}{2}]. You can get a DOI for the data you downloaded by creating a \href{https://www.gbif.org/derived-dataset/about}{"derived" dataset}. For this to work, you need to keep the "datasetKey" variable in your dataset.
+Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Citation rewards data-publishing institutions and individuals and provides support for sharing open data [\href{https://docs.ropensci.org/rgbif/articles/gbif_citations.html}{1}][\href{https://gbif.org/citation-guidelines}{2}]. You can get a DOI for the data you downloaded by creating a \href{https://gbif.org/derived-dataset/about}{"derived" dataset}. For this to work, you need to keep the "datasetKey" variable in your dataset.
 }
 
 
 \references{
-\url{https://www.gbif.org/occurrence}
-\url{https://www.gbif.org/derived-dataset/about}
+\url{https://gbif.org/occurrence}
+\url{https://gbif.org/derived-dataset/about}
 }
 
 \examples{
 sp_occurrence("solanum", "acaule", download=FALSE)
+g <- sp_occurrence("Solanum", "acaule", geo=TRUE, end=5)
 
+\donttest{
 sp_occurrence("Batrachoseps", "luciae", down=FALSE)
 g <- sp_occurrence("Batrachoseps", "luciae", geo=TRUE, end=5)
-#plot(g[, c("lon", "lat")])
 
+plot(g[, c("lon", "lat")])
 
 ## args
-#a1 <- sp_occurrence("Elgaria", "multicarinata", 
-#			args="recordNumber=Robert J. Hijmans RH-2")
-#a2 <- sp_occurrence("Batrachoseps", "luciae",
-#			args=c("year=2023", "identifiedBy=Anthony Ye"))
+a1 <- sp_occurrence("Elgaria", "multicarinata", 
+			args="recordNumber=Robert J. Hijmans RH-2")
+a2 <- sp_occurrence("Batrachoseps", "luciae",
+			args=c("year=2023", "identifiedBy=Anthony Ye"))
 
 ## year supports "range queries"
-#a3 <- sp_occurrence("Batrachoseps", "luciae", 
-#			args=c("year=2020,2023", "identifiedBy=Kuoni W"))
-#table(a3[,c("year")])
+a3 <- sp_occurrence("Batrachoseps", "luciae", 
+			args=c("year=2020,2023", "identifiedBy=Kuoni W"))
+table(a3[,c("year")])
 }
-
+}
 
 \keyword{spatial}
 

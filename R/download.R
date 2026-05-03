@@ -24,7 +24,7 @@
 
 
 
-.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, remove=TRUE,  ...) {
+.downloadDirect <- function(url, filename, unzip=FALSE, quiet=FALSE, mode="wb", cacheOK=FALSE, remove=TRUE, msg=TRUE, ...) {
 	if (!file.exists(filename)) {
 		ok <- try(
 			suppressWarnings(
@@ -48,7 +48,7 @@
 			return(FALSE)
 		}
 	}
-	message(paste0("Cached as: ", filename))
+	if (isTRUE(msg)) message(paste0("Cached as: ", filename))
 	TRUE	
 }	
 

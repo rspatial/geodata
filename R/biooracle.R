@@ -92,7 +92,7 @@ bio_oracle <- function(path, var, stat, benthic=FALSE, depth="Mean", time="Prese
 		return( rast(outf))
 	}
 	url  <- file.path("https://bio-oracle.org/data/2.0", basename(zipf))
-	if (!.downloadDirect(url, file.path(path, zipf), unzip=TRUE, ...)) return(NULL)
+	if (!.downloadDirect(url, file.path(path, zipf), unzip=TRUE, msg=FALSE, ...)) return(NULL)
 	if (file.exists(outf)) {
 		return( rast(outf))
 	} else {
