@@ -52,13 +52,13 @@ Before using this function, please first check the GBIF data use agreement and s
     </div>
 
     <div class="ref-description">
-    <p>Download data from the Global Biodiversity Information Facility (<a href="https://www.gbif.org" class="external-link">GBIF</a>) data portal.</p>
+    <p>Download data from the Global Biodiversity Information Facility (<a href="https://gbif.org" class="external-link">GBIF</a>) data portal.</p>
 <p><code>sp_genus</code> returns a data.frame with all the species names associated with a genus.</p>
 <p><code>sp_occurrence</code> downloads occurrence records for a single species.</p>
 <p>You can check the number of records returned by using the option <code>download=FALSE</code>.</p>
 <p>Note that the you can only download up to record number 100,000. To avoid getting more than 100,000 records, you can do separate queries for different geographic areas. This has been automated in <code>sp_occurrence_split</code>. This function recursively splits the area of interest into smaller areas until the number of records in an area is less than 50,000. It then downloads these records and saves them in a folder called "gbif". After all areas have been evaluated, the data are combined into a single file and returned as a data.frame or SpatVector). If the function is interrupted, it can be run again, and it will resume where it left off.</p>
 <p>If you want to download data for an entire genus, first run <code>sp_genus</code> and then download data for the returned species names one by one.</p>
-<p>Before using this function, please first check the GBIF <a href="https://www.gbif.org/terms/licences" class="external-link">data use agreement</a> and see the note below about how to cite these data.</p>
+<p>Before using this function, please first check the GBIF <a href="https://gbif.org/terms/licences" class="external-link">data use agreement</a> and see the note below about how to cite these data.</p>
     </div>
 
     <div id="ref-usage">
@@ -86,7 +86,7 @@ Before using this function, please first check the GBIF data use agreement and s
 <dd><p>SpatExtent object to limit the geographic extent of the records. A SpatExtent can be created using functions like <code><a href="https://rspatial.github.io/terra/reference/ext.html" class="external-link">ext</a></code> and <code><a href="https://rspatial.github.io/terra/reference/draw.html" class="external-link">draw</a></code></p></dd>
 
   <dt id="arg-args">args<a class="anchor" aria-label="anchor" href="#arg-args"></a></dt>
-<dd><p>character. Additional arguments to refine the query. See query parameters in http://www.gbif.org/developer/occurrence for more details</p></dd>
+<dd><p>character. Additional arguments to refine the query. See query parameters in http://gbif.org/developer/occurrence for more details</p></dd>
 
   <dt id="arg-geo">geo<a class="anchor" aria-label="anchor" href="#arg-geo"></a></dt>
 <dd><p>logical. If <code>TRUE</code>, only records that have a georeference (longitude and latitude values) will be downloaded</p></dd>
@@ -136,44 +136,75 @@ Before using this function, please first check the GBIF data use agreement and s
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Citation rewards data-publishing institutions and individuals and provides support for sharing open data [<a href="https://docs.ropensci.org/rgbif/articles/gbif_citations.html" class="external-link">1</a>][<a href="https://www.gbif.org/citation-guidelines" class="external-link">2</a>]. You can get a DOI for the data you downloaded by creating a <a href="https://www.gbif.org/derived-dataset/about" class="external-link">"derived" dataset</a>. For this to work, you need to keep the "datasetKey" variable in your dataset.</p>
+    <p>Under the terms of the GBIF data user agreement, users who download data agree to cite a DOI. Citation rewards data-publishing institutions and individuals and provides support for sharing open data [<a href="https://docs.ropensci.org/rgbif/articles/gbif_citations.html" class="external-link">1</a>][<a href="https://gbif.org/citation-guidelines" class="external-link">2</a>]. You can get a DOI for the data you downloaded by creating a <a href="https://gbif.org/derived-dataset/about" class="external-link">"derived" dataset</a>. For this to work, you need to keep the "datasetKey" variable in your dataset.</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p><a href="https://www.gbif.org/occurrence" class="external-link">https://www.gbif.org/occurrence</a>
-<a href="https://www.gbif.org/derived-dataset/about" class="external-link">https://www.gbif.org/derived-dataset/about</a></p>
+    <p><a href="https://gbif.org/occurrence" class="external-link">https://gbif.org/occurrence</a>
+<a href="https://gbif.org/derived-dataset/about" class="external-link">https://gbif.org/derived-dataset/about</a></p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"solanum"</span>, <span class="st">"acaule"</span>, download<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: jsonlite</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmpj1ul8r/file1ffc31ab3bbd.json</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5069</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, down<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmpj1ul8r/file1ffc4c08b9e2.json</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2405</span>
-<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, geo<span class="op">=</span><span class="cn">TRUE</span>, end<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmpj1ul8r/file1ffc5ff0440c.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e6224cfb6f9.json</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5070</span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Solanum"</span>, <span class="st">"acaule"</span>, geo<span class="op">=</span><span class="cn">TRUE</span>, end<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e624174abac.json</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records found</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/Rtmpj1ul8r/file1ffc5ff0440c.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e624174abac.json</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records downloaded</span>
-<span class="r-in"><span><span class="co">#plot(g[, c("lon", "lat")])</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, down<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e6219319ce8.json</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2412</span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, geo<span class="op">=</span><span class="cn">TRUE</span>, end<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e623e15361b.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e623e15361b.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records downloaded</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lon"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="sp_occurrence-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## args</span></span></span>
-<span class="r-in"><span><span class="co">#a1 &lt;- sp_occurrence("Elgaria", "multicarinata", </span></span></span>
-<span class="r-in"><span><span class="co">#      args="recordNumber=Robert J. Hijmans RH-2")</span></span></span>
-<span class="r-in"><span><span class="co">#a2 &lt;- sp_occurrence("Batrachoseps", "luciae",</span></span></span>
-<span class="r-in"><span><span class="co">#      args=c("year=2023", "identifiedBy=Anthony Ye"))</span></span></span>
+<span class="r-in"><span><span class="va">a1</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Elgaria"</span>, <span class="st">"multicarinata"</span>, </span></span>
+<span class="r-in"><span>      args<span class="op">=</span><span class="st">"recordNumber=Robert J. Hijmans RH-2"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e621e024674.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e621e024674.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records downloaded</span>
+<span class="r-in"><span><span class="va">a2</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>,</span></span>
+<span class="r-in"><span>      args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year=2023"</span>, <span class="st">"identifiedBy=Anthony Ye"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e624c3a2ba3.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 10 records found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e624c3a2ba3.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 10</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 10 records downloaded</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## year supports "range queries"</span></span></span>
-<span class="r-in"><span><span class="co">#a3 &lt;- sp_occurrence("Batrachoseps", "luciae", </span></span></span>
-<span class="r-in"><span><span class="co">#      args=c("year=2020,2023", "identifiedBy=Kuoni W"))</span></span></span>
-<span class="r-in"><span><span class="co">#table(a3[,c("year")])</span></span></span>
+<span class="r-in"><span><span class="va">a3</span> <span class="op">&lt;-</span> <span class="fu">sp_occurrence</span><span class="op">(</span><span class="st">"Batrachoseps"</span>, <span class="st">"luciae"</span>, </span></span>
+<span class="r-in"><span>      args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year=2020,2023"</span>, <span class="st">"identifiedBy=Kuoni W"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e628906879.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 57 records found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1-</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cached as: /tmp/RtmpZkpI9v/file1e628906879.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 57</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 57 records downloaded</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">a3</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2021 2022 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1   42   14 </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
