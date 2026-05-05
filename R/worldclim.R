@@ -66,13 +66,13 @@
 	} else {
 		ids <- unique(.did_extent(ext(x)))
 	}
-	pth <- file.path(path, "day24")
+	pth <- file.path(path, "day25b")
 	dir.create(pth, showWarnings=FALSE)
 	fname <- paste0("wcd_", ids, ".nc")
-	outfname <- file.path(pth, gsub("_", "24_", fname))
+	outfname <- file.path(pth, gsub("_", "25b_", fname))
 	for (i in 1:length(fname)) {
 		if (!file.exists(outfname[i])) {
-			turl <- .wc_url(paste0("day/2024/", fname[i]))
+			turl <- .wc_url(paste0("day/2025beta/", fname[i]))
 			if (!.downloadDirect(turl, outfname[i])) return(NULL)
 		}
 	}
@@ -96,7 +96,7 @@
 	}
 	
 	ff <- .worldclim_day(xy, path, sds=FALSE)
-	fid <- as.numeric(gsub("wcd24_|.nc", "", basename(ff)))
+	fid <- as.numeric(gsub("wcd25b_|.nc", "", basename(ff)))
 	ids <- cellFromXY(rast(res=5), xy)
 	m <- match(ids, fid)
 	
