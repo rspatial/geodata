@@ -101,7 +101,7 @@
 	m <- match(ids, fid)
 	
 	if (!is.null(dates)) {
-		datlyr <- na.omit(match(dates, seq(as.Date("1979-01-01"), as.Date("2024-12-31"))))
+		datlyr <- na.omit(match(dates, seq(as.Date("1979-01-01"), as.Date("2025-12-31"))))
 		if (length(datlyr) == 0) {
 			stop("no valid dates")
 		} else if (length(datlyr) != length(dates)) {
