@@ -88,7 +88,6 @@
 .fixNameGBIF <- function(genus, species) {
 	genus <- trimws(genus)
 	species <- trimws(species)
-	gensp <- paste(genus, species)
 	spec <- gsub("   ", " ", species) 
 	spec <- gsub("  ", " ", spec) 	
 	spec <- gsub(" ", "%20", spec)  # for genus species var. xxx
@@ -96,10 +95,28 @@
 	return(spec)
 }
 
+.getOccurrenceQueryGBIF <- function(genus, species, ...) {
+	genus <- trimws(genus)
+	species <- trimws(species)
+	if (species == "") {
+		gurl <- paste0("https://api.gbif.org/v1/species/match?name=", genus)
+		tmpfile <- tempfile()
+		if (!.downloadDirect(gurl, tmpfile, quiet=TRUE, msg=FALSE, ...)) return(NULL)
+		json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n", encoding="UTF-8")
+		try(file.remove(tmpfile), silent=TRUE)
+		x <- jsonlite::fromJSON(json)
+		key <- x$usageKey
+		if (is.null(key)) return(NULL)
+		paste0("taxonKey=", key)
+	} else {
+		paste0("scientificname=", .fixNameGBIF(genus, species))
+	}
+}
+
 sp_genus <- function(genus, simple=TRUE, ...) {
 	gurl <- paste0("https://api.gbif.org/v1/species/match?name=", genus)
 	tmpfile <- tempfile()
-	if (!.downloadDirect(gurl, tmpfile, quiet=TRUE, ...)) return(NULL)
+	if (!.downloadDirect(gurl, tmpfile, quiet=TRUE, msg=FALSE, ...)) return(NULL)
 	json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
 	try(file.remove(tmpfile), silent=TRUE)
 	json <- chartr("\a\v", "  ", json)
@@ -113,7 +130,7 @@ sp_genus <- function(genus, simple=TRUE, ...) {
 	while (TRUE) {
 		surl <- paste0("https://api.gbif.org/v1/species/search?rank=SPECIES&highertaxon_key=", key, "&offset=", off, "&limit=1000")
 		tmpfile <- tempfile()
-		if (!.downloadDirect(surl, tmpfile, quiet=TRUE, ...)) return(NULL)
+		if (!.downloadDirect(surl, tmpfile, quiet=TRUE, msg=FALSE, ...)) return(NULL)
 		json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
 		try(file.remove(tmpfile), silent=TRUE)
 		x <- jsonlite::fromJSON(json)
@@ -152,7 +169,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 	tmpfile <- paste0(tempfile(), ".json")
 	ex <- .getExtGBIF(ext)
-	spec <- .fixNameGBIF(genus, species)
+	taxq <- .getOccurrenceQueryGBIF(genus, species, ...)
+	if (is.null(taxq)) return(NULL)
 	if (geo) { cds <- "&hasCoordinate=true" } else { cds <- "" }
 
 	base <- "https://api.gbif.org/v1/occurrence/search?"
@@ -165,8 +183,8 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	
 	ntries <- min(max(ntries, 1), 100)
 
-	url1 <- paste(base, "scientificname=", spec, "&limit=1", cds, ex, args, sep="")
-	if (!.downloadDirect(url1, tmpfile, quiet=TRUE, ...)) return(NULL)
+	url1 <- paste(base, taxq, "&limit=1", cds, ex, args, sep="")
+	if (!.downloadDirect(url1, tmpfile, quiet=TRUE, msg=FALSE, ...)) return(NULL)
 	json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
 	try(file.remove(tmpfile), silent=TRUE)
 	x <- jsonlite::fromJSON(json)
@@ -202,7 +220,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	}
 
 	nrecs <- min(max(nrecs, 1), 300)
-	url1 <- paste(base, "scientificname=", spec, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
+	url1 <- paste(base, taxq, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
 	
 	g <- list()
 	breakout <- FALSE
@@ -210,7 +228,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 	while (TRUE) {
 		if (start+nrecs >= end) {
 			nrecs <- end - start + 1
-			url1 <- paste(base, "scientificname=", spec, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
+			url1 <- paste(base, taxq, "&limit=", format(nrecs, scientific=FALSE), cds, ex, args, sep="")
 			breakout <- TRUE
 		}
 	
@@ -234,7 +252,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 				breakout <- TRUE
 				break
 			}
-			if (!.downloadDirect(aurl, tmpfile, quiet=TRUE, ...)) return(NULL)
+			if (!.downloadDirect(aurl, tmpfile, quiet=TRUE, msg=FALSE, ...)) return(NULL)
 
 			json <- scan(tmpfile, what="character", quiet=TRUE, sep="\n",  encoding = "UTF-8")
 			try(file.remove(tmpfile), silent=TRUE)
