@@ -20,8 +20,7 @@
 	if (vsi) {
 		sg_url <- "/vsicurl/https://files.isric.org/soilgrids/latest/data/"
 	} else {
-		sg_url <- .data_url("soil/soilgrids/")
-		if (is.null(sg_url)) return(NULL)
+		sg_url <- "https://geodata.ucdavis.edu/geodata/soil/soilgrids/"
 	}
 	
 	var <- var[1]
