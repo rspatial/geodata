@@ -61,3 +61,6 @@ Nelson, A., D.J. Weiss, J. van Etten, A. Cattaneo, T.S. McMenomy & J. Koo, 2019.
 Version 3 (2019-05-15) from \url{https://figshare.com/articles/dataset/Travel_time_to_cities_and_ports_in_the_year_2015/7638134/3}
 }
 
+\seealso{
+\code{\link{footprint}}, \code{\link{population}}
+}
