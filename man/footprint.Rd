@@ -33,7 +33,7 @@ SpatRaster
 }
 
 \seealso{
-\code{\link{landcover}}
+\code{\link{landcover}}, \code{\link{population}}, \code{\link{travel_time}}
 }
 
 \references{

@@ -24,9 +24,8 @@ SpatRaster
 }
 
 \seealso{
-\code{\link{landcover}}
+\code{\link{cropland}}, \code{\link{soil_world}}, \code{\link{osm}}
 }
-
 
 \references{
 Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, Linlin, Tsendbazar, N.E., Ramoino, F., Arino, O., 2021. ESA WorldCover 10 m 2020 v100. doi:10.5281/zenodo.5571936. 
