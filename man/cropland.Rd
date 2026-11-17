@@ -30,7 +30,8 @@ SpatRaster
 }
 
 \seealso{
-\code{\link{landcover}}
+\code{\link{landcover}}, \code{\link{crop_calendar_sacks}}, \code{\link{crop_monfreda}}, \code{\link{crop_spam}}, 
+\code{\link{crop_spam}}, \code{\link{rice_calendar}}, \code{\link{soil_world}}
 }
 
 \references{
