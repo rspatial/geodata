@@ -363,7 +363,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 .run_sp_occurrence_batch <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
 
-	dir.create("gbif", FALSE, FALSE)
+	dir.create("gbif", showWarnings = FALSE, recursive = TRUE)
 	r <- rast(nrow=2, ncol=2, extent=ext)
 	p <- as.polygons(r)
 	for (i in 1:nrow(p)) {
