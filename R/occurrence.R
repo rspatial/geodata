@@ -363,7 +363,7 @@ sp_occurrence <- function(genus, species="", ext=NULL, args=NULL, geo=TRUE, remo
 
 .run_sp_occurrence_batch <- function(genus, species="", path=".", ext=c(-180,180,-90,90), args=NULL, geo=TRUE, removeZeros=FALSE, ntries=5, nrecs=300, fixnames=TRUE, prefix=NULL, ...) {
 
-	dir.create("gbif", FALSE, FALSE)
+	dir.create(file.path(path, "gbif"), FALSE, FALSE)
 	r <- rast(nrow=2, ncol=2, extent=ext)
 	p <- as.polygons(r)
 	for (i in 1:nrow(p)) {
@@ -412,7 +412,7 @@ sp_occurrence_split <- function(genus, species="", path=".", ext=c(-180,180,-90,
 	.run_sp_occurrence_batch(genus, species, path=path, ext=ext, args=args, geo=geo, removeZeros=removeZeros, ntries=ntries, nrecs=nrecs, fixnames=fixnames, prefix=prefix, ...)
 
 	message("combining")
-	ff <- list.files("gbif", pattern=paste0("^", genus, "_", species), full.names=TRUE, ignore.case=TRUE)
+	ff <- list.files(file.path(path, "gbif"), pattern=paste0("^", genus, "_", species), full.names=TRUE, ignore.case=TRUE)
 	out <- lapply(ff, readRDS)
 	i <- sapply(out, is.null)
 	if (any(i)) out <- out[[!i]]
